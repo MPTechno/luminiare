@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Inherit Sale view-->
+    <record id="sale_order_form_solum" model="ir.ui.view">
+        <field name="name">sale.view.order.form.solum</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+        
+            <field name="payment_term_id" position="after">
+                <field name="quote_type" widget="radio"/>
+                <field name="state_when_idle" invisible="1"/>
+                <field name="state_change_date" invisible="1"/>
+                <field name="days_sice_state_change" invisible="1"/>
+            </field>
+            
+            <button name="print_quotation" position="after">
+                <button name="set_to_active" type="object" states="idle" string="Set Active"/>
+                <button name="set_to_idle" type="object" states="draft,sent" string="Set Idle"/>
+            </button>
+            
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="after">
+                <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" />
+            </xpath>
+            
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="after">
+                <field name="image" widget="image"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="image" widget="image"/>
+            </xpath>
+            
+            
+        </field>
+    </record>
+    
+    <record id="action_led_strip_quotations" model="ir.actions.act_window">
+        <field name="name">LED Strip Quotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'default_quote_type': 'led_strip'}</field>
+        <field name="domain">[('quote_type', '=', 'led_strip')]</field>
+    </record>
+    
+    <record id="action_led_attach_quotations" model="ir.actions.act_window">
+        <field name="name">LED Attachment Quotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'default_quote_type': 'led_atta_quote'}</field>
+        <field name="domain">[('quote_type', '=', 'led_atta_quote')]</field>
+    </record>
+    
+    
+    <menuitem id="led_strip_quote_menu" 
+              name="LED Strip Quotation"
+              action="action_led_strip_quotations" 
+              parent="sales_team.menu_sales"/><!--LED Strip Menu-->
+              
+    <menuitem id="led_attach_quote_menu" 
+              name="LED Attachment Quotation" 
+              action="action_led_attach_quotations" 
+              parent="sales_team.menu_sales"/><!--LED Attach Menu-->
+              
+     <!--Remove Quotation Menu-->
+    <delete model="ir.ui.menu" search="[('name','=','Quotations'),('parent_id','=',ref('sales_team.menu_sales'))]"/>
+    
+</odoo>   
