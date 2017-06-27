@@ -23,7 +23,7 @@ class SaleExtenstion(models.Model):
     
     def _calculateStateDays(self):
         diff_time = 0
-        if self.state_change_date:
+        if self.state_change_date and self.state in ('draft','sent'):
             current_date_str = fields.Date.context_today(self)
             current_date = fields.Date.from_string(current_date_str)
             state_change_str = self.state_change_date
