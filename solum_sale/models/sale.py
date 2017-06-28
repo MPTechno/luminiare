@@ -6,7 +6,7 @@ class SaleExtenstion(models.Model):
     
     quote_type = fields.Selection([
                                    ('led_strip','LED Strip Quotation'),
-                                   ('led_atta_quote','LED Attachments Quotaion')
+                                   ('led_attach','LED Attachments Quotaion')
                                  ],string="Quotaion Type",readonly=True)
     state = fields.Selection([
         ('draft', 'Quotation'),

@@ -66,8 +66,8 @@
         <field name="view_id" ref="sale.view_quotation_tree"/>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'default_quote_type': 'led_atta_quote'}</field>
-        <field name="domain">[('quote_type', '=', 'led_atta_quote'),('state','in',('draft','idle','sent'))]</field>
+        <field name="context">{'default_quote_type': 'led_attach'}</field>
+        <field name="domain">[('quote_type', '=', 'led_attach'),('state','in',('draft','idle','sent'))]</field>
     </record>
     
     
