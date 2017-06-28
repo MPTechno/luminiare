@@ -8,6 +8,9 @@
     "depends": ['account','solum_sale'],
     "data": [
 		'views/invoice_view.xml',
+		'views/report_menu.xml',
+		'report/sol_invoice_report_view.xml',
+		'report/idesign_invoice_report_view.xml',
     ],
     'description': '''Invoice Customization''',
     'demo': [],

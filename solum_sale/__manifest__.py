@@ -13,7 +13,6 @@
 		'views/report_menu.xml',
 		'report/sol_quotation_report_view.xml',
 		'report/idesign_quotation_report_view.xml',
-		'report/sol_invoice_report_view.xml',
     ],
     "qweb": [
         'static/src/xml/widget.xml',

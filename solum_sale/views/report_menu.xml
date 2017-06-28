@@ -22,14 +22,5 @@
             file="solum_sale.idesign_quotation_report_template_id" 
             />
         
-        <!--SOL Invoice Report-->
-    	<report 
-        	id="sol_invoice_report_menu_id" 
-        	string="Sol Luminaire" 
-        	model="account.invoice" 
-            report_type="qweb-pdf"
-            name="solum_sale.sol_invoice_report_template_id"
-            file="solum_sale.sol_invoice_report_template_id" 
-            />
 	</data>
 </openerp>

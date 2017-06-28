@@ -118,7 +118,7 @@
 								</tbody>
 							</table>
 							
-							<table class="table table-condensed" t-if='o.quote_type == "led_atta_quote"'>
+							<table class="table table-condensed" t-if='o.quote_type == "led_attach"'>
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>

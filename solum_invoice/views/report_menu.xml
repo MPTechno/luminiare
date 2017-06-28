@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         
+        <!--SOL Invoice Report-->
+    	<report 
+        	id="sol_invoice_report_menu_id" 
+        	string="Sol Luminaire" 
+        	model="account.invoice" 
+            report_type="qweb-pdf"
+            name="solum_invoice.sol_invoice_report_template_id"
+            file="solum_invoice.sol_invoice_report_template_id" 
+            />
+            
+        <report 
+        	id="idesign_invoice_report_menu_id" 
+        	string="IDesign Line" 
+        	model="account.invoice" 
+            report_type="qweb-pdf"
+            name="solum_invoice.idesign_invoice_report_template_id"
+            file="solum_invoice.idesign_invoice_report_template_id" 
+            />
+	</data>
+</openerp>
