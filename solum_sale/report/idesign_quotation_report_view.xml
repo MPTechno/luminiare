@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="report.external_layout_quotation_idesign">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+		
+			<t t-call="solum_sale.external_layout_header_idesign"/>
+			<t t-raw="0" />
+			<t t-call="solum_sale.external_layout_footer_idesign" />
+		</template>
+
+		<template id="external_layout_header_idesign">
+			<div class="header">
+				<div class="col-xs-12 pull-left">
+					<div class="col-xs-9 pull-left">
+						<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="width:150px;height:100px;"/>
+					</div>
+					<div class="col-xs-3 pull-right">
+						<br/><br/><br/>
+						<span style="float:right;">Reg.No..200701388M</span>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 pull-left" style="border-bottom:1px solid black;">
+					<span style="font-size: 12px;">SPACE PLANING</span>
+					<span style="margin-left: 24px; font-size: 12px;">2D 3D DESIGN SOLUTIONS</span>
+					<span style="margin-left: 24px; font-size: 12px;">INTERIOR DESIGN</span>
+					<span style="margin-left: 24px; font-size: 12px;">RETAIL</span>
+					<span style="margin-left: 24px; font-size: 12px;">COMMERCIAL</span>
+					<span style="margin-left: 24px; font-size: 12px;">OFFICES</span>
+					<span style="margin-left: 24px; font-size: 12px;">ARCHITECTURAL</span>
+				</div>
+			</div>
+		</template>
+
+		<template id="external_layout_footer_idesign">
+			<div class="footer">
+				<div class="col-xs-12 pull-left">
+					<br/>
+					<center>
+						<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
+						<span style="margin-left: 30px;">Tel : (+65) 62828020</span>
+						<span style="margin-left: 30px;">Fax : (+65) 62828332</span>
+					</center>
+				</div>
+			</div>
+		</template>
+        
+    	<template id="idesign_quotation_report_template_id">
+		    <t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		            <t t-call="report.external_layout_quotation_idesign">
+		                <div class="page">
+		                    <div class="row">
+								<div class="col-xs-2">
+									<span><strong>Date</strong></span><br/>
+									<span><strong>Company</strong></span><br/>
+									<span><strong>Project</strong></span><br/>
+									<span><strong>Attention</strong></span>
+								</div>
+								<div class="col-xs-4">
+									<strong><span t-if="o.date_order" t-field="o.date_order"/></strong><br/>
+									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
+									<strong><span t-if="o.related_project_id" t-field="o.related_project_id.name"/></strong><br/>
+									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
+								</div>
+								<div class="col-xs-2">
+									<span><strong>Currency</strong></span><br/>
+									<span><strong>From</strong></span><br/>
+									<span><strong>Name</strong></span><br/>
+									<span><strong>Email</strong></span>
+								</div>
+								<div class="col-xs-4 pull-right">
+									<strong><span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></strong><br/>
+									<strong><span t-if="o.from_led_strip" t-field="o.from_led_strip"/></strong><br/>
+									<strong><span t-if="o.name_led_strip" t-field="o.name_led_strip"/></strong><br/>
+									<strong><span t-if="o.email_led_strip" t-field="o.email_led_strip"/></strong>
+								</div>
+							</div>
+							
+							<br/><br/>
+							<span style="font-size:16px;"><center><strong>QUOTATION</strong></center></span>
+							<br/>
+							<table class="table table-condensed" t-if='o.quote_type == "led_strip"'>
+								<thead>
+								    <tr>
+								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">AREA</th>
+								        <th style="border-top:1px solid black;">LOCATION</th>
+								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
+								        <th style="border-top:1px solid black;">
+								        	UNIT PRICE<br/>
+								        	(PER METER)
+								        </th>
+								        <th style="border-top:1px solid black;">QTY</th>
+								        <th style="border-top:1px solid black;">NET PRICE</th>
+								        <th style="border-top:1px solid black;">AMOUNT</th>
+								    </tr>
+							   </thead>
+							   <tbody class="sale_tbody">
+								    <t t-set="i" t-value="0" />
+								    <tr t-foreach="o.order_line" t-as="l">
+								        <t t-set="i" t-value="i+1" />
+								        <td>
+								           <span t-esc="i"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td></td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-esc="l.price_total / l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_total" t-field="l.price_total"/>
+								        </td>
+								    </tr>
+								</tbody>
+							</table>
+							
+							<table class="table table-condensed" t-if='o.quote_type == "led_atta_quote"'>
+								<thead>
+								    <tr>
+								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">MODEL</th>
+								        <th style="border-top:1px solid black;">DESCRIPTION</th>
+								        <th style="border-top:1px solid black;">QTY</th>
+								        <th style="border-top:1px solid black;">UNIT PRICE</th>
+								        <th style="border-top:1px solid black;">AMOUNT</th>
+								    </tr>
+							   </thead>
+							   <tbody class="sale_tbody">
+								    <t t-set="i" t-value="0" />
+								    <tr t-foreach="o.order_line" t-as="l">
+								        <t t-set="i" t-value="i+1" />
+								        <td>
+								           <span t-esc="i"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.name" t-field="l.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_subtotal" t-field="l.price_subtotal"/>
+								        </td>
+								    </tr>
+								</tbody>
+							</table>
+		                </div>
+		            </t>
+		        </t>
+		    </t>
+		</template>
+   </data>
+</openerp>

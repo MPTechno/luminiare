@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="report.external_layout_invoice_sol">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+		
+			<t t-call="solum_sale.external_layout_inv_header_sol"/>
+			<t t-raw="0" />
+			<t t-call="solum_sale.external_layout_inv_footer_sol" />
+		</template>
+
+		<template id="external_layout_inv_header_sol">
+			<div class="header">
+				<div class="col-xs-12 pull-left">
+					<div class="col-xs-7 pull-left">
+						<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="width:150px;height:100px;"/>
+					</div>
+					<div class="col-xs-5 pull-right">
+						<span style="text-align:right;">Reg.No..200701388M</span>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template id="external_layout_inv_footer_sol">
+			<div class="footer">
+				<div class="col-xs-12 pull-left">
+					<br/>
+					<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
+					<span style="margin-left: 30px;">Tel : (+65) 62828020</span>
+					<span style="margin-left: 30px;">Fax : (+65) 62828332</span>
+				</div>
+			</div>
+		</template>
+        
+    	<template id="sol_invoice_report_template_id">
+		    <t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		            <t t-call="report.external_layout_invoice_sol">
+		                <div class="page">
+		                    <div class="row">
+								<div class="col-xs-2">
+									<span><strong>Date</strong></span><br/>
+									<span><strong>Company</strong></span><br/>
+									<span><strong>Project</strong></span><br/>
+									<span><strong>Attention</strong></span>
+								</div>
+								<div class="col-xs-4">
+									<strong><span t-if="o.date_invoice" t-field="o.date_invoice"/></strong><br/>
+									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
+									<!--strong><span t-if="o.related_project_id" t-field="o.related_project_id.name"/></strong><br/>
+									<strong><span t-if="o.attention" t-field="o.attention"/></strong-->
+								</div>
+								<div class="col-xs-2">
+									<span><strong>Invoice</strong></span><br/>
+									<span><strong>Terms</strong></span><br/>
+									<span><strong>Currency</strong></span><br/>
+									<span><strong>Prepared by</strong></span><br/>
+									<span><strong>Approved by</strong></span><br/>
+								</div>
+								<div class="col-xs-4 pull-right">
+									<strong><span t-if="o.number" t-field="o.number"/></strong><br/>
+									<strong><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></strong><br/>
+									<strong><span t-if="o.currency_id" t-field="o.currency_id.name"/></strong><br/>
+									<strong><span t-if="o.user_id" t-field="o.user_id.name"/></strong><br/>
+									<strong><span t-if="o.user_id" t-field="o.user_id"/></strong>
+								</div>
+							</div>
+							<br/><br/>
+							<span style="font-size:16px;"><center><strong>INVOICE</strong></center></span>
+							<br/>
+							<table class="table table-condensed">
+								<thead>
+								    <tr>
+								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">AREA</th>
+								        <th style="border-top:1px solid black;">LOCATION</th>
+								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
+								        <th style="border-top:1px solid black;">
+								        	UNIT PRICE<br/>
+								        	(PER METER)
+								        </th>
+								        <th style="border-top:1px solid black;">QTY</th>
+								        <th style="border-top:1px solid black;">NET PRICE</th>
+								        <th style="border-top:1px solid black;">AMOUNT</th>
+								    </tr>
+							   </thead>
+							   <tbody class="sale_tbody">
+								    <t t-set="i" t-value="0" />
+								    <tr t-foreach="o.invoice_line_ids" t-as="l">
+								        <t t-set="i" t-value="i+1" />
+								        <td>
+								           <span t-esc="i"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td></td>
+								        <td>
+								           <span t-if="l.quantity" t-field="l.quantity"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								        </td>
+								        <td>
+								           <span t-if="l.quantity" t-field="l.quantity"/>
+								        </td>
+								        <td>
+								           <span t-esc="l.price_subtotal / l.quantity"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_subtotal" t-field="l.price_subtotal"/>
+								        </td>
+								    </tr>
+								</tbody>
+							</table>
+							
+		                </div>
+		            </t>
+		        </t>
+		    </t>
+		</template>
+   </data>
+</openerp>

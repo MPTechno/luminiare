@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="report.external_layout_quotation_sol">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"></t>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"></t>
+			</t>
+		
+			<t t-call="solum_sale.external_layout_header_sol"/>
+			<t t-raw="0" />
+			<t t-call="solum_sale.external_layout_footer_sol" />
+		</template>
+
+		<template id="external_layout_header_sol">
+			<div class="header">
+				<div class="col-xs-12 pull-left">
+					<center><img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="width:150px;height:100px;"/></center>
+				</div>
+			</div>
+		</template>
+
+		<template id="external_layout_footer_sol">
+			<div class="footer">
+				<div class="col-xs-12 pull-left" style="background-color: #FF8C00;">
+					<br/>
+					<center>
+						<span>Sol Luminaire Pte Ltd</span><br/>
+						<span>Showroom &amp; Office: Eunos avenue 7 Richfield Industrial centre Block 122 #07-10</span><br/>
+						<span>tel: +65 6282 8020 | fax: +65 6282 8332 | www.solluminaire.com</span><br/>
+					</center>
+					<br/>
+				</div>
+			</div>
+		</template>
+        
+    	<template id="sol_quotation_report_template_id">
+		    <t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		            <t t-call="report.external_layout_quotation_sol">
+		                <div class="page">
+		                    <div class="row">
+								<div class="col-xs-2">
+									<span><strong>Date</strong></span><br/>
+									<span><strong>Company</strong></span><br/>
+									<span><strong>Project</strong></span><br/>
+									<span><strong>Attention</strong></span>
+								</div>
+								<div class="col-xs-4">
+									<strong><span t-if="o.date_order" t-field="o.date_order"/></strong><br/>
+									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
+									<strong><span t-if="o.related_project_id" t-field="o.related_project_id.name"/></strong><br/>
+									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
+								</div>
+								<div class="col-xs-2">
+									<span><strong>Currency</strong></span><br/>
+									<span><strong>From</strong></span><br/>
+									<span><strong>Name</strong></span><br/>
+									<span><strong>Email</strong></span>
+								</div>
+								<div class="col-xs-4 pull-right">
+									<strong><span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></strong><br/>
+									<strong><span t-if="o.from_led_strip" t-field="o.from_led_strip"/></strong><br/>
+									<strong><span t-if="o.name_led_strip" t-field="o.name_led_strip"/></strong><br/>
+									<strong><span t-if="o.email_led_strip" t-field="o.email_led_strip"/></strong>
+								</div>
+							</div>
+							
+							<br/><br/>
+							<span style="font-size:16px;"><center><strong>QUOTATION</strong></center></span>
+							<br/>
+							<table class="table table-condensed" t-if='o.quote_type == "led_strip"'>
+								<thead>
+								    <tr>
+								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">AREA</th>
+								        <th style="border-top:1px solid black;">LOCATION</th>
+								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
+								        <th style="border-top:1px solid black;">
+								        	UNIT PRICE<br/>
+								        	(PER METER)
+								        </th>
+								        <th style="border-top:1px solid black;">QTY</th>
+								        <th style="border-top:1px solid black;">NET PRICE</th>
+								        <th style="border-top:1px solid black;">AMOUNT</th>
+								    </tr>
+							   </thead>
+							   <tbody class="sale_tbody">
+								    <t t-set="i" t-value="0" />
+								    <tr t-foreach="o.order_line" t-as="l">
+								        <t t-set="i" t-value="i+1" />
+								        <td>
+								           <span t-esc="i"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td></td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-esc="l.price_total / l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_total" t-field="l.price_total"/>
+								        </td>
+								    </tr>
+								</tbody>
+							</table>
+							
+							<table class="table table-condensed" t-if='o.quote_type == "led_atta_quote"'>
+								<thead>
+								    <tr>
+								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">MODEL</th>
+								        <th style="border-top:1px solid black;">DESCRIPTION</th>
+								        <th style="border-top:1px solid black;">QTY</th>
+								        <th style="border-top:1px solid black;">UNIT PRICE</th>
+								        <th style="border-top:1px solid black;">AMOUNT</th>
+								    </tr>
+							   </thead>
+							   <tbody class="sale_tbody">
+								    <t t-set="i" t-value="0" />
+								    <tr t-foreach="o.order_line" t-as="l">
+								        <t t-set="i" t-value="i+1" />
+								        <td>
+								           <span t-esc="i"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.name" t-field="l.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								        </td>
+								        <td>
+								           <span t-if="l.price_subtotal" t-field="l.price_subtotal"/>
+								        </td>
+								    </tr>
+								</tbody>
+							</table>
+		                </div>
+		            </t>
+		        </t>
+		    </t>
+		</template>
+   </data>
+</openerp>
