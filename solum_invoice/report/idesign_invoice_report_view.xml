@@ -19,7 +19,7 @@
 			<div class="header">
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
-						<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="width:150px;height:100px;"/>
+						<img src='/solum_sale/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
 					</div>
 					<div class="col-xs-3 pull-right">
 						<br/><br/><br/>
@@ -67,8 +67,8 @@
 								<div class="col-xs-4">
 									<strong><span t-if="o.date_invoice" t-field="o.date_invoice"/></strong><br/>
 									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<!--strong><span t-if="o.related_project_id" t-field="o.related_project_id.name"/></strong><br/>
-									<strong><span t-if="o.attention" t-field="o.attention"/></strong-->
+									<strong><span t-if="o.attention" t-field="o.attention"/></strong><br/>
+									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
 								</div>
 								<div class="col-xs-2">
 									<span><strong>Invoice</strong></span><br/>
@@ -81,8 +81,8 @@
 									<strong><span t-if="o.number" t-field="o.number"/></strong><br/>
 									<strong><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></strong><br/>
 									<strong><span t-if="o.currency_id" t-field="o.currency_id.name"/></strong><br/>
-									<strong><span t-if="o.user_id" t-field="o.user_id.name"/></strong><br/>
-									<strong><span t-if="o.user_id" t-field="o.user_id"/></strong>
+									<strong><span t-if="o.prepared_by" t-field="o.prepared_by.name"/></strong><br/>
+									<strong><span t-if="o.approved_by" t-field="o.approved_by.name"/></strong>
 								</div>
 							</div>
 							<br/><br/>
@@ -114,9 +114,11 @@
 								        <td>
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
-								        <td></td>
 								        <td>
-								           <span t-if="l.quantity" t-field="l.quantity"/>
+								           <span t-if="l.location" t-field="l.location"/>
+								        </td>
+								        <td>
+								           <span t-if="l.length" t-field="l.length"/>
 								        </td>
 								        <td>
 								           <span t-if="l.price_unit" t-field="l.price_unit"/>

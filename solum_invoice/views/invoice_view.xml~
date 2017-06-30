@@ -35,6 +35,7 @@
 			<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>
+			
         </field>
     </record>
     

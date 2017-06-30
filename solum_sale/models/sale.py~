@@ -62,6 +62,7 @@ class SaleOrderLineExtension(models.Model):
                                    ('led_attach','LED Attachments Quotaion')
                                  ],string="Quotaion Type",readonly=True)
                                  
+            
     @api.multi
     @api.onchange('product_id')
     def onChnageProduct(self):
