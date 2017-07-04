@@ -23,6 +23,7 @@ class SaleExtenstion(models.Model):
     name_led_strip = fields.Char("Name")
     email_led_strip = fields.Char("Email")
     state_change_date = fields.Date(string="State Change Date")
+    crm_lead_id = fields.Many2one('crm.lead','Project')
     
     def _calculateStateDays(self):
         diff_time = 0
@@ -53,14 +54,56 @@ class SaleExtenstion(models.Model):
 class SaleOrderLineExtension(models.Model):
     _inherit = 'sale.order.line'
     
+    @api.multi
+    @api.onchange('unit_zero_text')
+    def onChnageunit_zero_text(self):
+        print "\n\n===unit_zero_text==========",self
+        if self.unit_zero_text:
+            self.update({'name':self.unit_zero_text})
+        
+    
+    #@api.multi
+    #def create(self,vals):
+    #    print "\n\n===========VALS",vals
+    #    if vals.get('unit_zero_text'):
+    #    	vals.update({'name':'Unit Zero Text','product_id':1})
+    #    print "\n\n===========VALSsssssss",vals
+    #    return super(SaleOrderLineExtension,self).create(vals)
+    
+    @api.multi
+    @api.depends('sequence', 'order_id')
+    def get_number(self):
+        for order in self.mapped('order_id'):
+            number = 1
+            for line in order.order_line:
+                line.number = number
+                number += 1
+    
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        """
+        Compute the amounts of the SO line.
+        """
+        for line in self:
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
+            net_price = 0.0
+            if line.product_uom_qty > 0:
+            	net_price = taxes['total_excluded'] / line.product_uom_qty
+            line.update({
+                'price_tax': taxes['total_included'] - taxes['total_excluded'],
+                'price_total': taxes['total_included'],
+                'price_subtotal': taxes['total_excluded'],
+                'net_price': net_price,
+            })
+    
+    
+    net_price = fields.Monetary(compute='_compute_amount', string='Net Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
     unit_zero_text = fields.Text(string="Remarks")
     location = fields.Char('Location')
     length = fields.Char('Length(MM)')
-    quote_type = fields.Selection([
-                                   ('led_strip','LED Strip Quotation'),
-                                   ('led_attach','LED Attachments Quotaion')
-                                 ],string="Quotaion Type",readonly=True)
+    number = fields.Integer(compute='get_number', store=True ,string="Item")
                                  
     @api.multi
     @api.onchange('product_id')
