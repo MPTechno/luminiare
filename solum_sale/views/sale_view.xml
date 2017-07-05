@@ -16,6 +16,9 @@
     <!--Remove Quotation Menu-->
     <delete model="ir.ui.menu" search="[('name','=','Quotations'),('parent_id','=',ref('sales_team.menu_sales'))]"/>
     
+    <!--Remove Sales Orders Menu-->
+    <delete model="ir.ui.menu" search="[('name','=','Sales Orders'),('parent_id','=',ref('sales_team.menu_sales'))]"/>
+    
     <!-- LED Strip Quotation View -->
     <record id="view_led_strip_order_form" model="ir.ui.view">
         <field name="name">sale.order.strip.form</field>
@@ -257,6 +260,7 @@
         </field>
     </record>
     
+    <!-- LED Strip Quotation Menu -->
     <record id="action_led_strip_quotations" model="ir.actions.act_window">
         <field name="name">LED Strip Quotation</field>
         <field name="type">ir.actions.act_window</field>
@@ -289,7 +293,41 @@
               action="action_led_strip_quotations" 
               parent="sales_team.menu_sales" sequence="8"/>
     
-    <!-- LED Attachment Quotation View -->
+    <!-- LED Strip Sale Order Menu -->
+    
+    <record id="action_led_strip_so" model="ir.actions.act_window">
+        <field name="name">LED Strip Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'default_quote_type': 'led_strip'}</field>
+        <field name="domain">[('quote_type', '=', 'led_strip'),('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+    </record>
+    
+    
+    <record id="action_order_tree_view_strip_so" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="act_window_id" ref="action_led_strip_so"/>
+    </record>
+    
+    <record id="action_order_form_view_strip_so" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_led_strip_order_form"/>
+        <field name="act_window_id" ref="action_led_strip_so"/>
+    </record>
+
+    <menuitem id="led_strip_so_menu" 
+              name="LED Strip Sales Orders"
+              action="action_led_strip_so" 
+              parent="sales_team.menu_sales" sequence="10"/>
+    
+    <!-- =================LED Attachment Quotation View======================== -->
     <record id="view_led_attachment_order_form" model="ir.ui.view">
         <field name="name">sale.order.attachment.form</field>
         <field name="model">sale.order</field>
@@ -526,7 +564,7 @@
             </form>
         </field>
     </record>
-    
+    <!-- LED Attachment Quotation -->
     <record id="action_led_attach_quotations" model="ir.actions.act_window">
         <field name="name">LED Attachment Quotation</field>
         <field name="type">ir.actions.act_window</field>
@@ -556,5 +594,38 @@
     <menuitem id="led_attach_quote_menu" 
               name="LED Attachment Quotation" 
               action="action_led_attach_quotations" 
-              parent="sales_team.menu_sales" sequence="10"/>
+              parent="sales_team.menu_sales" sequence="9"/>
+  
+  	
+  	<!-- LED Attachment Sales Order -->
+    <record id="action_led_attach_so" model="ir.actions.act_window">
+        <field name="name">LED Attachment Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'default_quote_type': 'led_attach'}</field>
+        <field name="domain">[('quote_type', '=', 'led_attach'),('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+    </record>
+    
+    <record id="action_order_tree_view_attach_so" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="sale.view_quotation_tree"/>
+        <field name="act_window_id" ref="action_led_attach_so"/>
+    </record>
+
+    <record id="action_order_form_view_attach_so" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_led_attachment_order_form"/>
+        <field name="act_window_id" ref="action_led_attach_so"/>
+    </record>
+    
+    <menuitem id="led_attach_so_menu" 
+              name="LED Attachment Sales Orders" 
+              action="action_led_attach_so" 
+              parent="sales_team.menu_sales" sequence="11"/>
 </odoo>   

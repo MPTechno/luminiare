@@ -46,7 +46,7 @@ class InvoiceLineExtension(models.Model):
         sign = self.invoice_id.type in ['in_refund', 'out_refund'] and -1 or 1
         self.price_subtotal_signed = price_subtotal_signed * sign
     
-    net_price = fields.Monetary(string='Net Price',store=True, readonly=True, compute='_compute_price')
+    net_price = fields.Monetary(string='Nett Price',store=True, readonly=True, compute='_compute_price')
     location = fields.Char('Location')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Char('Length(MM)')

@@ -98,6 +98,7 @@
 								        	UNIT PRICE<br/>
 								        	(PER METER)
 								        </th>
+								        <th style="border-top:1px solid black;">REMARKS</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">NET PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
@@ -120,16 +121,19 @@
 								           <span t-if="l.length" t-field="l.length"/>
 								        </td>
 								        <td>
-								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								           <span t-esc="'%.2f'% l.price_unit"/>
 								        </td>
 								        <td>
-								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								           <span t-field="l.unit_zero_text"/>
 								        </td>
 								        <td>
-								           <span t-esc="l.price_total / l.product_uom_qty"/>
+								           <span t-esc="int(l.product_uom_qty)"/>
 								        </td>
 								        <td>
-								           <span t-if="l.price_total" t-field="l.price_total"/>
+								           <span t-esc="'%.2f'% (l.price_total / l.product_uom_qty)"/>
+								        </td>
+								        <td>
+								           <span t-esc="'%.2f'% l.price_total"/>
 								        </td>
 								    </tr>
 								</tbody>
@@ -143,6 +147,7 @@
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
+								        <th style="border-top:1px solid black;">REMARKS</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
 								    </tr>
 							   </thead>
@@ -160,13 +165,16 @@
 								           <span t-if="l.name" t-field="l.name"/>
 								        </td>
 								        <td>
-								           <span t-if="l.product_uom_qty" t-field="l.product_uom_qty"/>
+								           <span t-esc="int(l.product_uom_qty)"/>
 								        </td>
 								        <td>
-								           <span t-if="l.price_unit" t-field="l.price_unit"/>
+								           <span t-esc="'%.2f'% l.price_unit"/>
 								        </td>
 								        <td>
-								           <span t-if="l.price_subtotal" t-field="l.price_subtotal"/>
+								           <span t-field="l.unit_zero_text"/>
+								        </td>
+								        <td>
+								           <span t-esc="'%.2f'% l.price_subtotal"/>
 								        </td>
 								    </tr>
 								</tbody>

@@ -54,21 +54,6 @@ class SaleExtenstion(models.Model):
 class SaleOrderLineExtension(models.Model):
     _inherit = 'sale.order.line'
     
-    @api.multi
-    @api.onchange('unit_zero_text')
-    def onChnageunit_zero_text(self):
-        print "\n\n===unit_zero_text==========",self
-        if self.unit_zero_text:
-            self.update({'name':self.unit_zero_text})
-        
-    
-    #@api.multi
-    #def create(self,vals):
-    #    print "\n\n===========VALS",vals
-    #    if vals.get('unit_zero_text'):
-    #    	vals.update({'name':'Unit Zero Text','product_id':1})
-    #    print "\n\n===========VALSsssssss",vals
-    #    return super(SaleOrderLineExtension,self).create(vals)
     
     @api.multi
     @api.depends('sequence', 'order_id')
@@ -98,7 +83,7 @@ class SaleOrderLineExtension(models.Model):
             })
     
     
-    net_price = fields.Monetary(compute='_compute_amount', string='Net Price', readonly=True, store=True)
+    net_price = fields.Monetary(compute='_compute_amount', string='Nett Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
     unit_zero_text = fields.Text(string="Remarks")
     location = fields.Char('Location')
