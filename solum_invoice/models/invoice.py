@@ -11,6 +11,7 @@ class InvoiceExtension(models.Model):
     attention = fields.Char("Attention")
     prepared_by = fields.Many2one("res.users",'Prepared By')
     approved_by = fields.Many2one("res.users",'Approved By')
+    crm_lead_id = fields.Many2one('crm.lead','Project')
     
 
 class InvoiceLineExtension(models.Model):
@@ -47,7 +48,7 @@ class InvoiceLineExtension(models.Model):
         self.price_subtotal_signed = price_subtotal_signed * sign
     
     net_price = fields.Monetary(string='Nett Price',store=True, readonly=True, compute='_compute_price')
-    location = fields.Char('Location')
+    product_location_id = fields.Many2one('product.location','Location')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Char('Length(MM)')
     

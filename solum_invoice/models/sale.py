@@ -30,7 +30,7 @@ class SaleOrderLine(models.Model):
             'price_unit': self.price_unit,
             'quantity': qty,
             'discount': self.discount,
-            'location': self.location,
+            'product_location_id': self.product_location_id and self.product_location_id.id or False,
             'length': self.length,
             'uom_id': self.product_uom.id,
             'product_id': self.product_id.id or False,
@@ -73,6 +73,8 @@ class SalesOrders(models.Model):
             'user_id': self.user_id and self.user_id.id,
             'team_id': self.team_id.id,
             'inv_type':self.quote_type,
+            'attention': self.attention,
+            'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
         }
         return invoice_vals
     
@@ -81,7 +83,6 @@ class SalesOrders(models.Model):
     def action_view_invoice(self):
         invoice_ids = self.mapped('invoice_ids')
         imd = self.env['ir.model.data']
-        print "\n\n===========VIEW=====",self
         if self.quote_type == 'led_strip':
             action = imd.xmlid_to_object('solum_invoice.action_led_strip_invoices')
             list_view_id = imd.xmlid_to_res_id('account.invoice_tree')
@@ -102,7 +103,6 @@ class SalesOrders(models.Model):
                 result['res_id'] = invoice_ids.ids[0]
             else:
                 result = {'type': 'ir.actions.act_window_close'}
-            print "\n\n=========Result1111=",result
             return result
         if self.quote_type == 'led_attach':
             action = imd.xmlid_to_object('solum_invoice.action_led_attach_invoices')
@@ -124,7 +124,6 @@ class SalesOrders(models.Model):
                 result['res_id'] = invoice_ids.ids[0]
             else:
                 result = {'type': 'ir.actions.act_window_close'}
-            print "\n\n=========Result2222=",result
             return result
 
 class SaleAdvancePaymentInvExtension(models.TransientModel):
@@ -165,7 +164,6 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
             'origin': order.name,
             'type': 'out_invoice',
             'reference': False,
-            'attention': order.attention,
             'account_id': order.partner_id.property_account_receivable_id.id,
             'partner_id': order.partner_invoice_id.id,
             'partner_shipping_id': order.partner_shipping_id.id,
@@ -188,6 +186,8 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
             'team_id': order.team_id.id,
             'comment': order.note,
             'inv_type':order.quote_type,
+            'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
+            'attention': order.attention,
         })
         invoice.compute_taxes()
         invoice.message_post_with_view('mail.message_origin_link',

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         
+        <!--SOL Invoice Report-->
+    	<report 
+        	id="sol_do_report_menu_id" 
+        	string="Sol Luminaire" 
+        	model="stock.picking" 
+            report_type="qweb-pdf"
+            name="solum_delivery_order.sol_do_report_template_id"
+            file="solum_delivery_order.sol_do_report_template_id" 
+            />
+            
+        <report 
+        	id="idesign_do_report_menu_id" 
+        	string="IDesign Line" 
+        	model="stock.picking" 
+            report_type="qweb-pdf"
+            name="solum_delivery_order.idesign_do_report_template_id"
+            file="solum_delivery_order.idesign_do_report_template_id" 
+            />
+	</data>
+</openerp>

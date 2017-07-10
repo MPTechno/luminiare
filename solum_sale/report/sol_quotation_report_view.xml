@@ -52,7 +52,7 @@
 								<div class="col-xs-4">
 									<strong><span t-if="o.date_order" t-field="o.date_order"/></strong><br/>
 									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<strong><span t-if="o.related_project_id" t-field="o.related_project_id.name"/></strong><br/>
+									<strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong><br/>
 									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
 								</div>
 								<div class="col-xs-2">
@@ -100,7 +100,7 @@
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
 								        <td>
-								           <span t-if="l.location" t-field="l.location"/>
+								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
 								        </td>
 								        <td>
 								           <span t-if="l.length" t-field="l.length"/>

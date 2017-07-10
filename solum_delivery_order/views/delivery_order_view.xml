@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_picking_form_sol" model="ir.ui.view">
+        <field name="name">stock.picking.form.sol</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="delivery_type" />
+                <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                <field name="attention"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="vpicktree_extended" model="ir.ui.view">
+        <field name="name">stock.picking.tree.sol</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="delivery_type" />
+            </xpath>
+        </field>
+    </record>
+</odoo>   

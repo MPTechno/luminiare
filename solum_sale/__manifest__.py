@@ -7,7 +7,7 @@
     "category": "sale",
     "depends": ['sale','sales_team'],
     "data": [
-        #'security/security.xml',
+        'security/ir.model.access.csv',
 		'views/sale_view.xml',
 		'views/assets.xml',
 		'views/report_menu.xml',

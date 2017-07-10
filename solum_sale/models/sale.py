@@ -86,7 +86,7 @@ class SaleOrderLineExtension(models.Model):
     net_price = fields.Monetary(compute='_compute_amount', string='Nett Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
     unit_zero_text = fields.Text(string="Remarks")
-    location = fields.Char('Location')
+    product_location_id = fields.Many2one('product.location','Location')
     length = fields.Char('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
                                  
@@ -99,3 +99,9 @@ class SaleOrderLineExtension(models.Model):
             })
             return
         self.update({'image':self.product_id.image})
+        
+class ProductLocation(models.Model):
+    _name = 'product.location'
+    _description = 'Product Location'
+    
+    name = fields.Char(string='Location',required=True)

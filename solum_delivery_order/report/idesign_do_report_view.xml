@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-        <template id="report.external_layout_invoice_idesign">
+        <template id="report.external_layout_do_idesign">
 			<!-- Multicompany -->
 			<t t-if="o and 'company_id' in o">
 				<t t-set="company" t-value="o.company_id"></t>
@@ -10,16 +10,16 @@
 				<t t-set="company" t-value="res_company"></t>
 			</t>
 		
-			<t t-call="solum_invoice.external_layout_inv_header_idesign"/>
+			<t t-call="solum_delivery_order.external_layout_do_header_idesign"/>
 			<t t-raw="0" />
-			<t t-call="solum_invoice.external_layout_inv_footer_idesign" />
+			<t t-call="solum_delivery_order.external_layout_do_footer_idesign" />
 		</template>
 
-		<template id="external_layout_inv_header_idesign">
+		<template id="external_layout_do_header_idesign">
 			<div class="header">
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
-						<img src='/solum_sale/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
+						<img src='/solum_delivery_order/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
 					</div>
 					<div class="col-xs-3 pull-right">
 						<br/><br/><br/>
@@ -39,7 +39,7 @@
 			</div>
 		</template>
 
-		<template id="external_layout_inv_footer_idesign">
+		<template id="external_layout_do_footer_idesign">
 			<div class="footer">
 				<div class="col-xs-12 pull-left">
 					<br/>
@@ -52,61 +52,37 @@
 			</div>
 		</template>
         
-    	<template id="idesign_invoice_report_template_id">
+    	<template id="idesign_do_report_template_id">
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
-		            <t t-call="report.external_layout_invoice_idesign">
+		            <t t-call="report.external_layout_do_idesign">
 		                <div class="page">
 		                    <div class="row">
 								<div class="col-xs-2">
 									<span><strong>Date</strong></span><br/>
 									<span><strong>Company</strong></span><br/>
-									<span><strong>Project</strong></span><br/>
-									<span><strong>Attention</strong></span>
 								</div>
 								<div class="col-xs-4">
-									<strong><span t-if="o.date_invoice" t-field="o.date_invoice"/></strong><br/>
+									<strong><span t-if="o.min_date" t-field="o.min_date"/></strong><br/>
 									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong><br/>
-									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
-								</div>
-								<div class="col-xs-2">
-									<span><strong>Invoice</strong></span><br/>
-									<span><strong>Terms</strong></span><br/>
-									<span><strong>Currency</strong></span><br/>
-									<span><strong>Prepared by</strong></span><br/>
-									<span><strong>Approved by</strong></span><br/>
-								</div>
-								<div class="col-xs-4 pull-right">
-									<strong><span t-if="o.number" t-field="o.number"/></strong><br/>
-									<strong><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></strong><br/>
-									<strong><span t-if="o.currency_id" t-field="o.currency_id.name"/></strong><br/>
-									<strong><span t-if="o.prepared_by" t-field="o.prepared_by.name"/></strong><br/>
-									<strong><span t-if="o.approved_by" t-field="o.approved_by.name"/></strong>
 								</div>
 							</div>
 							<br/><br/>
-							<span style="font-size:16px;"><center><strong>INVOICE</strong></center></span>
+							<span style="font-size:16px;"><center><strong>DELIVERY ORDER</strong></center></span>
 							<br/>
-							<table class="table table-condensed" t-if='o.inv_type == "led_strip"'>
+							<table class="table table-condensed" t-if='o.delivery_type == "led_strip"'>
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
 								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
-								        <th style="border-top:1px solid black;">
-								        	UNIT PRICE<br/>
-								        	(PER METER)
-								        </th>
 								        <th style="border-top:1px solid black;">QTY</th>
-								        <th style="border-top:1px solid black;">NET PRICE</th>
-								        <th style="border-top:1px solid black;">AMOUNT</th>
 								    </tr>
 							   </thead>
 							   <tbody class="sale_tbody">
 								    <t t-set="i" t-value="0" />
-								    <tr t-foreach="o.invoice_line_ids" t-as="l">
+								    <tr t-foreach="o.get_order_line(o)" t-as="l">
 								        <t t-set="i" t-value="i+1" />
 								        <td>
 								           <span t-esc="i"/>
@@ -118,38 +94,26 @@
 								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
 								        </td>
 								        <td>
-								           <span t-if="l.length" t-field="l.length"/>
+								           <span t-field="l.length"/>
 								        </td>
 								        <td>
-								           <span t-esc="'%.2f'% l.price_unit"/>
-								        </td>
-								        <td>
-								           <span t-esc="int(l.quantity)"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% (l.price_subtotal / l.quantity)"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_subtotal"/>
+								           <span t-esc="int(l.product_uom_qty)"/>
 								        </td>
 								    </tr>
 								</tbody>
 							</table>
 							
-							<table class="table table-condensed" t-if='o.inv_type == "led_attach"'>
+							<table class="table table-condensed" t-if='o.delivery_type == "led_attach"'>
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
-								        <th style="border-top:1px solid black;">MODEL</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
-								        <th style="border-top:1px solid black;">UNIT PRICE</th>
-								        <th style="border-top:1px solid black;">AMOUNT</th>
 								    </tr>
 							   </thead>
 							   <tbody class="sale_tbody">
 								    <t t-set="i" t-value="0" />
-								    <tr t-foreach="o.invoice_line_ids" t-as="l">
+								    <tr t-foreach="o.get_order_line(o)" t-as="l">
 								        <t t-set="i" t-value="i+1" />
 								        <td>
 								           <span t-esc="i"/>
@@ -158,16 +122,7 @@
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
 								        <td>
-								           <span t-if="l.name" t-field="l.name"/>
-								        </td>
-								        <td>
-								           <span t-esc="int(l.quantity)"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_unit"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_subtotal"/>
+								           <span t-esc="int(l.product_uom_qty)"/>
 								        </td>
 								    </tr>
 								</tbody>

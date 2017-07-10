@@ -155,7 +155,7 @@
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                    />
                                	<field name="image" widget="image"/>
-                               	<field name="location" />
+                               	<field name="product_location_id" />
                                	<field name="length" />
                                 <field name="layout_category_id" groups="sale.group_sale_layout" invisible="1"/>
                                 <field name="name" invisible="1"/>
@@ -628,4 +628,28 @@
               name="LED Attachment Sales Orders" 
               action="action_led_attach_so" 
               parent="sales_team.menu_sales" sequence="11"/>
+              
+  	<!-- Product Location View -->
+  	
+  	<record id="product_location_tree_view" model="ir.ui.view">
+        <field name="name">product.location.tree.view</field>
+        <field name="model">product.location</field>            
+        <field name="arch" type="xml">
+            <tree editable="bottom"> 
+                <field name="name"/>                          
+            </tree>
+        </field>
+    </record>
+    
+    <record id="product_location_action" model="ir.actions.act_window">
+        <field name="name">Product Location</field>
+        <field name="res_model">product.location</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="product_location_tree_view"/>
+    </record>
+    
+              
+    <menuitem id="product_location_menu" name="Product Location" 
+              action="product_location_action" parent="sale.prod_config_main" sequence="10"/>
 </odoo>   
