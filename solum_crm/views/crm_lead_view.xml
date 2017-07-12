@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<!-- CRM LEAD Form View -->
+	
+	<record id="sale_action_quotations_new_strip" model="ir.actions.act_window">
+        <field name="name">Quotation</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">form,tree,graph</field>
+        <field name="view_id" ref="solum_sale.view_led_strip_order_form"/>
+        <field name="domain">[('opportunity_id', '=', active_id)]</field>
+        <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
+    </record>
+    
+    <record id="sale_action_quotations_new_attachment" model="ir.actions.act_window">
+        <field name="name">Quotation</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">form,tree,graph</field>
+        <field name="view_id" ref="solum_sale.view_led_attachment_order_form"/>
+        <field name="domain">[('opportunity_id', '=', active_id)]</field>
+        <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
+    </record>
+	
 	<record id="sale_crm.crm_case_form_view_oppor" model="ir.ui.view">
         <field name="name">crm.lead.oppor.inherited.crm</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_set_won']" position="before">
-                <button string="New LED Strip Quotation" name="%(sale_crm.sale_action_quotations_new)d" type="action" class="oe_highlight"
+                <button string="New LED Strip Quotation" name="%(sale_action_quotations_new_strip)d" type="action" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_strip',
                               'default_crm_lead_id': active_id,
                               'default_team_id': team_id}" attrs="{'invisible': [('lead_state','!=','Won')]}"/>
-      		 	<button string="New LED Attachment Quotation" name="%(sale_crm.sale_action_quotations_new)d" 
+      		 	<button string="New LED Attachment Quotation" name="%(sale_action_quotations_new_attachment)d" 
       		 		type="action" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
@@ -44,11 +63,9 @@
                     </div>
                 </button>
             </div>
-            
             <xpath expr="//notebook/page[2]/group/group/field[@name='partner_name']" position="before">
             	<field name="lead_state"/>
             </xpath>
-            
         </field>
     </record>
 </odoo>   
