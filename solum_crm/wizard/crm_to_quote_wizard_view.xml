@@ -13,8 +13,17 @@
 						</group>
 					</group>
 					<footer>
-			           	<button name="%(sale_crm.sale_action_quotations_new)d" type="action" 
-			           			string="Select" class="oe_highlight"
+			           	<button name="%(sale_action_quotations_new_strip)d" type="action" 
+			           			string="Generate LED Strip Quotation" class="oe_highlight"
+			           			attrs="{'invisible': [('quote_type','!=','led_strip')]}"
+			           			context="{'search_default_partner_id': context.get('partner_id',False),
+			           					  'default_quote_type': quote_type,
+			           					  'default_crm_lead_id': context.get('crm_lead_id',False),
+			           					  'default_partner_id': context.get('partner_id',False),
+			           					  'default_team_id': context.get('team_id',False)}"/>
+   					  	<button name="%(sale_action_quotations_new_attachment)d" type="action" 
+			           			string="Generate LED Attachment Quotation" class="oe_highlight"
+			           			attrs="{'invisible': [('quote_type','!=','led_attach')]}"
 			           			context="{'search_default_partner_id': context.get('partner_id',False),
 			           					  'default_quote_type': quote_type,
 			           					  'default_crm_lead_id': context.get('crm_lead_id',False),
