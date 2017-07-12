@@ -11,13 +11,20 @@
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_strip',
-                              'default_team_id': team_id}"/>
+                              'default_crm_lead_id': active_id,
+                              'default_team_id': team_id}" attrs="{'invisible': [('lead_state','!=','Won')]}"/>
       		 	<button string="New LED Attachment Quotation" name="%(sale_crm.sale_action_quotations_new)d" 
       		 		type="action" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_attach',
-                              'default_team_id': team_id}"/>
+                              'default_crm_lead_id': active_id,
+                              'default_team_id': team_id}" attrs="{'invisible': [('lead_state','!=','Won')]}"/>
+              	<button string="Quote" name="%(solum_crm.action_crm_to_quote_wizard)d" type="action" class="oe_highlight"
+                    	context="{'partner_id': partner_id,
+                              'crm_lead_id': active_id,
+                              'team_id': team_id}"
+                    	attrs="{'invisible': [('lead_state','!=','Won')]}"/>
             </xpath>
             <div name="button_box" position="inside">
                 <button class="oe_stat_button" type="action"
@@ -37,6 +44,11 @@
                     </div>
                 </button>
             </div>
+            
+            <xpath expr="//notebook/page[2]/group/group/field[@name='partner_name']" position="before">
+            	<field name="lead_state"/>
+            </xpath>
+            
         </field>
     </record>
 </odoo>   

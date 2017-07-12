@@ -7,6 +7,7 @@
     "category": "crm",
     "depends": ['crm','solum_sale','sale_crm'],
     "data": [
+		'wizard/crm_to_quote_wizard_view.xml',
 		'views/crm_lead_view.xml',
     ],
     "qweb": [],

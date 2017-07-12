@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+     <data>
+		<record id="view_crm_to_quote_wizard" model="ir.ui.view">
+			<field name="name">LED Quotation</field>
+			<field name="model">crm.to.quote.wizard</field>
+			<field name="arch" type="xml">
+				<form string="LED Quotation">
+					<separator string = "LED Quotation" colspan="4"/>
+					<group col="2">
+						<group>
+							<field name="quote_type" widget="radio"/>
+						</group>
+					</group>
+					<footer>
+			           	<button name="%(sale_crm.sale_action_quotations_new)d" type="action" 
+			           			string="Select" class="oe_highlight"
+			           			context="{'search_default_partner_id': context.get('partner_id',False),
+			           					  'default_quote_type': quote_type,
+			           					  'default_crm_lead_id': context.get('crm_lead_id',False),
+			           					  'default_partner_id': context.get('partner_id',False),
+			           					  'default_team_id': context.get('team_id',False)}"/>
+			        	<button special="cancel" string="Cancel" class="oe_highlight"/>
+ 					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record id="action_crm_to_quote_wizard" model="ir.actions.act_window">
+            <field name="name">LED Quotation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.to.quote.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_crm_to_quote_wizard"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+		
+     </data>
+</openerp>
