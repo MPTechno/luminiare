@@ -4,6 +4,31 @@ from odoo import fields, models, exceptions, api
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
     
+    @api.multi
+    @api.depends('procurement_group_id')
+    def _compute_picking_ids(self):
+        for order in self:
+            order.picking_ids = self.env['stock.picking'].search([('group_id', '=', order.procurement_group_id.id)]) if order.procurement_group_id else []
+            order.delivery_count = len(order.picking_ids)
+
+    
+    @api.model
+    def _get_default_currency_id(self):
+        currency_id = self.env['res.currency'].search([('name', '=', 'SGD')],limit=1)
+        return currency_id
+    
+    def _calculateStateDays(self):
+        diff_time = 0
+        if self.state_change_date and self.state in ('draft','sent'):
+            current_date_str = fields.Date.context_today(self)
+            current_date = fields.Date.from_string(current_date_str)
+            state_change_str = self.state_change_date
+            state_change = fields.Date.from_string(state_change_str)
+            diff_time = (current_date - state_change).days
+            if diff_time >= 7:
+                self.write({'state':'idle'})
+        self.days_sice_state_change = diff_time
+    
     quote_type = fields.Selection([
                                    ('led_strip','LED Strip Quotation'),
                                    ('led_attach','LED Attachments Quotaion')
@@ -24,27 +49,35 @@ class SaleExtenstion(models.Model):
     email_led_strip = fields.Char("Email")
     state_change_date = fields.Date(string="State Change Date")
     crm_lead_id = fields.Many2one('crm.lead','Project')
-    
-    def _calculateStateDays(self):
-        diff_time = 0
-        if self.state_change_date and self.state in ('draft','sent'):
-            current_date_str = fields.Date.context_today(self)
-            current_date = fields.Date.from_string(current_date_str)
-            state_change_str = self.state_change_date
-            state_change = fields.Date.from_string(state_change_str)
-            diff_time = (current_date - state_change).days
-            if diff_time >= 7:
-                self.write({'state':'idle'})
-        self.days_sice_state_change = diff_time
-    
     days_sice_state_change = fields.Integer(compute=_calculateStateDays,string="Days Since Last State")
+    picking_ids = fields.Many2many('stock.picking', compute='_compute_picking_ids', string='Picking associated to this sale')
+    delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
+    currency_id = fields.Many2one("res.currency", related='pricelist_id.currency_id', default=_get_default_currency_id, string="Currency", readonly=True, required=True)
+    
     
     def set_to_active(self):
         return self.write({'state':self.state_when_idle})
         
     def set_to_idle(self):
         return self.write({'state':'idle','state_when_idle':self.state})
-        
+    
+    @api.multi
+    def action_view_delivery(self):
+        '''
+        This function returns an action that display existing delivery orders
+        of given sales order ids. It can either be a in a list or in a form
+        view, if there is only one delivery order to show.
+        '''
+        action = self.env.ref('stock.action_picking_tree_all').read()[0]
+
+        pickings = self.mapped('picking_ids')
+        if len(pickings) > 1:
+            action['domain'] = [('id', 'in', pickings.ids)]
+        elif pickings:
+            action['views'] = [(self.env.ref('stock.view_picking_form').id, 'form')]
+            action['res_id'] = pickings.id
+        return action
+    
     @api.multi
     def write(self,vals):
         if vals.get('state',False):
