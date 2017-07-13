@@ -12,10 +12,15 @@ class SaleExtenstion(models.Model):
             order.delivery_count = len(order.picking_ids)
 
     
-    @api.model
-    def _get_default_currency_id(self):
-        currency_id = self.env['res.currency'].search([('name', '=', 'SGD')],limit=1)
-        return currency_id
+    @api.onchange('fiscal_position_id')
+    def _compute_tax_id(self):
+        """
+        Trigger the recompute of the taxes if the fiscal position is changed on the SO.
+        """
+        for order in self:
+            order.currency_id = self.env['res.currency'].search([('name', '=', 'SGD')])
+            order.order_line._compute_tax_id()
+    
     
     def _calculateStateDays(self):
         diff_time = 0
@@ -52,7 +57,6 @@ class SaleExtenstion(models.Model):
     days_sice_state_change = fields.Integer(compute=_calculateStateDays,string="Days Since Last State")
     picking_ids = fields.Many2many('stock.picking', compute='_compute_picking_ids', string='Picking associated to this sale')
     delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
-    currency_id = fields.Many2one("res.currency", related='pricelist_id.currency_id', default=_get_default_currency_id, string="Currency", readonly=True, required=True)
     
     
     def set_to_active(self):
@@ -60,7 +64,7 @@ class SaleExtenstion(models.Model):
         
     def set_to_idle(self):
         return self.write({'state':'idle','state_when_idle':self.state})
-    
+        
     @api.multi
     def action_view_delivery(self):
         '''
