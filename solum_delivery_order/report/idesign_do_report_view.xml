@@ -42,12 +42,13 @@
 		<template id="external_layout_do_footer_idesign">
 			<div class="footer">
 				<div class="col-xs-12 pull-left">
+					<span style="border-top:1px solid black;">CUSTOMER ACKNOWLEDGEMENT</span>
 					<br/>
-					<center>
-						<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
-						<span style="margin-left: 30px;">Tel : (+65) 62828020</span>
-						<span style="margin-left: 30px;">Fax : (+65) 62828332</span>
-					</center>
+					<br/>
+					<br/>
+					<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
+					<span style="margin-left: 40px;">Tel : (+65) 62828020</span>
+					<span style="margin-left: 40px;">Fax : (+65) 62828332</span>
 				</div>
 			</div>
 		</template>
@@ -128,6 +129,18 @@
 								</tbody>
 							</table>
 							
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
+								<span style="margin-left:-15px;">*Note all items are to be checked and verified on day of delivery.</span>
+							</div>
+							<br/>
+							<br/>
+							<br/>
+							<span>Checked by:</span>
 		                </div>
 		            </t>
 		        </t>

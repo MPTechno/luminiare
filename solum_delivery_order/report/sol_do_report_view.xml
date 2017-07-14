@@ -25,14 +25,12 @@
 
 		<template id="external_layout_do_footer_sol">
 			<div class="footer">
-				<div class="col-xs-12 pull-left" style="background-color: #FF8C00;">
+				<div class="col-xs-12 pull-left">
+					<span style="border-top:1px solid black;">CUSTOMER ACKNOWLEDGEMENT</span>
 					<br/>
-					<center>
-						<span>Sol Luminaire Pte Ltd</span><br/>
-						<span>Showroom &amp; Office: Eunos avenue 7 Richfield Industrial centre Block 122 #07-10</span><br/>
-						<span>tel: +65 6282 8020 | fax: +65 6282 8332 | www.solluminaire.com</span><br/>
-					</center>
 					<br/>
+					<br/>
+					<span>*Invoice payable to <strong><u>"Sol Luminaire Pte Ltd"</u></strong> via cheque <strong><u>ONLY</u></strong></span>
 				</div>
 			</div>
 		</template>
@@ -52,8 +50,8 @@
 								<div class="col-xs-4">
 									<strong><span t-if="o.min_date" t-field="o.min_date"/></strong><br/>
 									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<span><strong>Project</strong></span><br/>
-									<span><strong>Attention</strong></span>
+									<span><strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong></span><br/>
+									<span><strong><span t-if="o.attention" t-field="o.attention"/></strong></span>
 								</div>
 							</div>
 							<br/><br/>
@@ -121,6 +119,18 @@
 								</tbody>
 							</table>
 							
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
+								<span style="margin-left:-15px;">*Note all items are to be checked and verified on day of delivery.</span>
+							</div>
+							<br/>
+							<br/>
+							<br/>
+							<span>Checked by:</span>
 		                </div>
 		            </t>
 		        </t>
