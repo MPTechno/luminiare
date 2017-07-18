@@ -173,6 +173,32 @@
 								</tbody>
 							</table>
 							
+							<br/><br/>
+							<div class="col-xs-12" style="border-top:1px solid black; border-bottom:1px solid black;">
+								<div class="col-xs-4 pull-right">
+									<table class="table table-condensed" style="border-top:none;">
+									    <tr style="border-top:none;">
+									        <td style="border-top:none;"><strong>SUB-TOTAL</strong></td>
+									        <td class="text-right" style="border-top:none;">
+									            <span t-field="o.amount_untaxed"/>
+									        </td>
+									    </tr>
+									    <tr style="border-top:none;">
+									        <td style="border-top:none;" t-if="o.amount_discount"><strong>DISCOUNT</strong></td>
+									        <td class="text-right" style="border-top:none;" t-if="o.amount_discount">
+									            <span t-field="o.amount_discount"/>
+									        </td>
+									    </tr>
+									    <tr style="border-top:none;">
+									        <td style="border-top:none;"><strong>GRAND TOTAL</strong></td>
+									        <td class="text-right" style="border-top:none;">
+									            <span t-field="o.amount_total"/>
+									        </td>
+									    </tr>
+									</table>
+								</div>
+							</div>
+							
 		                </div>
 		            </t>
 		        </t>
