@@ -131,8 +131,8 @@
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
 								    </tr>
-							   </thead>
-							   <tbody class="sale_tbody">
+							   	</thead>
+							   	<tbody class="sale_tbody">
 								    <t t-set="i" t-value="0" />
 								    <tr t-foreach="o.invoice_line_ids" t-as="l">
 								        <t t-set="i" t-value="i+1" />

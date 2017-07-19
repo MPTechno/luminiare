@@ -57,6 +57,7 @@ class SaleExtenstion(models.Model):
     days_sice_state_change = fields.Integer(compute=_calculateStateDays,string="Days Since Last State")
     picking_ids = fields.Many2many('stock.picking', compute='_compute_picking_ids', string='Picking associated to this sale')
     delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
+    remarks_ids = fields.One2many('sale.remarks','order_id','Remarks')
     
     
     def set_to_active(self):
@@ -142,3 +143,10 @@ class ProductLocation(models.Model):
     _description = 'Product Location'
     
     name = fields.Char(string='Location',required=True)
+
+class SaleRemarks(models.Model):
+    _name = 'sale.remarks'
+    _description = 'Remarks'
+    
+    name = fields.Char(string='Remarks',required=True)
+    order_id = fields.Many2one('sale.order','Sale Order')
