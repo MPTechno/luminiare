@@ -40,7 +40,7 @@ class InvoiceLineExtension(models.Model):
         self.price_subtotal = price_subtotal_signed = taxes['total_excluded'] if taxes else self.quantity * price
         net_price = 0.0
         if self.quantity > 0:
-        	net_price = self.price_subtotal / self.quantity
+        	net_price = taxes['total_included'] / self.quantity
     	self.net_price = net_price
         if self.invoice_id.currency_id and self.invoice_id.currency_id != self.invoice_id.company_id.currency_id:
             price_subtotal_signed = self.invoice_id.currency_id.compute(price_subtotal_signed, self.invoice_id.company_id.currency_id)
