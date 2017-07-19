@@ -122,7 +122,7 @@
 								           <span t-esc="'%.2f'% (l.price_total / l.product_uom_qty)"/>
 								        </td>
 								        <td>
-								           <span t-esc="'%.2f'% l.price_total"/>
+								           <span t-esc="'%.2f'% l.price_subtotal"/>
 								        </td>
 								    </tr>
 								</tbody>
@@ -136,7 +136,6 @@
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
-								        <th style="border-top:1px solid black;">REMARKS</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
 								    </tr>
 							   </thead>
@@ -158,9 +157,6 @@
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>
-								        </td>
-								        <td>
-								           <span t-field="l.unit_zero_text"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_subtotal"/>
@@ -190,9 +186,15 @@
 									        </td>
 									    </tr>
 									    <tr style="border-top:none;">
-									        <td style="border-top:none;" t-if="o.amount_discount"><strong>DISCOUNT</strong></td>
-									        <td class="text-right" style="border-top:none;" t-if="o.amount_discount">
+									        <td style="border-top:none;"><strong>DISCOUNT</strong></td>
+									        <td class="text-right" style="border-top:none;">
 									            <span t-field="o.amount_discount"/>
+									        </td>
+									    </tr>
+									    <tr style="border-top:none;">
+									        <td style="border-top:none;"><strong>TAX</strong></td>
+									        <td class="text-right" style="border-top:none;">
+									            <span t-field="o.amount_tax"/>
 									        </td>
 									    </tr>
 									    <tr style="border-top:none;">

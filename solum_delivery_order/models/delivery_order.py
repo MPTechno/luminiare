@@ -12,6 +12,15 @@ class StockPicking(models.Model):
     attention = fields.Char("Attention")
     
     
+    def get_order_remarks(self,obj):
+    	sale_order_pool = self.env['sale.order']
+    	sale_order_ids = sale_order_pool.search([('name','=',obj.origin)])
+    	remarks_line_list = []
+    	if sale_order_ids:
+    		for line in sale_order_ids.remarks_ids:
+    			remarks_line_list.append(line)
+		return remarks_line_list
+    
     def get_order_line(self,obj):
     	sale_order_pool = self.env['sale.order']
     	sale_order_ids = sale_order_pool.search([('name','=',obj.origin)])

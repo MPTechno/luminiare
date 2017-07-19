@@ -26,8 +26,8 @@
 		<template id="external_layout_do_footer_sol">
 			<div class="footer">
 				<div class="col-xs-12 pull-left">
-					<span style="border-top:1px solid black;">CUSTOMER ACKNOWLEDGEMENT</span>
 					<br/>
+					<span style="border-top:1px solid black;">CUSTOMER ACKNOWLEDGEMENT</span>
 					<br/>
 					<br/>
 					<span>*Invoice payable to <strong><u>"Sol Luminaire Pte Ltd"</u></strong> via cheque <strong><u>ONLY</u></strong></span>
@@ -52,6 +52,12 @@
 									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
 									<span><strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong></span><br/>
 									<span><strong><span t-if="o.attention" t-field="o.attention"/></strong></span>
+								</div>
+								<div class="col-xs-2">
+									<span><strong>Delivery No.</strong></span><br/>
+								</div>
+								<div class="col-xs-4 pull-right">
+									<strong><span t-if="o.name" t-field="o.name"/></strong><br/>
 								</div>
 							</div>
 							<br/><br/>
@@ -125,6 +131,13 @@
 							<br/>
 							<br/>
 							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
+								<table class="table table-condensed" style="border-top:none; margin-left:-15px;">
+								    <tr style="border-top:none;" t-foreach="o.get_order_remarks(o)" t-as="r">
+								        <td style="border-top:none;">
+								            <span t-field="r.name"/>
+								        </td>
+								    </tr>
+								</table>
 								<span style="margin-left:-15px;">*Note all items are to be checked and verified on day of delivery.</span>
 							</div>
 							<br/>

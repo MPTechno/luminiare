@@ -129,7 +129,7 @@
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
                                         <field name="price_unit"/>
-                                        <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" />
+                                        <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" /-->
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/> %%
@@ -183,7 +183,7 @@
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
-                                <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/>
+                                <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/-->
                                 <field name="net_price" />
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
@@ -458,7 +458,7 @@
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
                                         <field name="price_unit"/>
-                                        <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" />
+                                        <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" /-->
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/> %%
@@ -510,7 +510,7 @@
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
-                                <field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/>
+                                <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/-->
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
                                     attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>

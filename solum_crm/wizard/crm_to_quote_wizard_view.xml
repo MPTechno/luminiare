@@ -13,7 +13,7 @@
 						</group>
 					</group>
 					<footer>
-			           	<button name="%(sale_action_quotations_new_strip)d" type="action" 
+			           	<button name="quotations_new_strip" type="object" 
 			           			string="Generate LED Strip Quotation" class="oe_highlight"
 			           			attrs="{'invisible': [('quote_type','!=','led_strip')]}"
 			           			context="{'search_default_partner_id': context.get('partner_id',False),
@@ -21,7 +21,7 @@
 			           					  'default_crm_lead_id': context.get('crm_lead_id',False),
 			           					  'default_partner_id': context.get('partner_id',False),
 			           					  'default_team_id': context.get('team_id',False)}"/>
-   					  	<button name="%(sale_action_quotations_new_attachment)d" type="action" 
+   					  	<button name="quotations_new_attachment" type="object" 
 			           			string="Generate LED Attachment Quotation" class="oe_highlight"
 			           			attrs="{'invisible': [('quote_type','!=','led_attach')]}"
 			           			context="{'search_default_partner_id': context.get('partner_id',False),

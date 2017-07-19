@@ -81,10 +81,10 @@
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
                                 <field name="product_id" string="Area"/>
+                                <field name="name"/>
                                 <field name="product_location_id" />
                                 <field name="length"/>
                                 <field name="origin" invisible="1"/>
-                                <field name="name" invisible="1"/>
                                 <field name="company_id" invisible="1"/>
                                 <field name="account_id" groups="account.group_account_user"
                                     domain="[('company_id', '=', parent.company_id), ('internal_type', '=', 'other')]" invisible="1"/>

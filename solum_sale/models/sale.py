@@ -112,7 +112,7 @@ class SaleOrderLineExtension(models.Model):
             taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
             net_price = 0.0
             if line.product_uom_qty > 0:
-            	net_price = taxes['total_excluded'] / line.product_uom_qty
+            	net_price = taxes['total_included'] / line.product_uom_qty
             line.update({
                 'price_tax': taxes['total_included'] - taxes['total_excluded'],
                 'price_total': taxes['total_included'],
@@ -123,7 +123,7 @@ class SaleOrderLineExtension(models.Model):
     
     net_price = fields.Monetary(compute='_compute_amount', string='Nett Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
-    unit_zero_text = fields.Text(string="Remarks")
+    #unit_zero_text = fields.Text(string="Remarks")
     product_location_id = fields.Many2one('product.location','Location')
     length = fields.Char('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")

@@ -66,8 +66,8 @@
 									<strong><span t-if="o.number" t-field="o.number"/></strong><br/>
 									<strong><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></strong><br/>
 									<strong><span t-if="o.currency_id" t-field="o.currency_id.name"/></strong><br/>
-									<strong><span t-if="o.user_id" t-field="o.user_id.name"/></strong><br/>
-									<strong><span t-if="o.user_id" t-field="o.user_id"/></strong>
+									<strong><span t-if="o.prepared_by" t-field="o.prepared_by.name"/></strong><br/>
+									<strong><span t-if="o.approved_by" t-field="o.approved_by.name"/></strong>
 								</div>
 							</div>
 							<br/><br/>
@@ -169,9 +169,15 @@
 									        </td>
 									    </tr>
 									    <tr style="border-top:none;">
-									        <td style="border-top:none;" t-if="o.amount_discount"><strong>DISCOUNT</strong></td>
-									        <td class="text-right" style="border-top:none;" t-if="o.amount_discount">
+									        <td style="border-top:none;"><strong>DISCOUNT</strong></td>
+									        <td class="text-right" style="border-top:none;">
 									            <span t-field="o.amount_discount"/>
+									        </td>
+									    </tr>
+									    <tr style="border-top:none;">
+									        <td style="border-top:none;"><strong>TAX</strong></td>
+									        <td class="text-right" style="border-top:none;">
+									            <span t-field="o.amount_tax"/>
 									        </td>
 									    </tr>
 									    <tr style="border-top:none;">

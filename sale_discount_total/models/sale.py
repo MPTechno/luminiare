@@ -16,11 +16,15 @@ class SaleOrder(models.Model):
                 amount_untaxed += line.price_subtotal
                 amount_tax += line.price_tax
                 amount_discount += (line.product_uom_qty * line.price_unit * line.discount)/100
+                if order.discount_type == 'percent':
+                    amount_discount = (amount_untaxed * order.discount_rate) / 100
+            	if order.discount_type == 'amount':
+            	    amount_discount = order.discount_rate
             order.update({
                 'amount_untaxed': order.pricelist_id.currency_id.round(amount_untaxed),
                 'amount_tax': order.pricelist_id.currency_id.round(amount_tax),
                 'amount_discount': order.pricelist_id.currency_id.round(amount_discount),
-                'amount_total': amount_untaxed + amount_tax,
+                'amount_total': amount_untaxed -amount_discount + amount_tax ,
             })
 
     discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount type',

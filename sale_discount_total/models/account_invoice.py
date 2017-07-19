@@ -5,18 +5,33 @@ import odoo.addons.decimal_precision as dp
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
+    '''@api.multi
+    def write(self, values):
+        if values.get('discount_type',False):
+            if values.get('discount_type') == 'amount':
+                values.update({'amount_discount': self.discount_rate})
+            if values.get('discount_type') == 'percent':
+                amount_discount = (self.amount_untaxed * self.discount_rate)/100
+                values.update({'amount_discount': amount_discount})
+        print "\n\n===values",values
+        return super(AccountInvoice, self).write(values)'''
+    
     @api.one
     @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'currency_id', 'company_id', 'date_invoice')
     def _compute_amount(self):
         self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
         self.amount_tax = sum(line.amount for line in self.tax_line_ids)
-        self.amount_total = self.amount_untaxed + self.amount_tax
-        #self.amount_discount = sum((line.quantity * line.price_unit * line.discount)/100 for line in self.invoice_line_ids)
-        self.amount_discount = 0.0
+        
+        self.amount_discount = sum((line.quantity * line.price_unit * line.discount)/100 for line in self.invoice_line_ids)
+        #self.amount_discount = 0.0
         if self.discount_type == 'amount':
             self.amount_discount = self.discount_rate
-        else:
-            self.amount_discount = sum((line.quantity * line.price_unit * line.discount)/100 for line in self.invoice_line_ids)
+        
+        if self.discount_type == 'percent':
+            self.amount_discount = (self.amount_untaxed * self.discount_rate ) / 100
+        
+        #self._cr.execute('update account_invoice set amount_discount=%s where id=%s',(self.amount_discount,self._context.get('active_id')))
+        self.amount_total = self.amount_untaxed - self.amount_discount + self.amount_tax
         amount_total_company_signed = self.amount_total
         amount_untaxed_signed = self.amount_untaxed
         if self.currency_id and self.currency_id != self.company_id.currency_id:
