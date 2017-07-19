@@ -38,23 +38,16 @@ class SaleOrder(models.Model):
                                       digits_compute=dp.get_precision('Account'), track_visibility='always')
                                       
 
-    @api.onchange('discount_type', 'discount_rate', 'order_line')
+    @api.onchange('discount_type', 'discount_rate')
     def supply_rate(self):
         for order in self:
             if order.discount_type == 'percent':
-                for line in order.order_line:
-                    line.discount = order.discount_rate
-            else:
-                total = discount = 0.0
-                for line in order.order_line:
-                    total += round((line.product_uom_qty * line.price_unit))
-                if order.discount_rate != 0:
-                    discount = (order.discount_rate / total) * 100
-                else:
-                    discount = order.discount_rate
-                for line in order.order_line:
-                    line.discount = discount
-
+                order.amount_discount = ((order.amount_untaxed * self.discount_rate)/100)
+                order.amount_total = (order.amount_untaxed + order.amount_tax ) - self.amount_discount
+            if order.discount_type == 'amount':
+                order.amount_discount = self.discount_rate
+                order.amount_total = (order.amount_untaxed + order.amount_tax ) - self.amount_discount
+                
     @api.multi
     def _prepare_invoice(self,):
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
@@ -74,7 +67,7 @@ class AccountTax(models.Model):
 
     @api.multi
     def compute_all(self, price_unit, currency=None, quantity=1.0, product=None, partner=None):
-        print "hello"
+        #print "hello",price_unit
         if len(self) == 0:
             company_id = self.env.user.company_id
         else:
@@ -131,8 +124,8 @@ class AccountTax(models.Model):
                 'analytic': tax.analytic,
                 'base': tax_base,
             })
-        print "total_excluded:",total_excluded
-        print "total_included:",total_included
+        #print "total_excluded:",total_excluded
+        #print "total_included:",total_included
         return {
             'taxes': sorted(taxes, key=lambda k: k['sequence']),
             'total_excluded': total_excluded,
