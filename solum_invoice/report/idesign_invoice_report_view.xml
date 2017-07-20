@@ -174,7 +174,16 @@
 							</table>
 							
 							<br/><br/>
-							<div class="col-xs-12" style="border-top:1px solid black; border-bottom:1px solid black;">
+							<div class="col-xs-12" style="border-bottom:1px solid black;">
+								<div class="col-xs-8">
+									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
+									    <tr style="border-top:none;" t-foreach="o.remarks_ids" t-as="r">
+									        <td style="border-top:none;">
+									            <span t-field="r.name"/>
+									        </td>
+									    </tr>
+									</table>
+								</div>
 								<div class="col-xs-4 pull-right">
 									<table class="table table-condensed" style="border-top:none;">
 									    <tr style="border-top:none;">

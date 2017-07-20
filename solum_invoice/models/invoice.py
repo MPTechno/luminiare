@@ -12,6 +12,7 @@ class InvoiceExtension(models.Model):
     prepared_by = fields.Many2one("res.users",'Prepared By')
     approved_by = fields.Many2one("res.users",'Approved By')
     crm_lead_id = fields.Many2one('crm.lead','Project')
+    remarks_ids = fields.One2many('invoice.remarks','invoice_id','Remarks')
     
 
 class InvoiceLineExtension(models.Model):
@@ -52,4 +53,10 @@ class InvoiceLineExtension(models.Model):
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Char('Length(MM)')
     
+
+class InvoiceRemarks(models.Model):
+    _name = 'invoice.remarks'
+    _description = 'Remarks'
     
+    name = fields.Char(string='Remarks',required=True)
+    invoice_id = fields.Many2one('account.invoice','Invoice')

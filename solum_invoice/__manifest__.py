@@ -7,6 +7,7 @@
     "category": "luminiare",
     "depends": ['account','solum_sale'],
     "data": [
+		'security/ir.model.access.csv',
 		'views/invoice_view.xml',
 		'views/report_menu.xml',
 		'report/sol_invoice_report_view.xml',

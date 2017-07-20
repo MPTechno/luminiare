@@ -1,5 +1,10 @@
+from itertools import groupby
+from datetime import datetime, timedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.tools import float_is_zero, float_compare, DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.tools.misc import formatLang
+import odoo.addons.decimal_precision as dp
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -78,6 +83,75 @@ class SalesOrders(models.Model):
         }
         return invoice_vals
     
+    
+    @api.multi
+    def action_invoice_create(self, grouped=False, final=False):
+        """
+        Create the invoice associated to the SO.
+        :param grouped: if True, invoices are grouped by SO id. If False, invoices are grouped by
+                        (partner_invoice_id, currency)
+        :param final: if True, refunds will be generated if necessary
+        :returns: list of created invoices
+        """
+        inv_obj = self.env['account.invoice']
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        invoices = {}
+        references = {}
+        for order in self:
+            group_key = order.id if grouped else (order.partner_invoice_id.id, order.currency_id.id)
+            for line in order.order_line.sorted(key=lambda l: l.qty_to_invoice < 0):
+                if float_is_zero(line.qty_to_invoice, precision_digits=precision):
+                    continue
+                if group_key not in invoices:
+                    inv_data = order._prepare_invoice()
+                    invoice = inv_obj.create(inv_data)
+                    inv_remarks_obj = self.env['invoice.remarks']
+                    if order.remarks_ids:
+                        for remarks in order.remarks_ids:
+        	                invoice_remarks_vals = {
+        	   	                'name': remarks.name,
+        	   	                'invoice_id': invoice and invoice.id or False
+        	                }
+        	                inv_remarks_obj.create(invoice_remarks_vals)
+                    references[invoice] = order
+                    invoices[group_key] = invoice
+                elif group_key in invoices:
+                    vals = {}
+                    if order.name not in invoices[group_key].origin.split(', '):
+                        vals['origin'] = invoices[group_key].origin + ', ' + order.name
+                    if order.client_order_ref and order.client_order_ref not in invoices[group_key].name.split(', '):
+                        vals['name'] = invoices[group_key].name + ', ' + order.client_order_ref
+                    invoices[group_key].write(vals)
+                if line.qty_to_invoice > 0:
+                    line.invoice_line_create(invoices[group_key].id, line.qty_to_invoice)
+                elif line.qty_to_invoice < 0 and final:
+                    line.invoice_line_create(invoices[group_key].id, line.qty_to_invoice)
+
+            if references.get(invoices.get(group_key)):
+                if order not in references[invoices[group_key]]:
+                    references[invoice] = references[invoice] | order
+
+        if not invoices:
+            raise UserError(_('There is no invoicable line.'))
+
+        for invoice in invoices.values():
+            if not invoice.invoice_line_ids:
+                raise UserError(_('There is no invoicable line.'))
+            # If invoice is negative, do a refund invoice instead
+            if invoice.amount_untaxed < 0:
+                invoice.type = 'out_refund'
+                for line in invoice.invoice_line_ids:
+                    line.quantity = -line.quantity
+            # Use additional field helper function (for account extensions)
+            for line in invoice.invoice_line_ids:
+                line._set_additional_fields(invoice)
+            # Necessary to force computation of taxes. In account_invoice, they are triggered
+            # by onchanges, which are not triggered when doing a create.
+            invoice.compute_taxes()
+            invoice.message_post_with_view('mail.message_origin_link',
+                values={'self': invoice, 'origin': references[invoice]},
+                subtype_id=self.env.ref('mail.mt_note').id)
+        return [inv.id for inv in invoices.values()]
     
     @api.multi
     def action_view_invoice(self):
@@ -189,6 +263,17 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
             'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
             'attention': order.attention,
         })
+        
+        inv_remarks_obj = self.env['invoice.remarks']
+        print "\n\n=====",order.remarks_ids,order
+        if order.remarks_ids:
+            for remarks in order.remarks_ids:
+        	    invoice_remarks_vals = {
+        	   	    'name': remarks.name,
+        	   	    'invoice_id': invoice and invoice.id or False
+        	    }
+        	    print "\n\n=======invoice_remarks_vals==",invoice_remarks_vals
+        	    inv_remarks_obj.create(invoice_remarks_vals)
         invoice.compute_taxes()
         invoice.message_post_with_view('mail.message_origin_link',
                     values={'self': invoice, 'origin': order},
