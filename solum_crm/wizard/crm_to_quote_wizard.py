@@ -29,7 +29,7 @@ class crm_to_quote_wizard(models.TransientModel):
         if partner_id:
             if partner_id.parent_id:
                 context = self._context.copy()
-                context.update({'default_partner_id':partner_id.parent_id.id})
+                context.update({'default_partner_id':partner_id.parent_id.id, 'default_client_order_ref_id':partner_id.id})
                 result.update({'context':context})
         return result
     @api.multi
@@ -48,7 +48,7 @@ class crm_to_quote_wizard(models.TransientModel):
         if partner_id:
             if partner_id.parent_id:
                 context = self._context.copy()
-                context.update({'default_partner_id':partner_id.parent_id.id})
+                context.update({'default_partner_id':partner_id.parent_id.id, 'default_client_order_ref_id':partner_id.id})
                 result.update({'context':context})
         return result
         

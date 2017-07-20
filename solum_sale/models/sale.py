@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, exceptions, api
+import time
+import datetime
 
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
+    
+    def get_formated_date(self,date_order):
+        if date_order:
+            date = str(date_order).split(' ')
+            date1 = datetime.datetime.strptime(date[0], '%Y-%m-%d')
+            date2 = date1.strftime('%m/%d/%Y')
+            return date2
+        else:
+        	return ''
     
     @api.multi
     @api.depends('procurement_group_id')
@@ -58,6 +69,7 @@ class SaleExtenstion(models.Model):
     picking_ids = fields.Many2many('stock.picking', compute='_compute_picking_ids', string='Picking associated to this sale')
     delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
     remarks_ids = fields.One2many('sale.remarks','order_id','Remarks')
+    client_order_ref_id = fields.Many2one('res.partner','Customer Reference')
     
     
     def set_to_active(self):

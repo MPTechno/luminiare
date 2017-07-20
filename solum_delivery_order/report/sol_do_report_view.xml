@@ -40,26 +40,44 @@
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_do_sol">
 		                <div class="page">
-		                    <div class="row">
-								<div class="col-xs-2">
-									<span><strong>Date</strong></span><br/>
-									<span><strong>Company</strong></span><br/>
-									<span><strong>Project</strong></span><br/>
-									<span><strong>Attention</strong></span>
-								</div>
-								<div class="col-xs-4">
-									<strong><span t-if="o.min_date" t-field="o.min_date"/></strong><br/>
-									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<span><strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong></span><br/>
-									<span><strong><span t-if="o.attention" t-field="o.attention"/></strong></span>
-								</div>
-								<div class="col-xs-2">
-									<span><strong>Delivery No.</strong></span><br/>
-								</div>
-								<div class="col-xs-4 pull-right">
-									<strong><span t-if="o.name" t-field="o.name"/></strong><br/>
-								</div>
-							</div>
+		                    <table>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Date</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.min_date)"/></b>
+									</td>
+									<td style="width:16cm; height:20px;"><b>Delivery No.</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name" t-field="o.name"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Company</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/></b>
+									</td>
+									<td style="width:16cm; height:20px;"></td>
+									<td style="width:30cm; height:20px;"></td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Project</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></b>
+									</td>
+									<td style="width:16cm; height:20px;"></td>
+									<td style="width:30cm; height:20px;"></td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Attention</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
+									</td>
+									<td style="width:16cm; height:20px;"></td>
+									<td style="width:30cm; height:20px;"></td>
+								</tr>
+							</table>
+		                    
+		                    
 							<br/><br/>
 							<span style="font-size:16px;"><center><strong>DELIVERY ORDER</strong></center></span>
 							<br/>

@@ -58,16 +58,29 @@
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_do_idesign">
 		                <div class="page">
-		                    <div class="row">
-								<div class="col-xs-2">
-									<span><strong>Date</strong></span><br/>
-									<span><strong>Company</strong></span><br/>
-								</div>
-								<div class="col-xs-4">
-									<strong><span t-if="o.min_date" t-field="o.min_date"/></strong><br/>
-									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-								</div>
-							</div>
+		                    
+		                    <table>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Date</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.min_date)"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Company</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/>
+										<br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/> &amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
+										
+								     	</b>
+									</td>
+								</tr>
+							</table>
+		                    
 							<br/><br/>
 							<span style="font-size:16px;"><center><strong>DELIVERY ORDER</strong></center></span>
 							<br/>

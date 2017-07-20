@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, exceptions, api
+import time
+import datetime
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -11,6 +13,15 @@ class StockPicking(models.Model):
     crm_lead_id = fields.Many2one('crm.lead','Project')
     attention = fields.Char("Attention")
     
+    
+    def get_formated_date(self,min_date):
+        if min_date:
+            date = str(min_date).split(' ')
+            date1 = datetime.datetime.strptime(date[0], '%Y-%m-%d')
+            date2 = date1.strftime('%m/%d/%Y')
+            return date2
+        else:
+        	return ''
     
     def get_order_remarks(self,obj):
     	sale_order_pool = self.env['sale.order']

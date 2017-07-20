@@ -57,32 +57,48 @@
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_quotation_idesign">
 		                <div class="page">
-		                    <div class="row">
-								<div class="col-xs-2">
-									<span><strong>Date</strong></span><br/>
-									<span><strong>Company</strong></span><br/>
-									<span><strong>Project</strong></span><br/>
-									<span><strong>Attention</strong></span>
-								</div>
-								<div class="col-xs-4">
-									<strong><span t-if="o.date_order" t-field="o.date_order"/></strong><br/>
-									<strong><span t-if="o.partner_id" t-field="o.partner_id.name"/></strong><br/>
-									<strong><span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></strong><br/>
-									<strong><span t-if="o.attention" t-field="o.attention"/></strong>
-								</div>
-								<div class="col-xs-2">
-									<span><strong>Currency</strong></span><br/>
-									<span><strong>From</strong></span><br/>
-									<span><strong>Name</strong></span><br/>
-									<span><strong>Email</strong></span>
-								</div>
-								<div class="col-xs-4 pull-right">
-									<strong><span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></strong><br/>
-									<strong><span t-if="o.from_led_strip" t-field="o.from_led_strip"/></strong><br/>
-									<strong><span t-if="o.name_led_strip" t-field="o.name_led_strip"/></strong><br/>
-									<strong><span t-if="o.email_led_strip" t-field="o.email_led_strip"/></strong>
-								</div>
-							</div>
+		                    <table>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Date</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.date_order)"/></b>
+									</td>
+									<td style="width:8cm; height:20px;"><b>Currency</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Company</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/></b>
+									</td>
+									<td style="width:8cm; height:20px;"><b>From</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.from_led_strip" t-field="o.from_led_strip"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Project</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></b>
+									</td>
+									<td style="width:8cm; height:20px;"><b>Name</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name_led_strip" t-field="o.name_led_strip"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>Attention</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
+									</td>
+									<td style="width:8cm; height:20px;"><b>Email</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.email_led_strip" t-field="o.email_led_strip"/></b>
+									</td>
+								</tr>
+							</table>
 							
 							<br/><br/>
 							<span style="font-size:16px;"><center><strong>QUOTATION</strong></center></span>
