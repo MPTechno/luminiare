@@ -11,13 +11,8 @@
                         <label for="id" string="Discount"/>
                         <div>
                             <div>
-                                <field name="discount_approval" class="oe_inline"/>
-                                <label for="discount_approval"/>
-                            </div>
-                            <div>
-                                <label for="limit_discount"/>
-                                <field name="limit_discount" attrs="{'required': [('discount_approval','=',True)]}"
-                                       class="oe_inline"/>
+                                <label for="discount_limit"/>
+                                <field name="discount_limit" class="oe_inline"/>
                             </div>
                         </div>
                     </group>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="tax_sale_view_form_strip" model="ir.ui.view">
+            <field name="name">tax.sale.order.form.strip</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_sale_view_form_strip"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='discount_part']/group/field[@name='discount_rate']" position="after">
+                    <field name="tax_rate"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="tax_sale_view_form_attachment" model="ir.ui.view">
+            <field name="name">tax.sale.order.form.attachment</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_sale_view_form_attachment"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='discount_part']/group/field[@name='discount_rate']" position="after">
+                    <field name="tax_rate"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

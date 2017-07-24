@@ -70,7 +70,7 @@
 									</td>
 									<td style="width:8cm; height:20px;"><b>Name</b></td>
 									<td style="width:30cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name_led_strip" t-field="o.name_led_strip"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name_led_strip" t-field="o.name_led_strip.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">

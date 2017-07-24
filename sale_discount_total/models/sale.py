@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import fields, models, exceptions, api, _
+from odoo.exceptions import UserError
 import odoo.addons.decimal_precision as dp
 
 
@@ -62,6 +63,23 @@ class SaleOrder(models.Model):
         return invoice_vals
 
     @api.multi
+    def action_confirm(self):
+        discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
+        for order in self:
+            if order.amount_discount > 0:
+                discount_rate = ((order.amount_discount*100)/ order.amount_untaxed)
+                if float(discount_rate) > float(discount_limit):
+                     raise UserError(_('You will not apply discount more then %s%s !') % (discount_limit,'%'))
+            order.state = 'sale'
+            order.confirmation_date = fields.Datetime.now()
+            if self.env.context.get('send_email'):
+                self.force_quotation_send()
+            order.order_line._action_procurement_create()
+        if self.env['ir.values'].get_default('sale.config.settings', 'auto_done_setting'):
+            self.action_done()
+        return True
+    
+    @api.multi
     def button_dummy(self):
         self.supply_rate()
         return True
@@ -71,7 +89,6 @@ class AccountTax(models.Model):
 
     @api.multi
     def compute_all(self, price_unit, currency=None, quantity=1.0, product=None, partner=None):
-        #print "hello",price_unit
         if len(self) == 0:
             company_id = self.env.user.company_id
         else:

@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_product_location,access_product_location,model_product_location,,1,0,0,0
 access_sale_remarks,access_sale_remarks,model_sale_remarks,,1,0,0,0
+access_experation_terms,access_experation_terms,model_experation_terms,,1,0,0,0

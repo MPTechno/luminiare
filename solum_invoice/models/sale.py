@@ -265,14 +265,12 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
         })
         
         inv_remarks_obj = self.env['invoice.remarks']
-        print "\n\n=====",order.remarks_ids,order
         if order.remarks_ids:
             for remarks in order.remarks_ids:
         	    invoice_remarks_vals = {
         	   	    'name': remarks.name,
         	   	    'invoice_id': invoice and invoice.id or False
         	    }
-        	    print "\n\n=======invoice_remarks_vals==",invoice_remarks_vals
         	    inv_remarks_obj.create(invoice_remarks_vals)
         invoice.compute_taxes()
         invoice.message_post_with_view('mail.message_origin_link',

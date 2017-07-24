@@ -5,16 +5,22 @@ import odoo.addons.decimal_precision as dp
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    '''@api.multi
-    def write(self, values):
-        if values.get('discount_type',False):
-            if values.get('discount_type') == 'amount':
-                values.update({'amount_discount': self.discount_rate})
-            if values.get('discount_type') == 'percent':
-                amount_discount = (self.amount_untaxed * self.discount_rate)/100
-                values.update({'amount_discount': amount_discount})
-        print "\n\n===values",values
-        return super(AccountInvoice, self).write(values)'''
+    
+    '''@api.model
+    def create(self, vals):
+        discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
+        account_invoice_obj = super(AccountInvoice, self).create(vals)
+        print "\n\n=====account_invoice_obj=",vals,account_invoice_obj,account_invoice_obj.invoice_line_ids
+        sale_order_pool = self.env['sale.order']
+        if vals.has_key('origin'):
+            sale_order_ids = sale_order_pool.search([('name','=',vals.get('origin'))])
+            if sale_order_ids:
+                if sale_order_ids.amount_discount > 0:
+                    discount_rate = ((sale_order_ids.amount_discount*100)/ sale_order_ids.amount_untaxed)
+                    if float(discount_rate) <= float(discount_limit):
+                        print "\n\n===================&&&&&&&&&"
+                        #account_invoice_obj.action_invoice_open()
+        return account_invoice_obj'''
     
     @api.one
     @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'currency_id', 'company_id', 'date_invoice')
@@ -90,4 +96,21 @@ class AccountInvoice(models.Model):
 class AccountInvoiceLine(models.Model):
     _inherit = "account.invoice.line"
 
+    
+    @api.model
+    def create(self, vals):
+        discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
+        invoice_line_obj = super(AccountInvoiceLine, self).create(vals)
+        print "\n\n=====invoice_line_obj=",vals,invoice_line_obj,invoice_line_obj.invoice_id
+        sale_order_pool = self.env['sale.order']
+        if invoice_line_obj.invoice_id.origin:
+            sale_order_ids = sale_order_pool.search([('name','=',invoice_line_obj.invoice_id.origin)])
+            if sale_order_ids:
+                if sale_order_ids.amount_discount > 0:
+                    discount_rate = ((sale_order_ids.amount_discount*100)/ sale_order_ids.amount_untaxed)
+                    if float(discount_rate) <= float(discount_limit):
+                        invoice_line_obj.invoice_id.action_invoice_open()
+        return invoice_line_obj
+    
+    
     discount = fields.Float(string='Discount (%)', digits=(16, 20), default=0.0)

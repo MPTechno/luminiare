@@ -1,2 +1,0 @@
-import invoice_report
-import sale_report

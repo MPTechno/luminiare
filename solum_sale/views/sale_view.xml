@@ -48,6 +48,11 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+                <div class="oe_button_box" name="button_box">
                     <field name="picking_ids" invisible="1"/>
                     <button type="object"
                         name="action_view_delivery"
@@ -83,10 +88,11 @@
                     </group>
                     <group>
                         <field name="date_order" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
+                        <field name="experation_terms_ids"/>
                         <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}"/>
                         <field name="confirmation_date" attrs="{'invisible': [('state', 'in', ['draft', 'sent', 'cancel'])]}"/>
                         <field name="pricelist_id" groups="product.group_sale_pricelist"/>
-                        <field name="currency_id"/>
+                        <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
@@ -378,6 +384,11 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+                <div class="oe_button_box" name="button_box">
                     <field name="picking_ids" invisible="1"/>
                     <button type="object"
                         name="action_view_delivery"
@@ -413,10 +424,11 @@
                     </group>
                     <group>
                         <field name="date_order" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
+                        <field name="experation_terms_ids"/>
                         <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}"/>
                         <field name="confirmation_date" attrs="{'invisible': [('state', 'in', ['draft', 'sent', 'cancel'])]}"/>
                         <field name="pricelist_id" groups="product.group_sale_pricelist"/>
-                        <field name="currency_id"/>
+                        <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
@@ -696,4 +708,33 @@
               
     <menuitem id="product_location_menu" name="Product Location" 
               action="product_location_action" parent="sale.prod_config_main" sequence="10"/>
+              
+  	<!-- Experation Terms View -->
+  	
+  	<record id="experation_terms_tree_view" model="ir.ui.view">
+        <field name="name">experation.terms.tree.view</field>
+        <field name="model">experation.terms</field>            
+        <field name="arch" type="xml">
+            <tree editable="bottom"> 
+                <field name="name"/>                          
+            </tree>
+        </field>
+    </record>
+    
+    <record id="experation_terms_action" model="ir.actions.act_window">
+        <field name="name">Experation Terms</field>
+        <field name="res_model">experation.terms</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="product_location_tree_view"/>
+    </record>
+    
+    <menuitem name="Experation Terms"
+            id="experation_terms_menu"
+            parent="sales_team.menu_sale_config"
+            action="experation_terms_action"
+            sequence="20"/>
+              
+    <!--menuitem id="experation_terms_menu"  
+              action="" parent="sale.prod_config_main" /-->
 </odoo>   

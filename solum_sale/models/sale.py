@@ -61,7 +61,7 @@ class SaleExtenstion(models.Model):
     state_when_idle = fields.Char(string="State when set Idle",readonly=True)
     attention = fields.Char("Attention")
     from_led_strip = fields.Char("From")
-    name_led_strip = fields.Char("Name")
+    name_led_strip = fields.Many2one('res.users', string='Name', track_visibility='onchange', default=lambda self: self.env.user)
     email_led_strip = fields.Char("Email")
     state_change_date = fields.Date(string="State Change Date")
     crm_lead_id = fields.Many2one('crm.lead','Project')
@@ -70,6 +70,8 @@ class SaleExtenstion(models.Model):
     delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
     remarks_ids = fields.One2many('sale.remarks','order_id','Remarks')
     client_order_ref_id = fields.Many2one('res.partner','Customer Reference')
+    experation_terms_ids = fields.Many2one('experation.terms','Experation Terms')
+    active = fields.Boolean(default=True)
     
     
     def set_to_active(self):
@@ -94,6 +96,13 @@ class SaleExtenstion(models.Model):
             action['views'] = [(self.env.ref('stock.view_picking_form').id, 'form')]
             action['res_id'] = pickings.id
         return action
+    
+    @api.onchange('experation_terms_ids')
+    def _experation_terms_ids(self):
+        for order in self:
+            date = str(order.date_order).split(' ')
+            date_order = datetime.datetime.strptime(date[0], '%Y-%m-%d')
+            order.validity_date = date_order + datetime.timedelta(days=int(self.experation_terms_ids.name))
     
     @api.multi
     def write(self,vals):
@@ -135,7 +144,6 @@ class SaleOrderLineExtension(models.Model):
     
     net_price = fields.Monetary(compute='_compute_amount', string='Nett Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
-    #unit_zero_text = fields.Text(string="Remarks")
     product_location_id = fields.Many2one('product.location','Location')
     length = fields.Char('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
@@ -155,6 +163,12 @@ class ProductLocation(models.Model):
     _description = 'Product Location'
     
     name = fields.Char(string='Location',required=True)
+
+class ExperationTerms(models.Model):
+    _name = 'experation.terms'
+    _description = 'Experation Terms'
+    
+    name = fields.Integer(string='Experation Term',required=True)
 
 class SaleRemarks(models.Model):
     _name = 'sale.remarks'
