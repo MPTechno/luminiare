@@ -13,6 +13,13 @@ class InvoiceExtension(models.Model):
     approved_by = fields.Many2one("res.users",'Approved By')
     crm_lead_id = fields.Many2one('crm.lead','Project')
     remarks_ids = fields.One2many('invoice.remarks','invoice_id','Remarks')
+    payment_term_text = fields.Char('Payment Term')
+    reference_no = fields.Char('Reference No')
+    
+    @api.onchange('payment_term_id')
+    def _payment_term_id(self):
+        for invoice in self:
+            invoice.payment_term_text = self.payment_term_id.name
     
 
 class InvoiceLineExtension(models.Model):

@@ -94,12 +94,12 @@
                         <field name="pricelist_id" groups="product.group_sale_pricelist"/>
                         <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
+                        <field name="payment_term_text" invisible="1"/>
                         <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
 				        <field name="state_change_date" invisible="1"/>
 				        <field name="days_sice_state_change" invisible="1"/>
-				        <field name="payment_term_text" invisible="1"/>
                     </group>
                 </group>
                 <notebook>
@@ -432,12 +432,13 @@
                         <field name="pricelist_id" groups="product.group_sale_pricelist"/>
                         <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
+                        <field name="payment_term_text" invisible="1"/>
                         <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
 				        <field name="state_change_date" invisible="1"/>
 				        <field name="days_sice_state_change" invisible="1"/>
-				        <field name="payment_term_text" invisible="1"/>
+				        
                     </group>
                 </group>
                 <notebook>

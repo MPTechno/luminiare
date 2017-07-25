@@ -37,7 +37,6 @@ class SaleExtenstion(models.Model):
     def _payment_term_id(self):
         for order in self:
             order.payment_term_text = self.payment_term_id.name
-            print "\n\n=order.payment_term_text",order.payment_term_text
     
     
     def _calculateStateDays(self):

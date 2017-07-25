@@ -79,6 +79,8 @@ class SalesOrders(models.Model):
             'team_id': self.team_id.id,
             'inv_type':self.quote_type,
             'attention': self.attention,
+            'payment_term_text': self.payment_term_text,
+            'reference_no': self.reference_no,
             'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
         }
         return invoice_vals
