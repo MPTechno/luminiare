@@ -33,6 +33,13 @@ class SaleExtenstion(models.Model):
             order.order_line._compute_tax_id()
     
     
+    @api.onchange('payment_term_id')
+    def _payment_term_id(self):
+        for order in self:
+            order.payment_term_text = self.payment_term_id.name
+            print "\n\n=order.payment_term_text",order.payment_term_text
+    
+    
     def _calculateStateDays(self):
         diff_time = 0
         if self.state_change_date and self.state in ('draft','sent'):
@@ -72,6 +79,8 @@ class SaleExtenstion(models.Model):
     client_order_ref_id = fields.Many2one('res.partner','Customer Reference')
     experation_terms_ids = fields.Many2one('experation.terms','Experation Terms')
     active = fields.Boolean(default=True)
+    payment_term_text = fields.Char('Payment Term')
+    reference_no = fields.Char('Reference No')
     
     
     def set_to_active(self):
@@ -158,6 +167,21 @@ class SaleOrderLineExtension(models.Model):
             return
         self.update({'image':self.product_id.image})
         
+class ResCurrency(models.Model):
+    _inherit = 'res.currency'
+    
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        res = super(ResCurrency, self).name_search(name, args, operator, limit)
+        result = []
+        currency_ids = self.search(['|',('name','=','SGD'),('name','=','USD')])
+        if currency_ids:
+            for currency in currency_ids:
+                result.append((currency.id,currency.name))
+            return result
+        else:
+            return res
+    
 class ProductLocation(models.Model):
     _name = 'product.location'
     _description = 'Product Location'

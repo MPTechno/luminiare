@@ -15,7 +15,7 @@
                 </xpath>
                 <xpath expr="//field[@name='comment']" position="before">
                     <div name="discount_type">
-                        <label for="discount_type" string="Discount Type :"/>
+                        <label for="discount_type" string="Discount/Tax Type :"/>
                         <field name="discount_type" class="oe_inline"/>
                     </div>
                     <div name="discount_rate">
@@ -39,7 +39,7 @@
                 </xpath>
                 <xpath expr="//field[@name='comment']" position="before">
                     <div name="discount_type">
-                        <label for="discount_type" string="Discount Type :"/>
+                        <label for="discount_type" string="Discount/Tax Type :"/>
                         <field name="discount_type" class="oe_inline"/>
                     </div>
                     <div name="discount_rate">

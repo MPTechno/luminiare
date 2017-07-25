@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
                 'amount_total': amount_untaxed -amount_discount + amount_tax ,
             })
 
-    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount type',
+    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount/Tax type',
                                      readonly=True,states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
                                      default='percent')
     discount_rate = fields.Float('Discount Rate', digits_compute=dp.get_precision('Account'),
