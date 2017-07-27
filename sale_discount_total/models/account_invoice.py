@@ -5,23 +5,6 @@ import odoo.addons.decimal_precision as dp
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    
-    '''@api.model
-    def create(self, vals):
-        discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
-        account_invoice_obj = super(AccountInvoice, self).create(vals)
-        print "\n\n=====account_invoice_obj=",vals,account_invoice_obj,account_invoice_obj.invoice_line_ids
-        sale_order_pool = self.env['sale.order']
-        if vals.has_key('origin'):
-            sale_order_ids = sale_order_pool.search([('name','=',vals.get('origin'))])
-            if sale_order_ids:
-                if sale_order_ids.amount_discount > 0:
-                    discount_rate = ((sale_order_ids.amount_discount*100)/ sale_order_ids.amount_untaxed)
-                    if float(discount_rate) <= float(discount_limit):
-                        print "\n\n===================&&&&&&&&&"
-                        #account_invoice_obj.action_invoice_open()
-        return account_invoice_obj'''
-    
     @api.one
     @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'currency_id', 'company_id', 'date_invoice')
     def _compute_amount(self):
@@ -49,7 +32,7 @@ class AccountInvoice(models.Model):
         self.amount_total_signed = self.amount_total * sign
         self.amount_untaxed_signed = amount_untaxed_signed * sign
 
-    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount/Tax Type',
+    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Type',
                                      readonly=True, states={'draft': [('readonly', False)]}, default='percent')
     discount_rate = fields.Float('Discount Amount', digits=(16, 2), readonly=True, states={'draft': [('readonly', False)]})
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
@@ -101,7 +84,6 @@ class AccountInvoiceLine(models.Model):
     def create(self, vals):
         discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
         invoice_line_obj = super(AccountInvoiceLine, self).create(vals)
-        print "\n\n=====invoice_line_obj=",vals,invoice_line_obj,invoice_line_obj.invoice_id
         sale_order_pool = self.env['sale.order']
         if invoice_line_obj.invoice_id.origin:
             sale_order_ids = sale_order_pool.search([('name','=',invoice_line_obj.invoice_id.origin)])

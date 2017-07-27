@@ -216,7 +216,8 @@
 									    <tr style="border-top:none;">
 									        <td style="border-top:none;"><strong>GRAND TOTAL</strong></td>
 									        <td class="text-right" style="border-top:none;">
-									            <span t-field="o.amount_total"/>
+									            <span t-if="o.currency_id" t-field="o.currency_id.symbol"/> 
+									            <span t-esc="'%.2f'% (o.amount_untaxed+o.amount_tax-o.amount_discount)"/>
 									        </td>
 									    </tr>
 									</table>

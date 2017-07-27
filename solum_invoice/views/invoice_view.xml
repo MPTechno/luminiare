@@ -82,7 +82,7 @@
                             <tree string="Invoice Lines" editable="bottom">
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
-                                <field name="product_id" string="Area"/>
+                                <field name="product_id" string="Product"/>
                                 <field name="name"/>
                                 <field name="product_location_id" />
                                 <field name="length"/>

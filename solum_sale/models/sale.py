@@ -77,7 +77,7 @@ class SaleExtenstion(models.Model):
     remarks_ids = fields.One2many('sale.remarks','order_id','Remarks')
     client_order_ref_id = fields.Many2one('res.partner','Customer Reference')
     experation_terms_ids = fields.Many2one('experation.terms','Experation Terms')
-    active = fields.Boolean(default=True)
+    #active = fields.Boolean(default=True)
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
     

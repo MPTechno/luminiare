@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="commission_account_invoice_view_form_strip" model="ir.ui.view">
+            <field name="name">commission.account.invoice.strip</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_account_invoice_view_form_strip"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='discount_rate']" position="after">
+                    <div name="tax_rate">
+                        <label for="commission_rate" string="Commission Rate :"/>
+                        <field name="commission_rate" class="oe_inline"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                        <field name="amount_commission"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="commission_account_invoice_view_form_attachment" model="ir.ui.view">
+            <field name="name">commission.account.invoice.attachment</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_account_invoice_view_form_attachment"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='discount_rate']" position="after">
+                    <div name="tax_rate">
+                        <label for="commission_rate" string="Commission Rate :"/>
+                        <field name="commission_rate" class="oe_inline"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                        <field name="amount_commission"/>
+                </xpath>
+            </field>
+        </record>
+        
+        
+    </data>
+</odoo>

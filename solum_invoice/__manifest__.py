@@ -12,6 +12,7 @@
 		'views/report_menu.xml',
 		'report/sol_invoice_report_view.xml',
 		'report/idesign_invoice_report_view.xml',
+		'report/sol_commission_invoice_report_view.xml',
     ],
     'description': '''Invoice Customization''',
     'demo': [],

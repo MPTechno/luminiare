@@ -2,7 +2,7 @@
 <openerp>
     <data>
          
-        <!--SOL Invoice Report-->
+        <!--SOL Invoice Report for Customer-->
     	<report 
         	id="sol_invoice_report_menu_id" 
         	string="Sol Luminaire" 
@@ -12,6 +12,7 @@
             file="solum_invoice.sol_invoice_report_template_id" 
             />
             
+        <!-- iDesign Report -->
         <report 
         	id="idesign_invoice_report_menu_id" 
         	string="IDesign Line" 
@@ -19,6 +20,16 @@
             report_type="qweb-pdf"
             name="solum_invoice.idesign_invoice_report_template_id"
             file="solum_invoice.idesign_invoice_report_template_id" 
+            />
+            
+        <!--SOL Invoice Report of Commission-->
+    	<report 
+        	id="sol_commission_invoice_report_menu_id" 
+        	string="Sol Luminaire Commission" 
+        	model="account.invoice" 
+            report_type="qweb-pdf"
+            name="solum_invoice.sol_commission_invoice_report_template_id"
+            file="solum_invoice.sol_commission_invoice_report_template_id" 
             />
 	</data>
 </openerp>
