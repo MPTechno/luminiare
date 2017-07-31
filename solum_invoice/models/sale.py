@@ -36,7 +36,8 @@ class SaleOrderLine(models.Model):
             'quantity': qty,
             'discount': self.discount,
             'product_location_id': self.product_location_id and self.product_location_id.id or False,
-            'length': self.length,
+            'length': self.length ,
+            'area_id': self.area_id and self.area_id.id or False,
             'uom_id': self.product_uom.id,
             'product_id': self.product_id.id or False,
             'layout_category_id': self.layout_category_id and self.layout_category_id.id or False,
@@ -111,7 +112,7 @@ class SalesOrders(models.Model):
                     if order.remarks_ids:
                         for remarks in order.remarks_ids:
         	                invoice_remarks_vals = {
-        	   	                'name': remarks.name,
+        	   	                'name': remarks.name and remarks.name.id or False,
         	   	                'invoice_id': invoice and invoice.id or False
         	                }
         	                inv_remarks_obj.create(invoice_remarks_vals)
@@ -270,7 +271,7 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
         if order.remarks_ids:
             for remarks in order.remarks_ids:
         	    invoice_remarks_vals = {
-        	   	    'name': remarks.name,
+        	   	    'name': remarks.name and remarks.name.id or False,
         	   	    'invoice_id': invoice and invoice.id or False
         	    }
         	    inv_remarks_obj.create(invoice_remarks_vals)

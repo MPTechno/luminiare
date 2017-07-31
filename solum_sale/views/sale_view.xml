@@ -48,9 +48,6 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
-                    <!--button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                    </button-->
                     <field name="picking_ids" invisible="1"/>
                     <button type="object"
                         name="action_view_delivery"
@@ -165,12 +162,13 @@
                             <tree string="Sales Order Lines" editable="bottom" decoration-info="invoice_status=='to invoice'">
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
-                                <field name="product_id" string="Area"
+                                <field name="product_id"
                                     attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                    />
                                	<field name="image" widget="image"/>
                                	<field name="name"/>
+                               	<field name="area_id"/>
                                	<field name="product_location_id" />
                                	<field name="length" />
                                 <field name="layout_category_id" groups="sale.group_sale_layout" invisible="1"/>
@@ -204,7 +202,7 @@
                                 <field name="customer_lead" invisible="1"/>
                             </tree>
                             <kanban class="o_kanban_mobile">
-                                <field name="product_id" string="Area"/>
+                                <field name="product_id" />
                                 <field name="product_uom_qty"/>
                                 <field name="product_uom" groups="product.group_uom"/>
                                 <field name="price_subtotal" string="Amount"/>
@@ -384,9 +382,6 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
-	                <!--button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-	                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-	                </button-->
                     <field name="picking_ids" invisible="1"/>
                     <button type="object"
                         name="action_view_delivery"
@@ -444,7 +439,7 @@
                             <form string="Sales Order Lines">
                                 <group>
                                     <group>
-                                        <field name="product_id" string="Area"
+                                        <field name="product_id" 
                                             context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                             attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                            />
@@ -538,7 +533,7 @@
                                 <field name="customer_lead" invisible="1"/>
                             </tree>
                             <kanban class="o_kanban_mobile">
-                                <field name="product_id" string="Area"/>
+                                <field name="product_id"/>
                                 <field name="product_uom_qty"/>
                                 <field name="product_uom" groups="product.group_uom"/>
                                 <field name="price_subtotal" string="Amount"/>
@@ -692,7 +687,7 @@
         <field name="name">product.location.tree.view</field>
         <field name="model">product.location</field>            
         <field name="arch" type="xml">
-            <tree editable="bottom"> 
+            <tree editable="bottom">
                 <field name="name"/>                          
             </tree>
         </field>
@@ -716,7 +711,7 @@
         <field name="name">experation.terms.tree.view</field>
         <field name="model">experation.terms</field>            
         <field name="arch" type="xml">
-            <tree editable="bottom"> 
+            <tree editable="top"> 
                 <field name="name"/>                          
             </tree>
         </field>
@@ -735,7 +730,57 @@
             parent="sales_team.menu_sale_config"
             action="experation_terms_action"
             sequence="20"/>
-              
-    <!--menuitem id="experation_terms_menu"  
-              action="" parent="sale.prod_config_main" /-->
+            
+	<!-- Area View -->
+  	
+  	<record id="area_tree_view" model="ir.ui.view">
+        <field name="name">area.tree.view</field>
+        <field name="model">area.area</field>            
+        <field name="arch" type="xml">
+            <tree editable="top"> 
+                <field name="name"/>                          
+            </tree>
+        </field>
+    </record>
+    
+    <record id="area_action" model="ir.actions.act_window">
+        <field name="name">Area</field>
+        <field name="res_model">area.area</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="area_tree_view"/>
+    </record>
+    
+    <menuitem name="Area"
+            id="area_menu"
+            parent="sales_team.menu_sale_config"
+            action="area_action"
+            sequence="20"/>
+
+	<!-- Remarks View -->
+  	
+  	<record id="remarks_tree_view" model="ir.ui.view">
+        <field name="name">remarks.remarks.tree.view</field>
+        <field name="model">remarks.remarks</field>            
+        <field name="arch" type="xml">
+            <tree editable="top"> 
+                <field name="name"/>
+                <field name="type"/>                          
+            </tree>
+        </field>
+    </record>
+    
+    <record id="remarks_action" model="ir.actions.act_window">
+        <field name="name">Remarks</field>
+        <field name="res_model">remarks.remarks</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="remarks_tree_view"/>
+    </record>
+    
+    <menuitem name="Remarks"
+            id="remarks_menu"
+            parent="sales_team.menu_sale_config"
+            action="remarks_action"
+            sequence="30"/>
 </odoo>   

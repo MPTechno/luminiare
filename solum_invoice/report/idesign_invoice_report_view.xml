@@ -116,6 +116,7 @@
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
+								        <th style="border-top:1px solid black;">Product</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
 								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
@@ -137,6 +138,9 @@
 								        </td>
 								        <td>
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.area_id" t-field="l.area_id.name"/>
 								        </td>
 								        <td>
 								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
@@ -203,7 +207,7 @@
 									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
 									    <tr style="border-top:none;" t-foreach="o.remarks_ids" t-as="r">
 									        <td style="border-top:none;">
-									            <span t-field="r.name"/>
+									            <span t-if="r.name" t-field="r.name.name"/>
 									        </td>
 									    </tr>
 									</table>

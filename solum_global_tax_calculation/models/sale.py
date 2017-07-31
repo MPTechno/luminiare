@@ -5,7 +5,6 @@ import odoo.addons.decimal_precision as dp
 class SaleOrder(models.Model):
     _inherit = "sale.order"
     
-    
     @api.depends('order_line.price_total')
     def _amount_all(self):
         """
@@ -15,8 +14,6 @@ class SaleOrder(models.Model):
             amount_untaxed = amount_tax = amount_discount = 0.0
             for line in order.order_line:
                 amount_untaxed += line.price_subtotal
-                #amount_tax += line.price_tax
-                #amount_discount += (line.product_uom_qty * line.price_unit * line.discount)/100
                 if order.discount_type == 'percent':
                     amount_discount = (amount_untaxed * order.discount_rate) / 100
                     amount_tax = (((amount_untaxed - amount_discount) * order.tax_rate )/100) 
@@ -69,5 +66,3 @@ class SaleOrder(models.Model):
     def button_dummy(self):
         self.supply_rate()
         return True
-
-

@@ -9,6 +9,7 @@
     "data": [
         'security/ir.model.access.csv',
         'data/payment_term_data.xml',
+        'data/remarks_data.xml',
 		'views/sale_view.xml',
 		'views/assets.xml',
 		'views/report_menu.xml',

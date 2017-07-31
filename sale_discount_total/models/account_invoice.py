@@ -10,16 +10,12 @@ class AccountInvoice(models.Model):
     def _compute_amount(self):
         self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
         self.amount_tax = sum(line.amount for line in self.tax_line_ids)
-        
         self.amount_discount = sum((line.quantity * line.price_unit * line.discount)/100 for line in self.invoice_line_ids)
-        #self.amount_discount = 0.0
         if self.discount_type == 'amount':
             self.amount_discount = self.discount_rate
-        
         if self.discount_type == 'percent':
             self.amount_discount = (self.amount_untaxed * self.discount_rate ) / 100
         
-        #self._cr.execute('update account_invoice set amount_discount=%s where id=%s',(self.amount_discount,self._context.get('active_id')))
         self.amount_total = self.amount_untaxed - self.amount_discount + self.amount_tax
         amount_total_company_signed = self.amount_total
         amount_untaxed_signed = self.amount_untaxed
@@ -32,7 +28,7 @@ class AccountInvoice(models.Model):
         self.amount_total_signed = self.amount_total * sign
         self.amount_untaxed_signed = amount_untaxed_signed * sign
 
-    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Type',
+    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount/Tax Type',
                                      readonly=True, states={'draft': [('readonly', False)]}, default='percent')
     discount_rate = fields.Float('Discount Amount', digits=(16, 2), readonly=True, states={'draft': [('readonly', False)]})
     amount_discount = fields.Monetary(string='Discount', store=True, readonly=True, compute='_compute_amount',
@@ -78,7 +74,6 @@ class AccountInvoice(models.Model):
 
 class AccountInvoiceLine(models.Model):
     _inherit = "account.invoice.line"
-
     
     @api.model
     def create(self, vals):
@@ -93,6 +88,5 @@ class AccountInvoiceLine(models.Model):
                     if float(discount_rate) <= float(discount_limit):
                         invoice_line_obj.invoice_id.action_invoice_open()
         return invoice_line_obj
-    
     
     discount = fields.Float(string='Discount (%)', digits=(16, 20), default=0.0)

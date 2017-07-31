@@ -8,6 +8,7 @@
             <field name="inherit_id" ref="sale_discount_total.discount_sale_view_form_strip"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='discount_part']/group/field[@name='discount_rate']" position="after">
+                    <field name="commission_type"/>
                     <field name="commission_rate"/>
                 </xpath>
                 <xpath expr="//field[@name='amount_tax']" position="after">
@@ -22,6 +23,7 @@
             <field name="inherit_id" ref="sale_discount_total.discount_sale_view_form_attachment"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='discount_part']/group/field[@name='discount_rate']" position="after">
+                    <field name="commission_type"/>
                     <field name="commission_rate"/>
                 </xpath>
                 <xpath expr="//field[@name='amount_tax']" position="after">

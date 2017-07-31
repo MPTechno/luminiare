@@ -5,7 +5,7 @@
         <!--SOL Invoice Report for Customer-->
     	<report 
         	id="sol_invoice_report_menu_id" 
-        	string="Sol Luminaire" 
+        	string="Sol Luminaire Customer" 
         	model="account.invoice" 
             report_type="qweb-pdf"
             name="solum_invoice.sol_invoice_report_template_id"

@@ -32,7 +32,6 @@ class SaleExtenstion(models.Model):
             order.currency_id = self.env['res.currency'].search([('name', '=', 'SGD')])
             order.order_line._compute_tax_id()
     
-    
     @api.onchange('payment_term_id')
     def _payment_term_id(self):
         for order in self:
@@ -77,10 +76,31 @@ class SaleExtenstion(models.Model):
     remarks_ids = fields.One2many('sale.remarks','order_id','Remarks')
     client_order_ref_id = fields.Many2one('res.partner','Customer Reference')
     experation_terms_ids = fields.Many2one('experation.terms','Experation Terms')
-    #active = fields.Boolean(default=True)
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
     
+    
+    @api.model
+    def default_get(self, fields):
+        rec = super(SaleExtenstion, self).default_get(fields)
+        remarks_ids_list = []
+        if rec.has_key('quote_type') and rec['quote_type']:
+		    if rec['quote_type'] == 'led_strip':
+				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_strip'),('type','=','Both')]):
+				    remarks_line_vals = {
+				        'name': remarks_obj and remarks_obj.id or False,
+				        }
+				    line_obj = self.env['sale.remarks'].create(remarks_line_vals)
+				    remarks_ids_list.append(line_obj.id)
+		    if rec['quote_type'] == 'led_attach':
+				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_attach'),('type','=','Both')]):
+				    remarks_line_vals = {
+				        'name': remarks_obj and remarks_obj.id or False,
+				        }
+				    line_obj = self.env['sale.remarks'].create(remarks_line_vals)
+				    remarks_ids_list.append(line_obj.id)
+        rec['remarks_ids'] = [(6, 0, remarks_ids_list)]
+        return rec
     
     def set_to_active(self):
         return self.write({'state':self.state_when_idle})
@@ -131,7 +151,7 @@ class SaleOrderLineExtension(models.Model):
                 line.number = number
                 number += 1
     
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id','length')
     def _compute_amount(self):
         """
         Compute the amounts of the SO line.
@@ -139,21 +159,24 @@ class SaleOrderLineExtension(models.Model):
         for line in self:
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
-            net_price = 0.0
-            if line.product_uom_qty > 0:
-            	net_price = taxes['total_included'] / line.product_uom_qty
+            price_subtotal = 0.0
+            if line.length and line.length > 0.0:
+                price_subtotal = (line.length/1000) * line.product_uom_qty * line.price_unit
+            else:
+                price_subtotal = taxes['total_excluded']
             line.update({
                 'price_tax': taxes['total_included'] - taxes['total_excluded'],
-                'price_total': taxes['total_included'],
-                'price_subtotal': taxes['total_excluded'],
-                'net_price': net_price,
+                'price_total': price_subtotal,
+                'price_subtotal': price_subtotal,
+                'net_price': price_subtotal,
             })
     
     
     net_price = fields.Monetary(compute='_compute_amount', string='Nett Price', readonly=True, store=True)
     image = fields.Binary(string="Image")
+    area_id = fields.Many2one('area.area','Area')
     product_location_id = fields.Many2one('product.location','Location')
-    length = fields.Char('Length(MM)')
+    length = fields.Float('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
                                  
     @api.multi
@@ -193,9 +216,22 @@ class ExperationTerms(models.Model):
     
     name = fields.Integer(string='Experation Term',required=True)
 
+class AreaArea(models.Model):
+    _name = 'area.area'
+    _description = 'Area'
+    
+    name = fields.Char(string='Name',required=True)
+
 class SaleRemarks(models.Model):
     _name = 'sale.remarks'
+    _description = 'Sale Remarks'
+    
+    name = fields.Many2one('remarks.remarks','Remarks')
+    order_id = fields.Many2one('sale.order','Sale Order')
+    
+class RemarksRemarks(models.Model):
+    _name = 'remarks.remarks'
     _description = 'Remarks'
     
-    name = fields.Char(string='Remarks',required=True)
-    order_id = fields.Many2one('sale.order','Sale Order')
+    name = fields.Char(string='Name',required=True)
+    type = fields.Selection([('led_strip','Strip Remark'),('led_attach','Attachment Remark'),('Both','Both')],string="Remark Type",readonly="True")

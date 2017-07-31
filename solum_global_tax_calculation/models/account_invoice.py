@@ -39,9 +39,6 @@ class AccountInvoice(models.Model):
     @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'currency_id', 'company_id', 'date_invoice')
     def _compute_amount(self):
         self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
-        #self.amount_tax = sum(line.amount for line in self.tax_line_ids)
-        
-        #self.amount_discount = sum((line.quantity * line.price_unit * line.discount)/100 for line in self.invoice_line_ids)
         self.amount_discount = self.amount_tax = 0.0
         if self.discount_type == 'amount':
             self.amount_discount = self.discount_rate
@@ -83,5 +80,3 @@ class AccountInvoice(models.Model):
     def button_dummy(self):
         self.supply_rate()
         return True
-
-

@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
                 'amount_total': amount_untaxed -amount_discount + amount_tax ,
             })
 
-    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Type',
+    discount_type = fields.Selection([('percent', 'Percentage'), ('amount', 'Amount')], string='Discount/Tax Type',
                                      readonly=True,states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
                                      default='percent')
     discount_rate = fields.Float('Discount Rate', digits_compute=dp.get_precision('Account'),
@@ -105,7 +105,6 @@ class AccountTax(models.Model):
 
         if not round_tax:
             prec += 5
-        # total_excluded = total_included = base = round(price_unit * quantity, prec)
         total_excluded = total_included = base = (price_unit * quantity)
 
         for tax in self.sorted(key=lambda r: r.sequence):
@@ -145,16 +144,12 @@ class AccountTax(models.Model):
                 'analytic': tax.analytic,
                 'base': tax_base,
             })
-        #print "total_excluded:",total_excluded
-        #print "total_included:",total_included
         return {
             'taxes': sorted(taxes, key=lambda k: k['sequence']),
             'total_excluded': total_excluded,
             'total_included': total_included,
             'base': base,
         }
-
-
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"

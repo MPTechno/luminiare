@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="attachment_remarks_cdi" model="remarks.remarks">
+            <field name="name">Complimentary Delivery Included</field>
+            <field name="type">led_attach</field>
+        </record>
+        
+        <record id="attachment_remarks_cash_delivery" model="remarks.remarks">
+            <field name="name">Cash On Delivery</field>
+            <field name="type">led_attach</field>
+        </record>
+        
+        <record id="attachment_remarks_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 2 years warranty</field>
+            <field name="type">led_attach</field>
+        </record>
+        
+        <record id="attachment_remarks_driver" model="remarks.remarks">
+            <field name="name">All recessed lights come with Meanwell Driver/Hep Driver</field>
+            <field name="type">led_attach</field>
+        </record>
+        
+        <record id="attachment_remarks_non_refund" model="remarks.remarks">
+            <field name="name">Non-Refundable</field>
+            <field name="type">led_attach</field>
+        </record>
+        
+        <record id="remarks_payment_on_delivery" model="remarks.remarks">
+            <field name="name">Payment on Delivery</field>
+            <field name="type">Both</field>
+        </record>
+        
+        <record id="strip_remarks_goods_sold" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">led_strip</field>
+        </record>
+        
+        <record id="strip_remarks_cldi" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery Included</field>
+            <field name="type">led_strip</field>
+        </record>
+        
+        <record id="strip_remarks_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 1 years warranty</field>
+            <field name="type">led_strip</field>
+        </record>
+        
+    </data>
+</odoo>

@@ -82,8 +82,9 @@
                             <tree string="Invoice Lines" editable="bottom">
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
-                                <field name="product_id" string="Product"/>
+                                <field name="product_id"/>
                                 <field name="name"/>
+                                <field name="area_id"/>
                                 <field name="product_location_id" />
                                 <field name="length"/>
                                 <field name="origin" invisible="1"/>
@@ -106,7 +107,7 @@
                                 <field name="currency_id" invisible="1"/>
                             </tree>
                             <kanban class="o_kanban_mobile">
-                                <field name="product_id" string="Area"/>
+                                <field name="product_id"/>
                                 <field name="price_subtotal" string="Amount"/>
                                 <field name="quantity"/>
                                 <field name="uom_id" groups="product.group_uom"/>
@@ -312,7 +313,7 @@
                                 <field name="currency_id" invisible="1"/>
                             </tree>
                             <kanban class="o_kanban_mobile">
-                                <field name="product_id" string="Area"/>
+                                <field name="product_id"/>
                                 <field name="price_subtotal" string="Amount"/>
                                 <field name="quantity"/>
                                 <field name="uom_id" groups="product.group_uom"/>
