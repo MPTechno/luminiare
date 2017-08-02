@@ -83,10 +83,10 @@ class AccountInvoiceLine(models.Model):
         if invoice_line_obj.invoice_id.origin:
             sale_order_ids = sale_order_pool.search([('name','=',invoice_line_obj.invoice_id.origin)])
             if sale_order_ids:
-                if sale_order_ids.amount_discount > 0:
-                    discount_rate = ((sale_order_ids.amount_discount*100)/ sale_order_ids.amount_untaxed)
-                    if float(discount_rate) <= float(discount_limit):
-                        invoice_line_obj.invoice_id.action_invoice_open()
+                #if sale_order_ids.amount_discount > 0:
+                discount_rate = ((sale_order_ids.amount_discount*100)/ sale_order_ids.amount_untaxed)
+                if float(discount_rate) <= float(discount_limit):
+                    invoice_line_obj.invoice_id.action_invoice_open()
         return invoice_line_obj
     
     discount = fields.Float(string='Discount (%)', digits=(16, 20), default=0.0)

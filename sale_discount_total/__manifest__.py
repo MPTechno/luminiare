@@ -21,6 +21,7 @@ Global Discount on Sale and Invoice.
         'views/sale_view.xml',
         'views/account_invoice_view.xml',
         'views/res_config_view.xml',
+        'wizard/warning_message_view.xml',
         'data/ir_config_parameter_data.xml',
     ],
     'demo': [],

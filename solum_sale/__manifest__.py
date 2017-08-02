@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Sol luminiare Sales Customization",
-    "author": "HashMicro/ Kunal",
+    "author": "HashMicro/ Amit",
     "version": "1.0",
     "website": "www.hashmicro.com",
     "category": "sale",

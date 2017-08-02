@@ -1,5 +1,6 @@
 from odoo import fields, models, exceptions, api, _
-from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, float_compare
+from odoo.exceptions import UserError,Warning
 import odoo.addons.decimal_precision as dp
 
 
@@ -63,8 +64,33 @@ class SaleOrder(models.Model):
         return invoice_vals
 
     @api.multi
+    def get_warning_alert(self,message):
+        if self.env['ir.values'].get_default('sale.config.settings', 'auto_done_setting'):
+            self.action_done()
+        imd = self.env['ir.model.data']
+        view = imd.get_object_reference('sale_discount_total','view_warning_message_wizard')
+        view_id = view and view[1] or False
+        context = dict(self._context)
+        context.update({
+            'default_message': message,
+        })
+        vals =  {
+            'name': _('Warning'),
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': view_id,
+            'res_model': 'warning.message',
+            'context': context,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+		}
+        return vals
+        
+    
+    @api.multi
     def action_confirm(self):
         discount_limit = self.env.ref('sale_discount_total.discount_limit_verification').value
+        warning_mess = {}
         for order in self:
             if order.amount_discount > 0:
                 discount_rate = ((order.amount_discount*100)/ order.amount_untaxed)
@@ -75,8 +101,15 @@ class SaleOrder(models.Model):
             if self.env.context.get('send_email'):
                 self.force_quotation_send()
             order.order_line._action_procurement_create()
-        if self.env['ir.values'].get_default('sale.config.settings', 'auto_done_setting'):
-            self.action_done()
+            message = ''
+            for order_line in order.order_line:
+                available_qty = order_line.product_id.qty_available - (abs(order_line.product_id.virtual_available))
+                if available_qty < order_line.product_uom_qty:
+                    lacking_qty = order_line.product_uom_qty - available_qty
+                    message += _('You plan to sell %s of %s qty but you have only %s qty available! The lacking quantity is %s. \n') % \
+                            (str(order_line.product_id.name), order_line.product_uom_qty, available_qty, lacking_qty)
+            if message:
+                return self.get_warning_alert(message)
         return True
     
     @api.multi

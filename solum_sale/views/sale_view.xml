@@ -37,8 +37,6 @@
                 <button name="action_confirm" states="sent" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" />
                 <button name="action_confirm" states="draft" string="Confirm Sale" class="o_sale_confirm" type="object" />
                 <button name="print_quotation" string="Print" type="object" states="sent,sale"/>
-                <button name="set_to_active" type="object" states="idle" string="Set Active"/>
-                <button name="set_to_idle" type="object" states="draft,sent" string="Set Idle"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
                 <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
                 <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>
@@ -90,7 +88,7 @@
                         <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
                         <field name="payment_term_text" invisible="1"/>
-                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
+                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Cash/Cheque/Bank Transfer')]}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
 				        <field name="state_change_date" invisible="1"/>
@@ -371,8 +369,6 @@
                 <button name="action_confirm" states="sent" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" />
                 <button name="action_confirm" states="draft" string="Confirm Sale" class="o_sale_confirm" type="object" />
                 <button name="print_quotation" string="Print" type="object" states="sent,sale"/>
-                <button name="set_to_active" type="object" states="idle" string="Set Active"/>
-                <button name="set_to_idle" type="object" states="draft,sent" string="Set Idle"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
                 <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
                 <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>
@@ -424,7 +420,7 @@
                         <field name="currency_id" readonly="0"/>
                         <field name="payment_term_id" options="{'no_create': True}"/>
                         <field name="payment_term_text" invisible="1"/>
-                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
+                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Cash/Cheque/Bank Transfer')]}"/>
                         <field name="quote_type" widget="radio"/>
 				        <field name="state_when_idle" invisible="1"/>
 				        <field name="state_change_date" invisible="1"/>

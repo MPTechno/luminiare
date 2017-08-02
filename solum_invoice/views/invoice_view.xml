@@ -56,7 +56,7 @@
                             domain="[('customer', '=', True)]"/>
                         <field name="payment_term_id"/>
                         <field name="payment_term_text" invisible="1"/>
-                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
+                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Cash/Cheque/Bank Transfer')]}"/>
                         <field name="inv_type"/>
                 		<field name="attention"/>
                     </group>
@@ -266,7 +266,7 @@
                             domain="[('customer', '=', True)]"/>
                         <field name="payment_term_id"/>
                         <field name="payment_term_text" invisible="1"/>
-                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Bank Transfer')]}"/>
+                        <field name="reference_no" attrs="{'invisible': [('payment_term_text', '!=', 'Cash/Cheque/Bank Transfer')]}"/>
                         <field name="inv_type"/>
                 		<field name="attention"/>
                     </group>

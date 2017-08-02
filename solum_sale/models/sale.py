@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, exceptions, api
 import time
 import datetime
 
+
+from odoo import api, fields, models, exceptions, api, _
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, float_compare
+from odoo.exceptions import UserError
+
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
+    
+    '''@api.model
+    def create(self, vals):
+        if vals.get('order_line'):
+            for line in vals.get('order_line'):
+                product_id = self.env['product.product'].browse(line[2]['product_id'])
+        sale_order_id = super(SaleExtenstion, self).create(vals)
+        return sale_order_id'''
     
     def get_formated_date(self,date_order):
         if date_order:
@@ -50,19 +62,8 @@ class SaleExtenstion(models.Model):
                 self.write({'state':'idle'})
         self.days_sice_state_change = diff_time
     
-    quote_type = fields.Selection([
-                                   ('led_strip','LED Strip Quotation'),
-                                   ('led_attach','LED Attachments Quotaion')
-                                 ],string="Quotaion Type",readonly=True)
-    state = fields.Selection([
-        ('draft', 'Quotation'),
-        ('idle', 'Idle'),
-        ('sent', 'Quotation Sent'),
-        ('sale', 'Sales Order'),
-        ('done', 'Locked'),
-        ('cancel', 'Cancelled'),
-        ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
-        
+    quote_type = fields.Selection([('led_strip','LED Strip Quotation'),('led_attach','LED Attachments Quotaion')],
+                                   string="Quotaion Type",readonly=True)
     state_when_idle = fields.Char(string="State when set Idle",readonly=True)
     attention = fields.Char("Attention")
     from_led_strip = fields.Char("From")
@@ -102,12 +103,6 @@ class SaleExtenstion(models.Model):
         rec['remarks_ids'] = [(6, 0, remarks_ids_list)]
         return rec
     
-    def set_to_active(self):
-        return self.write({'state':self.state_when_idle})
-        
-    def set_to_idle(self):
-        return self.write({'state':'idle','state_when_idle':self.state})
-        
     @api.multi
     def action_view_delivery(self):
         '''
