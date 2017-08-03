@@ -10,14 +10,31 @@ from odoo.exceptions import UserError
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
     
-    '''@api.model
+    @api.model
     def create(self, vals):
-        if vals.get('order_line'):
-            for line in vals.get('order_line'):
-                product_id = self.env['product.product'].browse(line[2]['product_id'])
         sale_order_id = super(SaleExtenstion, self).create(vals)
-        return sale_order_id'''
-    
+        message = ''
+        for line in sale_order_id.order_line:
+            product_id = line.product_id
+            previous_soline_ids = self.env['sale.order.line'].search([('product_id','=',product_id.id),('state','=','draft'),('order_id','!=',sale_order_id.id)])
+            order_qty = 0.0
+            order_name = ''
+            if previous_soline_ids:
+                for order_line in previous_soline_ids:
+                    order_qty += order_line.product_uom_qty
+                    order_name += order_line.order_id.name + ','
+            remaining_qty = (abs(product_id.virtual_available)) - order_qty
+            latest_order_qty = order_qty + line.product_uom_qty
+            if latest_order_qty > (abs(product_id.virtual_available)):
+                if order_name:
+                    message += _('%s has already quoted for %s and only %s quantity is remaining ! \n') % \
+                                (str(order_name),str(product_id.name),remaining_qty)
+                else:
+                    message += _('Only %s quantity is remaining for %s! \n') % (remaining_qty,str(product_id.name))
+        if message:
+            raise UserError(message)
+        return sale_order_id
+
     def get_formated_date(self,date_order):
         if date_order:
             date = str(date_order).split(' ')
@@ -135,7 +152,6 @@ class SaleExtenstion(models.Model):
         
 class SaleOrderLineExtension(models.Model):
     _inherit = 'sale.order.line'
-    
     
     @api.multi
     @api.depends('sequence', 'order_id')
