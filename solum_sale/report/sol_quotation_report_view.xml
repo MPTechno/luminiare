@@ -93,14 +93,11 @@
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">Product</th>
+								        <th style="border-top:1px solid black;">Picture</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
-								        <!--th style="border-top:1px solid black;">LENGTH(MM)</th-->
-								        <th style="border-top:1px solid black;">
-								        	UNIT PRICE<br/>
-								        	(PER METER)
-								        </th>
+								        <th style="border-top:1px solid black;">UNIT PRICE</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">NETT PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
@@ -116,6 +113,9 @@
 								        <td>
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
+								        <td class="text-center">
+								           <span t-field="l.product_id.image_small" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/>
+								        </td>
 								        <td>
 								           <span t-if="l.area_id" t-field="l.area_id.name"/>
 								        </td>
@@ -125,17 +125,11 @@
 								        <td>
 								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
 								        </td>
-								        <!--td>
-								           <span t-if="l.length" t-field="l.length"/>
-								        </td-->
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>
 								        </td>
-								        <!--td>
-								           <span t-field="l.unit_zero_text"/>
-								        </td-->
 								        <td>
-								           <span t-esc="int(l.product_uom_qty)"/>
+								           <span t-esc="int(l.product_uom_qty)"/> <span t-if="l.product_uom" t-field="l.product_uom.name"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_subtotal"/>
@@ -152,6 +146,7 @@
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">MODEL</th>
+								        <th style="border-top:1px solid black;">Picture</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
@@ -168,11 +163,14 @@
 								        <td>
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
+								        <td class="text-center">
+								           <span t-field="l.product_id.image_small" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/>
+								        </td>
 								        <td>
 								           <span t-if="l.name" t-field="l.name"/>
 								        </td>
 								        <td>
-								           <span t-esc="int(l.product_uom_qty)"/>
+								           <span t-esc="int(l.product_uom_qty)"/> <span t-if="l.product_uom" t-field="l.product_uom.name"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>

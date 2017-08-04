@@ -119,11 +119,7 @@
 								        <th style="border-top:1px solid black;">Product</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
-								        <!--th style="border-top:1px solid black;">LENGTH(MM)</th-->
-								        <th style="border-top:1px solid black;">
-								        	UNIT PRICE<br/>
-								        	(PER METER)
-								        </th>
+								        <th style="border-top:1px solid black;">UNIT PRICE</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">NETT PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
@@ -145,14 +141,11 @@
 								        <td>
 								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
 								        </td>
-								        <!--td>
-								           <span t-if="l.length" t-field="l.length"/>
-								        </td-->
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>
 								        </td>
 								        <td>
-								           <span t-esc="int(l.quantity)"/>
+								           <span t-esc="int(l.quantity)"/> <span t-if="l.uom_id" t-field="l.uom_id.name"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_subtotal"/>
@@ -189,7 +182,7 @@
 								           <span t-if="l.name" t-field="l.name"/>
 								        </td>
 								        <td>
-								           <span t-esc="int(l.quantity)"/>
+								           <span t-esc="int(l.quantity)"/> <span t-if="l.uom_id" t-field="l.uom_id.name"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>

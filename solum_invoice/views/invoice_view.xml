@@ -97,7 +97,7 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="price_unit"/>
                                 <field name="quantity"/>
-                                <field name="uom_id" groups="product.group_uom" invisible="1"/>
+                                <field name="uom_id" groups="product.group_uom"/>
                                 <field name="discount" groups="sale.group_discount_per_so_line" invisible="1"/>
                                 <field name="invoice_line_tax_ids" widget="many2many_tags" context="{'type':parent.type}"
                                     domain="[('type_tax_use','=','sale'),('company_id', '=', parent.company_id)]" 
@@ -303,7 +303,7 @@
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="quantity"/>
-                                <field name="uom_id" groups="product.group_uom" invisible="1"/>
+                                <field name="uom_id" groups="product.group_uom"/>
                                 <field name="price_unit"/>
                                 <field name="discount" groups="sale.group_discount_per_so_line" invisible="1"/>
                                 <field name="invoice_line_tax_ids" widget="many2many_tags" context="{'type':parent.type}"

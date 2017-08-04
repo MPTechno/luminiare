@@ -181,7 +181,7 @@
                                 <field name="product_uom"
                                     attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"
                                     context="{'company_id': parent.company_id}"
-                                    groups="product.group_uom" options='{"no_open": True}' invisible="1"/>
+                                    groups="product.group_uom" options='{"no_open": True}'/>
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
@@ -511,7 +511,7 @@
                                 <field name="product_uom"
                                     attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"
                                     context="{'company_id': parent.company_id}"
-                                    groups="product.group_uom" options='{"no_open": True}' invisible="1"/>
+                                    groups="product.group_uom" options='{"no_open": True}'/>
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
