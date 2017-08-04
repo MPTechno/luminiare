@@ -69,8 +69,10 @@ class InvoiceLineExtension(models.Model):
             taxes = self.invoice_line_tax_ids.compute_all(price, currency, self.quantity, product=self.product_id, partner=self.invoice_id.partner_id)
         price_subtotal = 0.0
         price_subtotal_signed = 0.0
-        if self.length and self.length > 0.0:
-            price_subtotal = price_subtotal_signed = (self.length/1000) * self.quantity * self.price_unit
+        #if self.length and self.length > 0.0:
+        #    price_subtotal = price_subtotal_signed = (self.length/1000) * self.quantity * self.price_unit
+        if self.product_id.uom_id.name == 'mm' or self.product_id.uom_id.name == 'MM':
+            price_subtotal = price_subtotal_signed = (self.quantity/1000) * self.price_unit
         else:
             price_subtotal = price_subtotal_signed = taxes['total_excluded'] if taxes else self.quantity * price    
         self.price_subtotal = price_subtotal

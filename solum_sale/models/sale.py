@@ -171,8 +171,10 @@ class SaleOrderLineExtension(models.Model):
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
             price_subtotal = 0.0
-            if line.length and line.length > 0.0:
-                price_subtotal = (line.length/1000) * line.product_uom_qty * line.price_unit
+            #if line.length and line.length > 0.0:
+            #    price_subtotal = (line.length/1000) * line.product_uom_qty * line.price_unit
+            if line.product_id.uom_id.name == 'mm' or line.product_id.uom_id.name == 'MM':
+                price_subtotal = (line.product_uom_qty/1000) * line.price_unit
             else:
                 price_subtotal = taxes['total_excluded']
             line.update({

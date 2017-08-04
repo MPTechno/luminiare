@@ -86,7 +86,7 @@
                                 <field name="name"/>
                                 <field name="area_id"/>
                                 <field name="product_location_id" />
-                                <field name="length"/>
+                                <field name="length" invisible="1"/>
                                 <field name="origin" invisible="1"/>
                                 <field name="company_id" invisible="1"/>
                                 <field name="account_id" groups="account.group_account_user"

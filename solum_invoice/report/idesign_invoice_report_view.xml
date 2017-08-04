@@ -119,7 +119,7 @@
 								        <th style="border-top:1px solid black;">Product</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
-								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
+								        <!--th style="border-top:1px solid black;">LENGTH(MM)</th-->
 								        <th style="border-top:1px solid black;">
 								        	UNIT PRICE<br/>
 								        	(PER METER)
@@ -145,9 +145,9 @@
 								        <td>
 								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
 								        </td>
-								        <td>
+								        <!--td>
 								           <span t-if="l.length" t-field="l.length"/>
-								        </td>
+								        </td-->
 								        <td>
 								           <span t-esc="'%.2f'% l.price_unit"/>
 								        </td>
@@ -155,7 +155,7 @@
 								           <span t-esc="int(l.quantity)"/>
 								        </td>
 								        <td>
-								           <span t-esc="'%.2f'% (l.net_price)"/>
+								           <span t-esc="'%.2f'% l.price_subtotal"/>
 								        </td>
 								        <td>
 								           <span t-esc="'%.2f'% l.price_subtotal"/>
