@@ -103,11 +103,23 @@ class SaleOrder(models.Model):
             order.order_line._action_procurement_create()
             message = ''
             for order_line in order.order_line:
-                available_qty = order_line.product_id.qty_available - (abs(order_line.product_id.virtual_available))
-                if available_qty < order_line.product_uom_qty:
-                    lacking_qty = order_line.product_uom_qty - available_qty
-                    message += _('You plan to sell %s of %s qty but you have only %s qty available! The lacking quantity is %s. \n') % \
-                            (str(order_line.product_id.name), order_line.product_uom_qty, available_qty, lacking_qty)
+                if order_line.product_id.is_pack:
+                    if order_line.product_id.wk_product_pack:
+                        for product_pack in order_line.product_id.wk_product_pack:
+                            outgoing_qty = product_pack.product_name.outgoing_qty - order_line.product_uom_qty
+                            available_qty = product_pack.product_name.qty_available - outgoing_qty
+                            if available_qty < order_line.product_uom_qty:
+                                lacking_qty = order_line.product_uom_qty - available_qty
+                                message += _('You plan to sell %s of %s qty but you have only %s qty available! The lacking quantity is %s. \n')%\
+                                    (str(product_pack.product_name.name), order_line.product_uom_qty, available_qty, lacking_qty)
+                            
+                else:    	
+                    outgoing_qty = order_line.product_id.outgoing_qty - order_line.product_uom_qty
+                    available_qty = order_line.product_id.qty_available - outgoing_qty
+                    if available_qty < order_line.product_uom_qty:
+                        lacking_qty = order_line.product_uom_qty - available_qty
+                        message += _('You plan to sell %s of %s qty but you have only %s qty available! The lacking quantity is %s. \n')%\
+                                    (str(order_line.product_id.name), order_line.product_uom_qty, available_qty, lacking_qty)
             if message:
                 return self.get_warning_alert(message)
         return True
