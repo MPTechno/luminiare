@@ -37,6 +37,7 @@ class SaleOrderLine(models.Model):
             'discount': self.discount,
             'product_location_id': self.product_location_id and self.product_location_id.id or False,
             'length': self.length ,
+            'colour_id': self.colour_id and self.colour_id.id and False ,
             'area_id': self.area_id and self.area_id.id or False,
             'uom_id': self.product_uom.id,
             'product_id': self.product_id.id or False,

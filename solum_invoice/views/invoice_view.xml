@@ -67,7 +67,7 @@
                         <field name="user_id" groups="base.group_user"/>
                         <field name="approved_by"/>
                 		<field name="prepared_by"/>
-                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
                         <label for="currency_id" groups="base.group_multi_currency"/>
                         <div groups="base.group_multi_currency">
                             <field name="currency_id" options="{'no_create': True, 'no_open': True}" class="oe_inline"/>
@@ -84,6 +84,7 @@
                                 <field name="number"/>
                                 <field name="product_id"/>
                                 <field name="name"/>
+                                <field name="colour_id" invisible="1"/>
                                 <field name="area_id"/>
                                 <field name="product_location_id" />
                                 <field name="length" invisible="1"/>
@@ -277,7 +278,7 @@
                         <field name="user_id" groups="base.group_user"/>
                         <field name="approved_by"/>
                 		<field name="prepared_by"/>
-                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
                         <label for="currency_id" groups="base.group_multi_currency"/>
                         <div groups="base.group_multi_currency">
                             <field name="currency_id" options="{'no_create': True, 'no_open': True}" class="oe_inline"/>
@@ -295,6 +296,7 @@
                                 <field name="product_id" string="Model"/>
                                 <field name="origin" invisible="1"/>
                                 <field name="name"/>
+                                <field name="colour_id"/>
                                 <field name="company_id" invisible="1"/>
                                 <field name="account_id" groups="account.group_account_user"
                                     domain="[('company_id', '=', parent.company_id), ('internal_type', '=', 'other')]" invisible="1"/>

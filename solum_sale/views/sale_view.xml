@@ -73,7 +73,7 @@
                         <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' string="Company"/>
                         <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
                         <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}"/>
-                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')"/>
                         <field name="attention"/>
                 		<field name="from_led_strip"/>
                 		<field name="name_led_strip"/>
@@ -166,6 +166,7 @@
                                    />
                                	<field name="image" widget="image"/>
                                	<field name="name"/>
+                               	<field name="colour_id" invisible="1"/>
                                	<field name="area_id"/>
                                	<field name="product_location_id" />
                                	<field name="length" invisible="1"/>
@@ -405,7 +406,7 @@
                         <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' string="Company"/>
                         <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
                         <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}"/>
-                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
                         <field name="attention"/>
                 		<field name="from_led_strip"/>
                 		<field name="name_led_strip"/>
@@ -500,6 +501,7 @@
                                	<field name="image" widget="image"/>
                                 <field name="layout_category_id" groups="sale.group_sale_layout" invisible="1"/>
                                 <field name="name"/>
+                                <field name="colour_id"/>
                                 <field name="product_uom_qty"
                                     string="Ordered Qty"
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
@@ -779,4 +781,30 @@
             parent="sales_team.menu_sale_config"
             action="remarks_action"
             sequence="30"/>
+            
+    <!-- Colour View -->
+  	
+  	<record id="colour_tree_view" model="ir.ui.view">
+        <field name="name">colour.tree.view</field>
+        <field name="model">colour.colour</field>            
+        <field name="arch" type="xml">
+            <tree editable="top"> 
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="colour_action" model="ir.actions.act_window">
+        <field name="name">Colours</field>
+        <field name="res_model">colour.colour</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="colour_tree_view"/>
+    </record>
+    
+    <menuitem name="Colours"
+            id="colour_menu"
+            parent="sales_team.menu_sale_config"
+            action="colour_action"
+            sequence="40"/>
 </odoo>   

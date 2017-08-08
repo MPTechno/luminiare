@@ -10,95 +10,6 @@ from odoo.exceptions import UserError
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
     
-    @api.model
-    def create(self, vals):
-        sale_order_id = super(SaleExtenstion, self).create(vals)
-        message = ''
-        for line in sale_order_id.order_line:
-            product_id = line.product_id
-            if product_id.is_pack:
-                #print "\n\n\n====Product Pack"
-                pack_soline_ids = self.env['sale.order.line'].search([('product_id','=',product_id.id),('state','=','draft'),('order_id','!=',sale_order_id.id)])
-                if pack_soline_ids:
-                    order_qty_1 = 0.0
-                    order_name_1 = ''
-                    for pack_order_line in pack_soline_ids:
-                        #print "\n\n======**********pack_soline_ids",pack_order_line
-                        temp = 0
-                        if pack_order_line.product_id.wk_product_pack:
-                            for wk_product_line in pack_order_line.product_id.wk_product_pack:
-                                order_qty = 0.0
-                                order_name = ''
-                                if temp == 0:
-                                    temp = 1
-                                    order_qty_1 += wk_product_line.product_quantity * pack_order_line.product_uom_qty
-                                    order_name_1 += pack_order_line.order_id.name + ','
-                                unpack_product_line_ids = self.env['sale.order.line'].search([('product_id','=',wk_product_line.product_name.id),('state','=','draft'),('order_id','!=',sale_order_id.id)])
-                                if unpack_product_line_ids:
-                                    #print "\n\n=======unpack_product_line_ids",unpack_product_line_ids
-                                    for unpack_product_line in unpack_product_line_ids:
-                                        order_qty += unpack_product_line.product_uom_qty
-                                        #print "\n\n########",unpack_product_line.product_uom_qty,unpack_product_line.order_id.name
-                                        order_name += unpack_product_line.order_id.name + ','
-                                order_qty = order_qty + order_qty_1
-                                order_name = order_name + order_name_1
-                                remaining_qty = (abs(wk_product_line.product_name.virtual_available)) - order_qty
-                                latest_order_qty = order_qty + line.product_uom_qty
-                                #print "\n\norder_qty=========",order_qty
-                                #print "\n\nvirtual_available=",wk_product_line.product_name.virtual_available
-                                #print "\n\nremaining_qty=====",remaining_qty
-                                #print "\n\nlatest_order_qty==",latest_order_qty
-                                #print "\n\norder_name========",order_name
-                                if latest_order_qty > (abs(wk_product_line.product_name.virtual_available)):
-                                    if order_name:
-                                        message += _('%s has already quoted for %s and only %s quantity is remaining ! \n') % \
-                                                (str(order_name),str(wk_product_line.product_name.name),remaining_qty)
-                                    else:
-                                        message += _('Only %s quantity is remaining for %s! \n') % \
-                                                    (remaining_qty,str(wk_product_line.product_name.name))
-                                #print "\n\nMessage=",message
-                
-            else:
-                order_qty = 0.0
-                order_name = ''
-                
-                #For If this product is already in any pack product
-                pack_ids = self.env['product.pack'].search([('product_name','=',product_id.id)])
-                #print "\n\n====pack_ids=",pack_ids
-                if pack_ids:
-                    for pack_id	in pack_ids:
-                        product_product_id = self.env['product.product'].search([('product_tmpl_id','=',pack_id.wk_product_template.id)])
-                        pack_soline_ids = self.env['sale.order.line'].search([('product_id','=',product_product_id.id),('state','=','draft'),('order_id','!=',sale_order_id.id)])
-                        #print "\n\n======pack_soline_ids=",pack_soline_ids,product_product_id.name
-                        if pack_soline_ids:
-                            for pack_order_line in pack_soline_ids:
-                                order_qty += pack_id.product_quantity * pack_order_line.product_uom_qty
-                                order_name += pack_order_line.order_id.name + ','
-                #For Normal Product
-                previous_soline_ids = self.env['sale.order.line'].search([('product_id','=',product_id.id),('state','=','draft'),('order_id','!=',sale_order_id.id)])
-                #print "\n\n====previous_soline_ids===",previous_soline_ids
-                if previous_soline_ids:
-                    for order_line in previous_soline_ids:
-                        order_qty += order_line.product_uom_qty
-                        order_name += order_line.order_id.name + ','
-                remaining_qty = (abs(product_id.virtual_available)) - order_qty
-                latest_order_qty = order_qty + line.product_uom_qty
-                #print "\n\norder_qty=========",order_qty
-                #print "\n\nvirtual_available=",(abs(product_id.virtual_available))
-                #print "\n\nremaining_qty=====",remaining_qty
-                #print "\n\nlatest_order_qty==",latest_order_qty
-                #print "\n\norder_name========",order_name
-                if latest_order_qty > (abs(product_id.virtual_available)):
-                    if order_name:
-                        message += _('%s has already quoted for %s and only %s quantity is remaining ! \n') % \
-                                    (str(order_name),str(product_id.name),remaining_qty)
-                    else:
-                        message += _('Only %s quantity is remaining for %s! \n') % (remaining_qty,str(product_id.name))
-                #print "\n\n=====Message",message
-        if message:
-            raise UserError(message)
-        return sale_order_id
-
     def get_formated_date(self,date_order):
         if date_order:
             date = str(date_order).split(' ')
@@ -217,6 +128,12 @@ class SaleExtenstion(models.Model):
 class SaleOrderLineExtension(models.Model):
     _inherit = 'sale.order.line'
     
+    @api.model
+    def _default_colour(self):
+        colour_id = self.env['colour.colour'].search([('name','=','White')])
+        colour_id = colour_id and colour_id.id or False
+        return colour_id
+    
     @api.multi
     @api.depends('sequence', 'order_id')
     def get_number(self):
@@ -255,6 +172,7 @@ class SaleOrderLineExtension(models.Model):
     product_location_id = fields.Many2one('product.location','Location')
     length = fields.Float('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
+    colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
                                  
     @api.multi
     @api.onchange('product_id')
@@ -312,3 +230,9 @@ class RemarksRemarks(models.Model):
     
     name = fields.Char(string='Name',required=True)
     type = fields.Selection([('led_strip','Strip Remark'),('led_attach','Attachment Remark'),('Both','Both')],string="Remark Type",readonly="True")
+    
+class Colour(models.Model):
+    _name = 'colour.colour'
+    _description = 'Color'
+    
+    name = fields.Char(string='Name',required=True)

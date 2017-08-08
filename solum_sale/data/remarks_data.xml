@@ -47,5 +47,9 @@
             <field name="type">led_strip</field>
         </record>
         
+        <record id="white_colour" model="colour.colour">
+            <field name="name">White</field>
+        </record>
+        
     </data>
 </odoo>

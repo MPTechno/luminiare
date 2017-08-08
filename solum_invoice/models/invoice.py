@@ -48,6 +48,11 @@ class InvoiceLineExtension(models.Model):
     _inherit = 'account.invoice.line'
     
     
+    @api.model
+    def _default_colour(self):
+        colour_id = self.env['colour.colour'].search([('name','=','White')])
+        colour_id = colour_id and colour_id.id or False
+        return colour_id
     
     @api.multi
     @api.depends('sequence', 'invoice_id')
@@ -91,6 +96,7 @@ class InvoiceLineExtension(models.Model):
     product_location_id = fields.Many2one('product.location','Location')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Float('Length(MM)')
+    colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
     
 
 class InvoiceRemarks(models.Model):
