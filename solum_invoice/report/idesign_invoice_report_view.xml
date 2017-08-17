@@ -16,7 +16,7 @@
 		</template>
 
 		<template id="external_layout_inv_header_idesign">
-			<div class="header" style="font-family:Calibri; font-size:11px;">
+			<div class="header" style="font-family:Calibri; font-size:13px;">
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
 						<img src='/solum_sale/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
@@ -40,7 +40,7 @@
 		</template>
 
 		<template id="external_layout_inv_footer_idesign">
-			<div class="footer" style="font-family:Calibri; font-size:11px;">
+			<div class="footer" style="font-family:Calibri; font-size:13px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
 					<center>
@@ -56,7 +56,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_invoice_idesign">
-		                <div class="page" style="font-family:Calibri; font-size:11px;">
+		                <div class="page" style="font-family:Calibri; font-size:13px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Date</b></td>
