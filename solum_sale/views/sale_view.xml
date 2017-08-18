@@ -73,7 +73,7 @@
                         <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' string="Company"/>
                         <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
                         <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}"/>
-                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')"/>
+                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
                         <field name="attention"/>
                 		<field name="from_led_strip"/>
                 		<field name="name_led_strip"/>
@@ -129,7 +129,7 @@
                                         <div invisible="1">
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
-                                        <field name="price_unit"/>
+                                        <field name="price_unit" readonly="1"/>
                                         <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" /-->
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
@@ -185,7 +185,8 @@
                                     groups="product.group_uom" options='{"no_open": True}'/>
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
-                                <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                                <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/-->
+                                <field name="price_unit" readonly="1"/>
                                 <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/-->
                                 <field name="net_price" />
                                 <field name="tax_id" widget="many2many_tags" 
