@@ -203,7 +203,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
         <field name="domain">[('type','in',('out_invoice', 'out_refund')),('inv_type','=','led_strip')]</field>
-        <field name="context">{'default_type':'out_invoice', 'default_journal_type': 'sale','default_inv_type':'led_strip'}</field>
+        <field name="context">{'default_type':'out_invoice', 'default_journal_type': 'sale','default_inv_type':'led_strip','readonly_by_pass': True}</field>
     </record>
     
     <record id="action_invoice_tree_view_strip" model="ir.actions.act_window.view">
@@ -410,7 +410,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
         <field name="domain">[('type','in',('out_invoice', 'out_refund')),('inv_type','=','led_attach')]</field>
-        <field name="context">{'default_type':'out_invoice', 'default_journal_type': 'sale','default_inv_type':'led_attach'}</field>
+        <field name="context">{'default_type':'out_invoice', 'default_journal_type': 'sale','default_inv_type':'led_attach','readonly_by_pass': True}</field>
     </record>
     
     <record id="action_invoice_tree_view_attach" model="ir.actions.act_window.view">

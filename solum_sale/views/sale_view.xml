@@ -187,7 +187,6 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/-->
                                 <field name="price_unit" readonly="1"/>
-                                <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/-->
                                 <field name="net_price" />
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
@@ -295,7 +294,7 @@
         <field name="view_id" ref="sale.view_quotation_tree"/>
         <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'default_quote_type': 'led_strip'}</field>
+        <field name="context">{'default_quote_type': 'led_strip','readonly_by_pass': True}</field>
         <field name="domain">[('quote_type', '=', 'led_strip'),('state','in',('draft','idle','sent'))]</field>
     </record>
     
@@ -329,7 +328,7 @@
         <field name="view_id" ref="sale.view_quotation_tree"/>
         <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'default_quote_type': 'led_strip'}</field>
+        <field name="context">{'default_quote_type': 'led_strip','readonly_by_pass': True}</field>
         <field name="domain">[('quote_type', '=', 'led_strip'),('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
     </record>
     
@@ -464,7 +463,7 @@
                                         <div invisible="1">
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
-                                        <field name="price_unit"/>
+                                        <field name="price_unit" readonly="1"/>
                                         <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}" /-->
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
@@ -517,8 +516,8 @@
                                     groups="product.group_uom" options='{"no_open": True}'/>
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
-                                <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
-                                <!--field name="unit_zero_text" attrs="{'invisible':[('price_unit','!=',0)]}"/-->
+                                <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/-->
+                                <field name="price_unit" readonly="1"/>
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
                                     attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
@@ -624,7 +623,7 @@
         <field name="view_id" ref="sale.view_quotation_tree"/>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'default_quote_type': 'led_attach'}</field>
+        <field name="context">{'default_quote_type': 'led_attach','readonly_by_pass': True}</field>
         <field name="domain">[('quote_type', '=', 'led_attach'),('state','in',('draft','idle','sent'))]</field>
     </record>
     
@@ -657,7 +656,7 @@
         <field name="view_id" ref="sale.view_quotation_tree"/>
         <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
         <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-        <field name="context">{'default_quote_type': 'led_attach'}</field>
+        <field name="context">{'default_quote_type': 'led_attach','readonly_by_pass': True}</field>
         <field name="domain">[('quote_type', '=', 'led_attach'),('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
     </record>
     

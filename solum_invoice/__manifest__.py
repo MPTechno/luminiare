@@ -5,7 +5,7 @@
     "version": "1.0",
     "website": "www.hashmicro.com",
     "category": "luminiare",
-    "depends": ['account','solum_sale'],
+    "depends": ['account','solum_sale','web_readonly_bypass'],
     "data": [
 		'security/ir.model.access.csv',
 		'views/invoice_view.xml',
