@@ -66,7 +66,7 @@
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Project</b></td>
 									<td style="width:140cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.crm_lead_id" t-field="o.crm_lead_id.name"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.sale_project_id" t-field="o.sale_project_id.name"/></b>
 									</td>
 									<td style="width:14cm; height:20px;"><b>Currency</b></td>
 									<td style="width:40cm; height:20px;">

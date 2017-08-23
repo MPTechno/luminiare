@@ -58,11 +58,10 @@ class SaleExtenstion(models.Model):
                                    string="Quotaion Type",readonly=True)
     state_when_idle = fields.Char(string="State when set Idle",readonly=True)
     attention = fields.Char("Attention")
-    from_led_strip = fields.Char("From")
     name_led_strip = fields.Many2one('res.users', string='Name', track_visibility='onchange', default=lambda self: self.env.user)
-    email_led_strip = fields.Char("Email")
+    email_led_strip = fields.Char("Email", default=lambda self: self.env.user.email)
     state_change_date = fields.Date(string="State Change Date")
-    crm_lead_id = fields.Many2one('crm.lead','Project')
+    sale_project_id = fields.Many2one('sale.project','Project')
     days_sice_state_change = fields.Integer(compute=_calculateStateDays,string="Days Since Last State")
     picking_ids = fields.Many2many('stock.picking', compute='_compute_picking_ids', string='Picking associated to this sale')
     delivery_count = fields.Integer(string='Delivery Orders', compute='_compute_picking_ids')
@@ -280,5 +279,11 @@ class RemarksRemarks(models.Model):
 class Colour(models.Model):
     _name = 'colour.colour'
     _description = 'Color'
+    
+    name = fields.Char(string='Name',required=True)
+    
+class SaleProject(models.Model):
+    _name = 'sale.project'
+    _description = 'Project'
     
     name = fields.Char(string='Name',required=True)

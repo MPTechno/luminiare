@@ -83,7 +83,7 @@ class SalesOrders(models.Model):
             'attention': self.attention,
             'payment_term_text': self.payment_term_text,
             'reference_no': self.reference_no,
-            'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
+            'sale_project_id':self.sale_project_id and self.sale_project_id.id or False,
         }
         return invoice_vals
     
@@ -264,7 +264,7 @@ class SaleAdvancePaymentInvExtension(models.TransientModel):
             'team_id': order.team_id.id,
             'comment': order.note,
             'inv_type':order.quote_type,
-            'crm_lead_id':self.crm_lead_id and self.crm_lead_id.id or False,
+            'sale_project_id':self.sale_project_id and self.sale_project_id.id or False,
             'attention': order.attention,
         })
         

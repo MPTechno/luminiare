@@ -1,7 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_location,access_product_location,model_product_location,,1,0,0,0
-access_sale_remarks,access_sale_remarks,model_sale_remarks,,1,0,0,0
-access_experation_terms,access_experation_terms,model_experation_terms,,1,0,0,0
-access_area_area,access_area_area,model_area_area,,1,0,0,0
-access_remarks_remarks,access_remarks_remarks,model_remarks_remarks,,1,0,0,0
-access_colour_colour,access_colour_colour,model_colour_colour,,1,0,0,0
+access_product_location,access_product_location,model_product_location,,1,1,1,1
+access_sale_remarks,access_sale_remarks,model_sale_remarks,,1,1,1,1
+access_experation_terms,access_experation_terms,model_experation_terms,,1,1,1,1
+access_area_area,access_area_area,model_area_area,,1,1,1,1
+access_remarks_remarks,access_remarks_remarks,model_remarks_remarks,,1,1,1,1
+access_colour_colour,access_colour_colour,model_colour_colour,,1,1,1,1
+access_sale_project,access_sale_project,model_sale_project,,1,1,1,1

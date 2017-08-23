@@ -30,20 +30,15 @@
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_strip',
-                              'default_crm_lead_id': active_id,
-                              'default_team_id': team_id}" attrs="{'invisible': [('lead_state','!=','Won')]}"/>
+                              'default_team_id': team_id}"/>
       		 	<button string="New LED Attachment Quotation" name="quotations_new_attachment" 
       		 		type="object" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_attach',
-                              'default_crm_lead_id': active_id,
-                              'default_team_id': team_id}" attrs="{'invisible': [('lead_state','!=','Won')]}"/>
+                              'default_team_id': team_id}"/>
               	<button string="Quote" name="%(solum_crm.action_crm_to_quote_wizard)d" type="action" class="oe_highlight"
-                    	context="{'partner_id': partner_id,
-                              'crm_lead_id': active_id,
-                              'team_id': team_id}"
-                    	attrs="{'invisible': [('lead_state','!=','Won')]}"/>
+                    	context="{'partner_id': partner_id,'team_id': team_id}"/>
             </xpath>
             <xpath expr="//notebook/page['lead']/group/group/field[@name='partner_name']" position="attributes">
 				<attribute name='string'>Company</attribute>
@@ -51,8 +46,7 @@
             <div name="button_box" position="inside">
                 <button class="oe_stat_button" type="object"
                         name="action_open_lead_quotations" icon="fa-pencil-square-o"
-                        context="{'default_partner_id': partner_id, 'search_default_draft': 1}"
-                        attrs="{'invisible': [('lead_state','!=','Won')]}">
+                        context="{'default_partner_id': partner_id, 'search_default_draft': 1}">
                     <div class="o_stat_info">
                         <field name="sale_number" class="o_stat_value"/>
                         <span class="o_stat_text"> Quote(s) </span>

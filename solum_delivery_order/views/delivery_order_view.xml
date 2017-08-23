@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="delivery_type" />
-                <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won'),('partner_id','=',partner_id)]"/>
+                <field name="sale_project_id"/>
                 <field name="attention"/>
             </xpath>
         </field>

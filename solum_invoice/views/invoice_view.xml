@@ -67,7 +67,7 @@
                         <field name="user_id" groups="base.group_user"/>
                         <field name="approved_by"/>
                 		<field name="prepared_by"/>
-                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
+                		<field name="sale_project_id"/>
                         <label for="currency_id" groups="base.group_multi_currency"/>
                         <div groups="base.group_multi_currency">
                             <field name="currency_id" options="{'no_create': True, 'no_open': True}" class="oe_inline"/>
@@ -278,7 +278,7 @@
                         <field name="user_id" groups="base.group_user"/>
                         <field name="approved_by"/>
                 		<field name="prepared_by"/>
-                		<field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
+                		<field name="sale_project_id"/>
                         <label for="currency_id" groups="base.group_multi_currency"/>
                         <div groups="base.group_multi_currency">
                             <field name="currency_id" options="{'no_create': True, 'no_open': True}" class="oe_inline"/>

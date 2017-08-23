@@ -73,9 +73,8 @@
                         <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' string="Company"/>
                         <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
                         <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}"/>
-                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
+                        <field name="sale_project_id"/>
                         <field name="attention"/>
-                		<field name="from_led_strip"/>
                 		<field name="name_led_strip"/>
                 		<field name="email_led_strip"/>
                     </group>
@@ -406,9 +405,8 @@
                         <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}' string="Company"/>
                         <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
                         <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}"/>
-                        <field name="crm_lead_id" domain="[('type','=','opportunity'),('stage_id','=','Won')]"/>
+                        <field name="sale_project_id"/>
                         <field name="attention"/>
-                		<field name="from_led_strip"/>
                 		<field name="name_led_strip"/>
                 		<field name="email_led_strip"/>
                     </group>
@@ -808,6 +806,32 @@
             action="colour_action"
             sequence="40"/>
             
+    <!-- Sale Project View -->
+  	
+  	<record id="sale_project_tree_view" model="ir.ui.view">
+        <field name="name">sale.project.tree.view</field>
+        <field name="model">sale.project</field>            
+        <field name="arch" type="xml">
+            <tree editable="top"> 
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="sale_project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">sale.project</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="sale_project_tree_view"/>
+    </record>
+    
+    <menuitem name="Project"
+            id="sale_project_menu"
+            parent="sales_team.menu_sale_config"
+            action="sale_project_action"
+            sequence="50"/>
+    
     <!-- Product Template Tree View -->
 	<record id="product_template_tree_view_ext_sol" model="ir.ui.view">
         <field name="name">product.template.product.tree.solum</field>

@@ -10,7 +10,7 @@ class StockPicking(models.Model):
                        ('led_strip','LED Strip Delivery Order'),
                        ('led_attach','LED Attachments Delivery Order')
                      ],string="Delivery Type")
-    crm_lead_id = fields.Many2one('crm.lead','Project')
+    sale_project_id = fields.Many2one('sale.project','Project')
     attention = fields.Char("Attention")
     
     
@@ -48,7 +48,7 @@ class StockPicking(models.Model):
         	sale_order_obj = sale_order_pool.search([('name','=',vals.get('origin'))])
         	if sale_order_obj:
         		vals.update({
-        			'crm_lead_id': sale_order_obj.crm_lead_id and sale_order_obj.crm_lead_id.id or False,
+        			'sale_project_id': sale_order_obj.sale_project_id and sale_order_obj.sale_project_id.id or False,
         			'attention': sale_order_obj.attention,
         			'delivery_type': sale_order_obj.quote_type,
         		})

@@ -4,23 +4,6 @@ from odoo.exceptions import UserError
 class crm_lead(models.Model):
     _inherit = 'crm.lead'
     
-    @api.depends('order_ids')
-    def _compute_sale_amount_total(self):
-        for lead in self:
-            total = 0.0
-            nbr = 0
-            company_currency = lead.company_currency or self.env.user.company_id.currency_id
-            sale_order_pool = self.env['sale.order']
-            sale_order_ids = sale_order_pool.search([('crm_lead_id','=',lead.id)])
-            for order in sale_order_ids:
-                if order.state in ('draft', 'sent'):
-                    nbr += 1
-                if order.state not in ('draft', 'sent', 'cancel'):
-                    #total += order.currency_id.compute(order.amount_untaxed, company_currency)
-                    total += order.amount_total
-            lead.sale_amount_total = total
-            lead.sale_number = nbr
-    
     @api.depends('stage_id')
     def _get_lead_state(self):
         for lead in self:

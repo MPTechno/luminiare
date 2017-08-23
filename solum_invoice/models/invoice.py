@@ -11,7 +11,7 @@ class InvoiceExtension(models.Model):
     attention = fields.Char("Attention")
     prepared_by = fields.Many2one("res.users",'Prepared By')
     approved_by = fields.Many2one("res.users",'Approved By')
-    crm_lead_id = fields.Many2one('crm.lead','Project')
+    sale_project_id = fields.Many2one('sale.project','Project')
     remarks_ids = fields.One2many('invoice.remarks','invoice_id','Remarks')
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
