@@ -5,7 +5,7 @@
     "version": "1.0",
     "website": "www.hashmicro.com",
     "category": "sale",
-    "depends": ['sale','sales_team','web_readonly_bypass'],
+    "depends": ['product','sale','sales_team','web_readonly_bypass'],
     "data": [
         'security/ir.model.access.csv',
         'data/payment_term_data.xml',

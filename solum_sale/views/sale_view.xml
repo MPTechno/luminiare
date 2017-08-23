@@ -807,4 +807,75 @@
             parent="sales_team.menu_sale_config"
             action="colour_action"
             sequence="40"/>
+            
+    <!-- Product Template Tree View -->
+	<record id="product_template_tree_view_ext_sol" model="ir.ui.view">
+        <field name="name">product.template.product.tree.solum</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+            	<field name="currency_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='list_price']" position="attributes">
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+                <attribute name="widget">monetary</attribute>
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+                <attribute name="widget">monetary</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    
+    <!-- Product Product Tree View -->
+	<record id="product_product_tree_view_ext_sol" model="ir.ui.view">
+        <field name="name">product.product.tree.solum</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+            	<field name="currency_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='lst_price']" position="attributes">
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+                <attribute name="widget">monetary</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Product Product Kanban View -->
+	<record id="product_kanban_view_sol" model="ir.ui.view">
+        <field name="name">Product Kanban Solum</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" position="after">
+            	<field name="currency_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//templates/t/div/div/ul/li/field[@name='lst_price']" position="attributes">
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+                <attribute name="widget">monetary</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    
+    <!-- Product Template Kanban View -->
+	<record id="product_template_kanban_view_sol" model="ir.ui.view">
+        <field name="name">Product.template.product.kanban.solum</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='lst_price']" position="after">
+            	<field name="currency_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//templates/t/div/div/ul/li/field[@name='lst_price']" position="attributes">
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+                <attribute name="widget">monetary</attribute>
+            </xpath>
+        </field>
+    </record>
+    
 </odoo>   

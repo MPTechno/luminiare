@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, exceptions, api
+from odoo import fields, models, exceptions, api, _
 
 class InvoiceExtension(models.Model):
     _inherit = 'account.invoice'
