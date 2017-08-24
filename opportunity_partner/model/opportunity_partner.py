@@ -30,7 +30,7 @@ class crm_lead(models.Model):
 				'email':vals.get('email_from'),
 				'phone':vals.get('phone'),
 				'opportunity_partner':True,
-				'customer':False,
+				'customer':True,
 				'supplier':False,
 				'company_type':'company',
 				'is_company':True,

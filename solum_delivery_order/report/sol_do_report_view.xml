@@ -18,7 +18,7 @@
 		<template id="external_layout_do_header_sol">
 			<div class="header">
 				<div class="col-xs-12 pull-left">
-					<center><img src='/solum_delivery_order/static/src/images/sol_luminaire.jpeg' style="width:300px;height:100px;"/></center>
+					<center><img src='/solum_delivery_order/static/src/images/sol_luminaire.jpeg' style="width:275px;height:100px;"/></center>
 				</div>
 			</div>
 		</template>
@@ -27,10 +27,9 @@
 			<div class="footer" style="font-family:Calibri; font-size:13px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
-					<span style="border-top:1px solid black;">CUSTOMER ACKNOWLEDGEMENT</span>
-					<br/>
-					<br/>
-					<span>*Invoice payable to <strong><u>"Sol Luminaire Pte Ltd"</u></strong> via cheque <strong><u>ONLY</u></strong></span>
+					<center>
+						<span>*Invoice payable to <strong><u>"Sol Luminaire Pte Ltd"</u></strong> via cheque <strong><u>ONLY</u></strong></span>
+					</center>
 				</div>
 			</div>
 		</template>
@@ -152,16 +151,18 @@
 								<table class="table table-condensed" style="border-top:none; margin-left:-15px;">
 								    <tr style="border-top:none;" t-foreach="o.get_order_remarks(o)" t-as="r">
 								        <td style="border-top:none;">
-								            <span t-field="r.name"/>
+								            *<span t-field="r.name"/>
 								        </td>
 								    </tr>
 								</table>
-								<span style="margin-left:-15px;">*Note all items are to be checked and verified on day of delivery.</span>
 							</div>
 							<br/>
 							<br/>
 							<br/>
 							<span>Checked by:</span>
+							<br/>
+							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<br/>
 		                </div>
 		            </t>
 		        </t>

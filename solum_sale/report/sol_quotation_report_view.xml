@@ -18,14 +18,14 @@
 		<template id="external_layout_header_sol">
 			<div class="header">
 				<div class="col-xs-12 pull-left">
-					<center><img src='/solum_sale/static/src/images/sol_luminaire.jpeg' style="width:300px;height:100px;"/></center>
+					<center><img src='/solum_sale/static/src/images/sol_luminaire.jpeg' style="width:275px;height:100px;"/></center>
 				</div>
 			</div>
 		</template>
 
 		<template id="external_layout_footer_sol">
 			<div class="footer" style="font-family:Calibri; font-size:13px;">
-				<div class="col-xs-12 pull-left" style="background-color: #FF8C00;">
+				<div style="background-color: #FF8C00;">
 					<br/>
 					<center>
 						<span>Sol Luminaire Pte Ltd</span><br/>
@@ -34,6 +34,7 @@
 					</center>
 					<br/>
 				</div>
+				<br/>
 			</div>
 		</template>
         
@@ -90,8 +91,8 @@
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
-								        <th style="border-top:1px solid black;">Product</th>
-								        <th style="border-top:1px solid black;">Picture</th>
+								        <th style="border-top:1px solid black;">PRODUCT</th>
+								        <th style="border-top:1px solid black;">PICTURE</th>
 								        <th style="border-top:1px solid black;">AREA</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">LOCATION</th>
@@ -144,7 +145,7 @@
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">MODEL</th>
-								        <th style="border-top:1px solid black;">Picture</th>
+								        <th style="border-top:1px solid black;">PICTURE</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
@@ -186,7 +187,7 @@
 									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
 									    <tr style="border-top:none;" t-foreach="o.remarks_ids" t-as="r">
 									        <td style="border-top:none;">
-									            <span t-if="r.name" t-field="r.name.name" />
+									            *<span t-if="r.name" t-field="r.name.name" />
 									        </td>
 									    </tr>
 									</table>
@@ -222,7 +223,7 @@
 									</table>
 								</div>
 							</div>
-							<span style="border-top:1px solid black; margin-top:100px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
 							<br/>
 		                </div>
 		            </t>
