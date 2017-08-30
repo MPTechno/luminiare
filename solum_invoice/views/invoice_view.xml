@@ -61,7 +61,7 @@
                 		<field name="attention"/>
                     </group>
                     <group>
-                    	<field name="number" string="Invoice Numner" readonly="1" class="oe_inline" attrs="{'invisible': [('state','in',('draft',))]}"/>
+                    	<field name="number" string="Invoice Number" readonly="1" class="oe_inline" attrs="{'invisible': [('state','in',('draft',))]}"/>
                         <field name="date_invoice"/>
                         <field name="move_name" invisible="1"/>
                         <field name="user_id" groups="base.group_user"/>
@@ -272,7 +272,7 @@
                 		<field name="attention"/>
                     </group>
                     <group>
-                    	<field name="number" string="Invoice Numner" readonly="1" class="oe_inline" attrs="{'invisible': [('state','in',('draft',))]}"/>
+                    	<field name="number" string="Invoice Number" readonly="1" class="oe_inline" attrs="{'invisible': [('state','in',('draft',))]}"/>
                         <field name="date_invoice"/>
                         <field name="move_name" invisible="1"/>
                         <field name="user_id" groups="base.group_user"/>
