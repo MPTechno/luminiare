@@ -23,24 +23,24 @@
 					</div>
 					<div class="col-xs-3 pull-right">
 						<br/><br/><br/>
-						<span style="float:right;">Reg.No..200701388M</span>
+						<span style="float:right;"><b>Reg.No..200701388M</b></span>
 					</div>
 				</div>
 				
 				<div class="col-xs-12 pull-left" style="border-bottom:1px solid black;">
-					<span style="font-size: 12px;">SPACE PLANING</span>
-					<span style="margin-left: 24px; font-size: 12px;">2D 3D DESIGN SOLUTIONS</span>
-					<span style="margin-left: 24px; font-size: 12px;">INTERIOR DESIGN</span>
-					<span style="margin-left: 24px; font-size: 12px;">RETAIL</span>
-					<span style="margin-left: 24px; font-size: 12px;">COMMERCIAL</span>
-					<span style="margin-left: 24px; font-size: 12px;">OFFICES</span>
-					<span style="margin-left: 24px; font-size: 12px;">ARCHITECTURAL</span>
+					<span style="font-size: 12px;"><b>SPACE PLANING</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>2D 3D DESIGN SOLUTIONS</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>INTERIOR DESIGN</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>RETAIL</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>COMMERCIAL</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>OFFICES</b></span>
+					<span style="margin-left: 24px; font-size: 12px;"><b>ARCHITECTURAL</b></span>
 				</div>
 			</div>
 		</template>
 
 		<template id="external_layout_do_footer_idesign">
-			<div class="footer" style="font-family:Calibri; font-size:13px;">
+			<div class="footer" style="font-family:Calibri; font-size:13px; font-weight: bold;">
 				<div class="col-xs-12 pull-left">
 					<br/>
 					<center>
@@ -92,7 +92,7 @@
 								        <th style="border-top:1px solid black;">QTY</th>
 								    </tr>
 							   </thead>
-							   <tbody class="sale_tbody">
+							   <tbody class="sale_tbody" style="font-weight: bold;">
 								    <t t-set="i" t-value="0" />
 								    <tr t-foreach="o.get_order_line(o)" t-as="l">
 								        <t t-set="i" t-value="i+1" />
@@ -123,7 +123,7 @@
 								        <th style="border-top:1px solid black;">QTY</th>
 								    </tr>
 							   </thead>
-							   <tbody class="sale_tbody">
+							   <tbody class="sale_tbody" style="font-weight: bold;">
 								    <t t-set="i" t-value="0" />
 								    <tr t-foreach="o.get_order_line(o)" t-as="l">
 								        <t t-set="i" t-value="i+1" />
@@ -139,16 +139,11 @@
 								    </tr>
 								</tbody>
 							</table>
-							
-							<br/>
-							<br/>
-							<br/>
-							<br/>
 							<br/>
 							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
 								<table class="table table-condensed" style="border-top:none; margin-left:-15px;">
 								    <tr style="border-top:none;" t-foreach="o.get_order_remarks(o)" t-as="r">
-								        <td style="border-top:none;">
+								        <td style="border-top:none; font-weight: bold;">
 								            *<span t-field="r.name"/>
 								        </td>
 								    </tr>
@@ -157,7 +152,7 @@
 							<br/>
 							<br/>
 							<br/>
-							<span>Checked by:</span>
+							<span><b>Checked by:</b></span>
 							<br/>
 							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
 							<br/>
