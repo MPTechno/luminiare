@@ -42,7 +42,34 @@ class InvoiceExtension(models.Model):
 				    remarks_ids_list.append(line_obj.id)
         rec['remarks_ids'] = [(6, 0, remarks_ids_list)]
         return rec
-
+        
+    @api.multi
+    def invoice_validate(self):
+        inoive_tax = self.env['account.invoice.tax']
+        new_tax_ids = []
+        if self.amount_tax:
+            print "\n\n\nself.amount_tax",self.amount_tax
+            account = self.env['account.account'].search([('code','=','204002')])
+            vals = {
+                'account_id':account.id,
+                'name':'Sales Tax',
+                'amount':self.amount_tax,
+                'invoice_id':self.id,
+            }
+            tax_id = inoive_tax.create(vals)
+            new_tax_ids.append(tax_id.id)
+        if self.amount_commission:
+            account = self.env['account.account'].search([('code','=','100000')])
+            vals = {
+                'account_id':account.id,
+                'name':'Referral Fees',
+                'amount':self.amount_commission,
+                'invoice_id':self.id,
+            }
+            tax_id = inoive_tax.create(vals)
+            new_tax_ids.append(tax_id.id)
+        self.write({'tax_line_ids': [(6,0,new_tax_ids)]})
+        return super(InvoiceExtension, self).invoice_validate()
 
 class InvoiceLineExtension(models.Model):
     _inherit = 'account.invoice.line'

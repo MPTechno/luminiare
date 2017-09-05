@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="luminiare_referal_fee_account" model="account.account">
+            <field name="code">100000</field>
+            <field name="name">Referal Fees</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <!--field name="tag_ids" eval="[(6, 0, ref(account.account_tag_operating)])"/-->
+        </record>
+    </data>
+</odoo>
