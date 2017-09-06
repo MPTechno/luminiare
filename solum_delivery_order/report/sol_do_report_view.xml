@@ -24,7 +24,7 @@
 		</template>
 
 		<template id="external_layout_do_footer_sol">
-			<div class="footer" style="font-family:Calibri; font-size:13px;">
+			<div class="footer" style="font-family:Calibri; font-size:16px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
 					<center>
@@ -38,7 +38,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_do_sol">
-		                <div class="page" style="font-family:Calibri; font-size:13px;">
+		                <div class="page" style="font-family:Calibri; font-size:18px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Date</b></td>
@@ -78,7 +78,7 @@
 		                    
 		                    
 							<br/><br/>
-							<span style="font-size:25px;"><center><strong>DELIVERY ORDER</strong></center></span>
+							<span style="font-size:32px;"><center><strong>DELIVERY ORDER</strong></center></span>
 							<br/>
 							<table class="table table-condensed" t-if='o.delivery_type == "led_strip"'>
 								<thead>
