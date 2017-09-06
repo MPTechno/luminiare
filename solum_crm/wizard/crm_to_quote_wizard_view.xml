@@ -18,6 +18,7 @@
 			           			attrs="{'invisible': [('quote_type','!=','led_strip')]}"
 			           			context="{'search_default_partner_id': context.get('partner_id',False),
 			           					  'default_quote_type': quote_type,
+			           					  'readonly_by_pass': True,
 			           					  'default_partner_id': context.get('partner_id',False),
 			           					  'default_team_id': context.get('team_id',False)}"/>
    					  	<button name="quotations_new_attachment" type="object" 
@@ -25,6 +26,7 @@
 			           			attrs="{'invisible': [('quote_type','!=','led_attach')]}"
 			           			context="{'search_default_partner_id': context.get('partner_id',False),
 			           					  'default_quote_type': quote_type,
+			           					  'readonly_by_pass': True,
 			           					  'default_partner_id': context.get('partner_id',False),
 			           					  'default_team_id': context.get('team_id',False)}"/>
 			        	<button special="cancel" string="Cancel" class="oe_highlight"/>

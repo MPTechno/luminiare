@@ -30,13 +30,15 @@
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_strip',
-                              'default_team_id': team_id}"/>
+                              'default_team_id': team_id,
+                              'readonly_by_pass': True}"/>
       		 	<button string="New LED Attachment Quotation" name="quotations_new_attachment" 
       		 		type="object" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
                               'default_partner_id': partner_id,
                               'default_quote_type': 'led_attach',
-                              'default_team_id': team_id}"/>
+                              'default_team_id': team_id,
+                              'readonly_by_pass': True}"/>
               	<button string="Quote" name="%(solum_crm.action_crm_to_quote_wizard)d" type="action" class="oe_highlight"
                     	context="{'partner_id': partner_id,'team_id': team_id}"/>
             </xpath>
