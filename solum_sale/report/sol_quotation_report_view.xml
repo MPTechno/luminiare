@@ -189,7 +189,7 @@
 							</table>
 							
 							<t t-foreach="o.get_line_length(o.order_line)" t-as="l">
-								<br/><br/><br/><span style="color:white;">.</span>
+								<br/><span style="color:white;">.</span>
 							</t>
 							
 							<div class="col-xs-12">
@@ -234,7 +234,7 @@
 									</table>
 								</div>
 							</div>
-							<span style="border-top:1px solid black; margin-top:140px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<span style="border-top:1px solid black; margin-top:130px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
 							<br/>
 		                </div>
 		            </t>

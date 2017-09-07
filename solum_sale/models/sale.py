@@ -16,10 +16,22 @@ class SaleExtenstion(models.Model):
         limit = 7
         line_length = len(line)
         final_limit = limit - line_length
-        if len(line) <= 1:
-            final_limit = 1
+        if len(line) == 1:
+            final_limit = final_limit - 3
         if len(line) == 2:
-            final_limit = 0
+            final_limit = final_limit - 4
+        if len(line) == 3:
+            final_limit = final_limit - 5
+        if len(line) == 4:
+            final_limit = 9
+        if len(line) == 5:
+            final_limit = 6
+        if len(line) == 6:
+            final_limit = 5
+        if len(line) == 7:
+            final_limit = 5
+        if len(line) == 8:
+            final_limit = 5
         return final_limit
     
     def get_formated_date(self,date_order):
