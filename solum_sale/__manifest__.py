@@ -13,6 +13,7 @@
 		'views/sale_view.xml',
 		'views/assets.xml',
 		'views/report_menu.xml',
+		'data/mail_template_data.xml',
 		'report/sol_quotation_report_view.xml',
 		'report/idesign_quotation_report_view.xml',
     ],

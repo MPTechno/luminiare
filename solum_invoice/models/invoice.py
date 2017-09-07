@@ -4,6 +4,13 @@ from odoo import fields, models, exceptions, api, _
 class InvoiceExtension(models.Model):
     _inherit = 'account.invoice'
     
+    
+    @api.model
+    def _default_payment_term(self):
+        payment_term = self.env['account.payment.term'].search([('name','=','Cash/Cheque/Bank Transfer')])
+        payment_term_id = payment_term and payment_term.id or False
+        return payment_term_id
+    
     inv_type = fields.Selection([
                                    ('led_strip','LED Strip Invoice'),
                                    ('led_attach','LED Attachments Invoice')
@@ -15,6 +22,76 @@ class InvoiceExtension(models.Model):
     remarks_ids = fields.One2many('invoice.remarks','invoice_id','Remarks')
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
+    payment_term_id = fields.Many2one('account.payment.term', string='Payment Terms', oldname='payment_term',
+        readonly=True, states={'draft': [('readonly', False)]},
+        help="If you use payment terms, the due date will be computed automatically at the generation "
+             "of accounting entries. If you keep the payment term and the due date empty, it means direct payment. "
+             "The payment term may compute several due dates, for example 50% now, 50% in one month.",default=_default_payment_term)
+    
+    
+    @api.onchange('partner_id', 'company_id')
+    def _onchange_partner_id(self):
+        account_id = False
+        payment_term_id = False
+        fiscal_position = False
+        bank_id = False
+        company_id = self.company_id.id
+        p = self.partner_id if not company_id else self.partner_id.with_context(force_company=company_id)
+        type = self.type
+        if p:
+            rec_account = p.property_account_receivable_id
+            pay_account = p.property_account_payable_id
+            if not rec_account and not pay_account:
+                action = self.env.ref('account.action_account_config')
+                msg = _('Cannot find a chart of accounts for this company, You should configure it. \nPlease go to Account Configuration.')
+                raise RedirectWarning(msg, action.id, _('Go to the configuration panel'))
+
+            if type in ('out_invoice', 'out_refund'):
+                account_id = rec_account.id
+                payment_term_id = p.property_payment_term_id.id
+            else:
+                account_id = pay_account.id
+                payment_term_id = p.property_supplier_payment_term_id.id
+            addr = self.partner_id.address_get(['delivery'])
+            fiscal_position = self.env['account.fiscal.position'].get_fiscal_position(self.partner_id.id, delivery_id=addr['delivery'])
+
+            bank_id = p.bank_ids and p.bank_ids.ids[0] or False
+
+            # If partner has no warning, check its company
+            if p.invoice_warn == 'no-message' and p.parent_id:
+                p = p.parent_id
+            if p.invoice_warn != 'no-message':
+                # Block if partner only has warning but parent company is blocked
+                if p.invoice_warn != 'block' and p.parent_id and p.parent_id.invoice_warn == 'block':
+                    p = p.parent_id
+                warning = {
+                    'title': _("Warning for %s") % p.name,
+                    'message': p.invoice_warn_msg
+                    }
+                if p.invoice_warn == 'block':
+                    self.partner_id = False
+                return {'warning': warning}
+
+        self.account_id = account_id
+        #self.payment_term_id = payment_term_id
+        self.fiscal_position_id = fiscal_position
+
+        if type in ('in_invoice', 'in_refund'):
+            self.partner_bank_id = bank_id
+    
+    
+    @api.model
+    def get_line_length(self,line):
+        limit = 7
+        line_length = len(line)
+        final_limit = limit - line_length - 1
+        if len(line) <= 1:
+            final_limit = 1
+        if len(line) == 2:
+            final_limit = 0
+        if len(line) >= 7:
+            final_limit = 17
+        return final_limit
     
     @api.onchange('payment_term_id')
     def _payment_term_id(self):
@@ -49,7 +126,7 @@ class InvoiceExtension(models.Model):
         new_tax_ids = []
         if self.amount_tax:
             print "\n\n\nself.amount_tax",self.amount_tax
-            account = self.env['account.account'].search([('code','=','204002')])
+            account = self.env['account.account'].search([('code','=','204002')]) # 101300
             vals = {
                 'account_id':account.id,
                 'name':'Sales Tax',

@@ -18,7 +18,7 @@
 		<template id="external_layout_do_header_sol">
 			<div class="header">
 				<div class="col-xs-12 pull-left">
-					<center><img src='/solum_delivery_order/static/src/images/sol_luminaire.jpeg' style="width:275px;height:100px;"/></center>
+					<center><img src='/solum_delivery_order/static/src/images/sol_luminaire.jpeg' style="width:300px;height:110px;"/></center>
 				</div>
 			</div>
 		</template>

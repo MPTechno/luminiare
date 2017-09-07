@@ -10,6 +10,18 @@ from odoo.exceptions import UserError
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
     
+    
+    @api.model
+    def get_line_length(self,line):
+        limit = 7
+        line_length = len(line)
+        final_limit = limit - line_length
+        if len(line) <= 1:
+            final_limit = 1
+        if len(line) == 2:
+            final_limit = 0
+        return final_limit
+    
     def get_formated_date(self,date_order):
         if date_order:
             date = str(date_order).split(' ')
@@ -54,6 +66,13 @@ class SaleExtenstion(models.Model):
                 self.write({'state':'idle'})
         self.days_sice_state_change = diff_time
     
+    
+    @api.model
+    def _default_payment_term(self):
+        payment_term_id = self.env['account.payment.term'].search([('name','=','Cash/Cheque/Bank Transfer')])
+        payment_term_id = payment_term_id and payment_term_id.id or False
+        return payment_term_id
+    
     quote_type = fields.Selection([('led_strip','LED Strip Quotation'),('led_attach','LED Attachments Quotaion')],
                                    string="Quotaion Type",readonly=True)
     state_when_idle = fields.Char(string="State when set Idle",readonly=True)
@@ -70,6 +89,7 @@ class SaleExtenstion(models.Model):
     experation_terms_ids = fields.Many2one('experation.terms','Experation Terms')
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
+    payment_term_id = fields.Many2one('account.payment.term', string='Payment Terms',oldname='payment_term',default=_default_payment_term)
     
     
     @api.model
@@ -93,6 +113,42 @@ class SaleExtenstion(models.Model):
 				    remarks_ids_list.append(line_obj.id)
         rec['remarks_ids'] = [(6, 0, remarks_ids_list)]
         return rec
+    
+    @api.multi
+    @api.onchange('partner_id')
+    def onchange_partner_id(self):
+        """
+        Update the following fields when the partner is changed:
+        - Pricelist
+        - Payment term
+        - Invoice address
+        - Delivery address
+        """
+        if not self.partner_id:
+            self.update({
+                'partner_invoice_id': False,
+                'partner_shipping_id': False,
+                #'payment_term_id': False,
+                'fiscal_position_id': False,
+            })
+            return
+
+        addr = self.partner_id.address_get(['delivery', 'invoice'])
+        values = {
+            'pricelist_id': self.partner_id.property_product_pricelist and self.partner_id.property_product_pricelist.id or False,
+            #'payment_term_id': self.partner_id.property_payment_term_id and self.partner_id.property_payment_term_id.id or False,
+            'partner_invoice_id': addr['invoice'],
+            'partner_shipping_id': addr['delivery'],
+        }
+        if self.env.user.company_id.sale_note:
+            values['note'] = self.with_context(lang=self.partner_id.lang).env.user.company_id.sale_note
+
+        if self.partner_id.user_id:
+            values['user_id'] = self.partner_id.user_id.id
+        if self.partner_id.team_id:
+            values['team_id'] = self.partner_id.team_id.id
+        self.update(values)
+    
     
     @api.multi
     def action_view_delivery(self):

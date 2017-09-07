@@ -18,7 +18,7 @@
 		<template id="external_layout_inv_header_sol">
 			<div class="header">
 				<div class="col-xs-12 pull-left">
-					<center><img src='/solum_sale/static/src/images/sol_luminaire.jpeg' style="width:275px;height:100px;"/></center>
+					<center><img src='/solum_sale/static/src/images/sol_luminaire.jpeg' style="width:300px;height:110px;"/></center>
 				</div>
 			</div>
 		</template>
@@ -89,6 +89,14 @@
 									<td style="width:14cm; height:20px;"><b>Approved by</b></td>
 									<td style="width:40cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.approved_by" t-field="o.approved_by.name"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"></td>
+									<td style="width:140cm; height:20px;"></td>
+									<td style="width:14cm; height:20px;"><b t-if="o.reference_no">Reference No</b></td>
+									<td style="width:40cm; height:20px;">
+										<b t-if="o.reference_no" >:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.reference_no"/></b>
 									</td>
 								</tr>
 							</table>
@@ -176,6 +184,11 @@
 								    </tr>
 								</tbody>
 							</table>
+							
+							<t t-foreach="o.get_line_length(o.invoice_line_ids)" t-as="l">
+								<br/><span style="color:white;">.</span>
+							</t>
+							
 							<div class="col-xs-12">
 								<div class="col-xs-8">
 									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
@@ -218,7 +231,7 @@
 									</table>
 								</div>
 							</div>
-							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<span style="border-top:1px solid black; margin-top:130px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
 							<br/>
 		                </div>
 		            </t>

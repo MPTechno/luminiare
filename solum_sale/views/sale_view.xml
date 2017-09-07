@@ -33,10 +33,10 @@
                     type="action" context="{'default_advance_payment_method': 'percentage'}"
                     attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="draft" class="btn-primary"/>
-                <button name="print_quotation" string="Print" type="object" states="draft" class="btn-primary"/>
+                <button name="print_quotation" string="Print" type="object" states="draft" class="btn-primary" invisible="1"/>
                 <button name="action_confirm" states="sent" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" />
                 <button name="action_confirm" states="draft" string="Confirm Sale" class="o_sale_confirm" type="object" />
-                <button name="print_quotation" string="Print" type="object" states="sent,sale"/>
+                <button name="print_quotation" string="Print" type="object" states="sent,sale" invisible="1"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
                 <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
                 <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>
@@ -365,10 +365,10 @@
                     type="action" context="{'default_advance_payment_method': 'percentage'}"
                     attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="draft" class="btn-primary"/>
-                <button name="print_quotation" string="Print" type="object" states="draft" class="btn-primary"/>
+                <button name="print_quotation" string="Print" type="object" states="draft" class="btn-primary" invisible="1"/>
                 <button name="action_confirm" states="sent" string="Confirm Sale" class="btn-primary o_sale_confirm" type="object" />
                 <button name="action_confirm" states="draft" string="Confirm Sale" class="o_sale_confirm" type="object" />
-                <button name="print_quotation" string="Print" type="object" states="sent,sale"/>
+                <button name="print_quotation" string="Print" type="object" states="sent,sale" invisible="1"/>
                 <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
                 <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
                 <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>

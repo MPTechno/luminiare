@@ -14,6 +14,7 @@
 		'report/idesign_invoice_report_view.xml',
 		'report/sol_commission_invoice_report_view.xml',
 		'data/data.xml',
+		'data/invoice_action_data.xml',
     ],
     'description': '''Invoice Customization''',
     'demo': [],
