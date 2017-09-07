@@ -58,9 +58,9 @@
 									<td style="width:140cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/></b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>Terms</b></td>
+									<td style="width:14cm; height:20px;"><b>Currency</b></td>
 									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.currency_id" t-field="o.currency_id.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
@@ -68,9 +68,9 @@
 									<td style="width:140cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.sale_project_id" t-field="o.sale_project_id.name"/></b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>Currency</b></td>
+									<td style="width:14cm; height:20px;"><b>Prepared by</b></td>
 									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.currency_id" t-field="o.currency_id.name"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.prepared_by" t-field="o.prepared_by.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
@@ -78,25 +78,25 @@
 									<td style="width:140cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>Prepared by</b></td>
-									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.prepared_by" t-field="o.prepared_by.name"/></b>
-									</td>
-								</tr>
-								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"></td>
-									<td style="width:140cm; height:20px;"></td>
 									<td style="width:14cm; height:20px;"><b>Approved by</b></td>
 									<td style="width:40cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.approved_by" t-field="o.approved_by.name"/></b>
 									</td>
 								</tr>
+								<tr style="border:none; height:20px;" t-if="o.reference_no">
+									<td style="width:8cm; height:20px;"></td>
+									<td style="width:140cm; height:20px;"></td>
+									<td style="width:14cm; height:20px;"><b>Ref. No</b></td>
+									<td style="width:40cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.reference_no"/></b>
+									</td>
+								</tr>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"></td>
 									<td style="width:140cm; height:20px;"></td>
-									<td style="width:14cm; height:20px;"><b t-if="o.reference_no">Reference No</b></td>
+									<td style="width:14cm; height:20px;"><b>Terms</b></td>
 									<td style="width:40cm; height:20px;">
-										<b t-if="o.reference_no" >:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.reference_no"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
 								</tr>
 							</table>
