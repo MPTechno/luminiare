@@ -24,7 +24,7 @@
 		</template>
 
 		<template id="external_layout_inv_commission_footer_sol">
-			<div class="footer" style="font-family:Calibri; font-size:16px;">
+			<div class="footer" style="font-family:Calibri (Body); font-size:16px;">
 				<div class="col-xs-12 pull-left" style="background-color: #FF8C00;">
 					<br/>
 					<center>
@@ -41,7 +41,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_invoice_commission_sol">
-		                <div class="page" style="font-family:Calibri; font-size:18px;">
+		                <div class="page" style="font-family:Calibri (Body); font-size:18px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Date</b></td>
@@ -185,7 +185,7 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_line_length(o.invoice_line_ids)" t-as="l">
+							<t t-foreach="o.get_commission_line_length(o.invoice_line_ids)" t-as="l">
 								<br/><span style="color:white;">.</span>
 							</t>
 							

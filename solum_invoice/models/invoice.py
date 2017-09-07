@@ -84,11 +84,36 @@ class InvoiceExtension(models.Model):
     def get_line_length(self,line):
         limit = 7
         line_length = len(line)
-        final_limit = limit - line_length - 1
-        if len(line) <= 1:
-            final_limit = 1
+        final_limit = limit - line_length
         if len(line) == 2:
-            final_limit = 0
+            final_limit = final_limit - 1
+        if len(line) == 3:
+            final_limit = final_limit - 2
+        if len(line) == 4:
+            final_limit = final_limit - 3
+        if len(line) == 5:
+            final_limit = final_limit - 4
+        if len(line) == 6:
+            final_limit = final_limit - 5
+        if len(line) >= 7:
+            final_limit = 17
+        return final_limit
+    
+    @api.model
+    def get_commission_line_length(self,line):
+        limit = 7
+        line_length = len(line)
+        final_limit = limit - line_length - 2
+        if len(line) == 2:
+            final_limit = final_limit - 1
+        if len(line) == 3:
+            final_limit = final_limit - 2
+        if len(line) == 4:
+            final_limit = final_limit - 3
+        if len(line) == 5:
+            final_limit = final_limit - 4
+        if len(line) == 6:
+            final_limit = final_limit - 5
         if len(line) >= 7:
             final_limit = 17
         return final_limit
