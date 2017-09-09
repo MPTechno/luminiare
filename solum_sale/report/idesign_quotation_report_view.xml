@@ -40,7 +40,7 @@
 		</template>
 
 		<template id="external_layout_footer_idesign">
-			<div class="footer" style="font-family:Calibri (Body); font-size:13px; font-weight: bold;">
+			<div class="footer" style="font-family:Calibri (Body); font-size:13px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
 					<center>
@@ -59,9 +59,19 @@
 		                <div class="page" style="font-family:Calibri (Body); font-size:13px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Date</b></td>
+									<td style="width:8cm; height:20px;"><b>DATE</b></td>
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.date_order)"/></b>
+									</td>
+									<td style="width:8cm; height:20px;"><b>QUOTATION</b></td>
+									<td style="width:30cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.name"/></b>
+									</td>
+								</tr>
+								<tr style="border:none; height:20px;">
+									<td style="width:8cm; height:20px;"><b>ATTN</b></td>
+									<td style="width:170cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
 									<td style="width:8cm; height:20px;"><b>Currency</b></td>
 									<td style="width:30cm; height:20px;">
@@ -69,97 +79,33 @@
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Company</b></td>
+									<td style="width:8cm; height:20px;"><b>CUSTOMER</b></td>
 									<td style="width:170cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/>
+										<br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/> &amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
+										
+								     	</b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>Name</b></td>
+									<td style="width:8cm; height:20px;"><b>TERMS</b></td>
 									<td style="width:30cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name_led_strip" t-field="o.name_led_strip.name"/></b>
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
 								</tr>
-								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Project</b></td>
-									<td style="width:170cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.sale_project_id" t-field="o.sale_project_id.name"/></b>
-									</td>
-									<td style="width:8cm; height:20px;"><b>Email</b></td>
-									<td style="width:30cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.email_led_strip" t-field="o.email_led_strip"/></b>
-									</td>
-								</tr>
-								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Attention</b></td>
-									<td style="width:170cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
-									</td>
-									<td></td>
-									<td></td>
-								</tr>
+								
 							</table>
 							
 							<br/><br/>
 							<span style="font-size:25px;"><center><strong>QUOTATION</strong></center></span>
 							<br/>
-							<table class="table table-condensed" t-if='o.quote_type == "led_strip"'>
-								<thead>
-								    <tr>
-								        <th style="border-top:1px solid black;">ITEM</th>
-								        <th style="border-top:1px solid black;">PRODUCT</th>
-								        <th style="border-top:1px solid black;">PICTURE</th>
-								        <th style="border-top:1px solid black;">AREA</th>
-								        <th style="border-top:1px solid black;">DESCRIPTION</th>
-								        <th style="border-top:1px solid black;">LOCATION</th>
-								        <th style="border-top:1px solid black;">UNIT PRICE</th>
-								        <th style="border-top:1px solid black;">QTY</th>
-								        <th style="border-top:1px solid black;">NETT PRICE</th>
-								        <th style="border-top:1px solid black;">AMOUNT</th>
-								    </tr>
-							   </thead>
-							   <tbody class="sale_tbody" style="font-weight: bold;">
-								    <t t-set="i" t-value="0" />
-								    <tr t-foreach="o.order_line" t-as="l">
-								        <t t-set="i" t-value="i+1" />
-								        <td>
-								           <span t-esc="i"/>
-								        </td>
-								        <td>
-								           <span t-if="l.product_id" t-field="l.product_id.name"/>
-								        </td>
-								        <td class="text-center">
-								           <span t-field="l.product_id.image_small" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/>
-								        </td>
-								        <td>
-								           <span t-if="l.area_id" t-field="l.area_id.name"/>
-								        </td>
-								        <td>
-								           <span t-if="l.name" t-field="l.name"/>
-								        </td>
-								        <td>
-								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_unit"/>
-								        </td>
-								        <td>
-								           <span t-esc="int(l.product_uom_qty)"/> <span t-if="l.product_uom" t-field="l.product_uom.name"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_subtotal"/>
-								        </td>
-								        <td>
-								           <span t-esc="'%.2f'% l.price_subtotal"/>
-								        </td>
-								    </tr>
-								</tbody>
-							</table>
 							
-							<table class="table table-condensed" t-if='o.quote_type == "led_attach"'>
+							<table class="table table-condensed">
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
-								        <th style="border-top:1px solid black;">MODEL</th>
-								        <th style="border-top:1px solid black;">PICTURE</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
@@ -172,12 +118,6 @@
 								        <t t-set="i" t-value="i+1" />
 								        <td>
 								           <span t-esc="i"/>
-								        </td>
-								        <td>
-								           <span t-if="l.product_id" t-field="l.product_id.name"/>
-								        </td>
-								        <td class="text-center">
-								           <span t-field="l.product_id.image_small" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/>
 								        </td>
 								        <td>
 								           <span t-if="l.name" t-field="l.name"/>
@@ -194,18 +134,7 @@
 								    </tr>
 								</tbody>
 							</table>
-							<div class="col-xs-12">
-								<div class="col-xs-8">
-									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
-									    <tr style="border-top:none;" t-foreach="o.remarks_ids" t-as="r">
-									        <td style="border-top:none; font-weight: bold;">
-									            *<span t-if="r.name" t-field="r.name.name"/>
-									        </td>
-									    </tr>
-									</table>
-								</div>
-							</div>
-							<div class="col-xs-12" style="border-bottom:1px solid black; border-top:1px solid black;">
+							<div class="col-xs-12" style="border-top:1px solid black; margin-top: 30px;">
 								<div class="col-xs-4 pull-right" style="height:109px;">
 									<table class="table table-condensed" style="border-top:none;">
 									    <tr style="border-top:none;">
@@ -236,8 +165,33 @@
 									</table>
 								</div>
 							</div>
-							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
-							<br/>
+							<b><span style="margin-top: 30px;">SGD:</span> <span t-esc="o.convert((o.amount_untaxed+o.amount_tax-o.amount_discount),'SGD')"/></b><br/><br/>
+							
+							<span style="margin-top: 30px;"><b>TERMS OF PAYMENT: </b></span><br/>
+							<div class="col-xs-12">
+								<div class="col-xs-8">
+									<table class="table table-condensed" style="border-top:none; margin-left:-35px;">
+									    <t t-set="i" t-value="0" />
+									    <tr style="border-top:none;" t-foreach="o.remarks_ids" t-as="r">
+									        <t t-set="i" t-value="i+1" />
+									        <td style="border-top:none; font-weight: bold;">
+									           <span t-esc="i"/>. <span t-if="r.name" t-field="r.name.name"/>
+									        </td>
+									    </tr>
+									</table>
+								</div>
+							</div>
+							<span style="float: left; margin-top: 30px;"><b>If the mention above is agreeable, please kindly sign and stamp and return the duplicate copy of this quotation and send back to us</b></span>
+							<span style="float: left; margin-top: 30px;"><b>Agreed &amp; accept by:</b></span>
+							
+							<div class="col-xs-12" style="margin-top: 100px;">
+								<div class="col-xs-8">
+							           <b><span style="float: left; border-top:1px solid black; margin-left: -35px;">NIKE GLOBAL TRADING B.V. SINGAPORE BRANCH</span></b>
+								</div>
+								<div class="col-xs-4 pull-right">
+							           <b><span style="float: left; border-top:1px solid black; margin-left: 80px;"> IDESIGNLINE PTE LTD</span></b>
+								</div>
+							</div>
 		                </div>
 		            </t>
 		        </t>

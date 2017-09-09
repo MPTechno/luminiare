@@ -16,6 +16,7 @@
 		'data/mail_template_data.xml',
 		'report/sol_quotation_report_view.xml',
 		'report/idesign_quotation_report_view.xml',
+		'report/idesign_do_report_view.xml',
     ],
     "qweb": [
         'static/src/xml/widget.xml',

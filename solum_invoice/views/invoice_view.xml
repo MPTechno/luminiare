@@ -96,7 +96,9 @@
                                     domain="[('company_id', '=', parent.company_id)]" invisible="1"/>
                                 <field name="analytic_tag_ids" 
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
-                                <field name="price_unit" readonly="1"/>
+                                <!--field name="price_unit" readonly="1"/-->
+                                <field name="is_service" invisible='1'/>
+                                <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
                                 <field name="quantity"/>
                                 <field name="uom_id" groups="product.group_uom"/>
                                 <field name="discount" groups="sale.group_discount_per_so_line" invisible="1"/>
@@ -306,7 +308,9 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <field name="quantity"/>
                                 <field name="uom_id" groups="product.group_uom"/>
-                                <field name="price_unit" readonly="1"/>
+                                <!--field name="price_unit" readonly="1"/-->
+                                <field name="is_service" invisible='1'/>
+                                <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
                                 <field name="discount" groups="sale.group_discount_per_so_line" invisible="1"/>
                                 <field name="invoice_line_tax_ids" widget="many2many_tags" context="{'type':parent.type}"
                                     domain="[('type_tax_use','=','sale'),('company_id', '=', parent.company_id)]" 
@@ -431,5 +435,6 @@
               name="LED Attachment Invoices" 
               action="action_led_attach_invoices" 
               parent="account.menu_finance_receivables"/>
+              
    
 </odoo>   

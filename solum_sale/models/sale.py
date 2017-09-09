@@ -6,10 +6,17 @@ import datetime
 from odoo import api, fields, models, exceptions, api, _
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, float_compare
 from odoo.exceptions import UserError
+from odoo.tools import amount_to_text_en
+
 
 class SaleExtenstion(models.Model):
     _inherit = 'sale.order'
     
+    
+    def convert(self, amount, cur):
+        amount_in_words = amount_to_text_en.amount_to_text(amount, 'en', cur)
+        words = amount_in_words.upper()
+        return words
     
     @api.model
     def get_line_length(self,line):
@@ -240,6 +247,7 @@ class SaleOrderLineExtension(models.Model):
     length = fields.Float('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
+    is_service = fields.Boolean(string="Is Service")
                                  
     
     @api.multi
@@ -268,6 +276,10 @@ class SaleOrderLineExtension(models.Model):
             name += product.description_sale
         vals['name'] = name
 
+        if product.type == 'service':
+            vals['is_service'] = True
+        else:
+        	vals['is_service'] = False
         self._compute_tax_id()
 
         if self.order_id.pricelist_id and self.order_id.partner_id:

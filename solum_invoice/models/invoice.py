@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, exceptions, api, _
+from odoo.tools import amount_to_text_en
 
 class InvoiceExtension(models.Model):
     _inherit = 'account.invoice'
     
+    
+    def convert(self, amount, cur):
+        amount_in_words = amount_to_text_en.amount_to_text(amount, 'en', cur)
+        words = amount_in_words.upper()
+        return words
     
     @api.model
     def _default_payment_term(self):
@@ -95,8 +101,10 @@ class InvoiceExtension(models.Model):
             final_limit = final_limit - 4
         if len(line) == 6:
             final_limit = final_limit - 5
-        if len(line) >= 7:
-            final_limit = 17
+        if len(line) == 7:
+            final_limit = final_limit - 6
+        if len(line) >= 8:
+            final_limit = 19
         return final_limit
     
     @api.model
@@ -114,8 +122,10 @@ class InvoiceExtension(models.Model):
             final_limit = final_limit - 4
         if len(line) == 6:
             final_limit = final_limit - 5
-        if len(line) >= 7:
-            final_limit = 17
+        if len(line) == 7:
+            final_limit = final_limit - 6
+        if len(line) >= 8:
+            final_limit = 19
         return final_limit
     
     @api.onchange('payment_term_id')
@@ -151,7 +161,7 @@ class InvoiceExtension(models.Model):
         new_tax_ids = []
         if self.amount_tax:
             print "\n\n\nself.amount_tax",self.amount_tax
-            account = self.env['account.account'].search([('code','=','204002')]) # 101300
+            account = self.env['account.account'].search([('code','=','101300')]) #204002
             vals = {
                 'account_id':account.id,
                 'name':'Sales Tax',
@@ -189,6 +199,7 @@ class InvoiceLineExtension(models.Model):
         currency = self.invoice_id.currency_id
         type = self.invoice_id.type
 
+        
         if not part:
             warning = {
                     'title': _('Warning!'),
@@ -206,6 +217,11 @@ class InvoiceLineExtension(models.Model):
             else:
                 product = self.product_id
 
+            if self.product_id.type == 'service':
+                self.is_service = True
+            else:
+                self.is_service = False 
+            
             self.name = ''
             account = self.get_invoice_line_account(type, product, fpos, company)
             if account:
@@ -280,6 +296,7 @@ class InvoiceLineExtension(models.Model):
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Float('Length(MM)')
     colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
+    is_service = fields.Boolean(string="Is Service")
     
 
 class InvoiceRemarks(models.Model):
@@ -288,3 +305,4 @@ class InvoiceRemarks(models.Model):
     
     name = fields.Many2one('remarks.remarks','Remarks')
     invoice_id = fields.Many2one('account.invoice','Invoice')
+    

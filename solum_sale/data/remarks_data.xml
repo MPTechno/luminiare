@@ -47,6 +47,10 @@
             <field name="type">led_strip</field>
         </record>
         
+        <record id="strip_remarks_idesign" model="remarks.remarks">
+            <field name="name">FULL PAYMENT UPON COMPLETION</field>
+        </record>
+        
         <record id="white_colour" model="colour.colour">
             <field name="name">White</field>
         </record>
