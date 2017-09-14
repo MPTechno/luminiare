@@ -171,7 +171,7 @@ class InvoiceExtension(models.Model):
             tax_id = inoive_tax.create(vals)
             new_tax_ids.append(tax_id.id)
         if self.amount_commission:
-            account = self.env['account.account'].search([('code','=','100000')])
+            account = self.env['account.account'].search([('code','=','502006')]) #100000
             vals = {
                 'account_id':account.id,
                 'name':'Referral Fees',
