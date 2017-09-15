@@ -161,7 +161,7 @@ class InvoiceExtension(models.Model):
         new_tax_ids = []
         if self.amount_tax:
             print "\n\n\nself.amount_tax",self.amount_tax
-            account = self.env['account.account'].search([('code','=','101300')]) #204002
+            account = self.env['account.account'].search([('code','=','204002')]) #101300
             vals = {
                 'account_id':account.id,
                 'name':'Sales Tax',
