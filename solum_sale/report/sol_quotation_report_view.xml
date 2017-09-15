@@ -154,6 +154,7 @@
 								        <th style="border-top:1px solid black;">MODEL</th>
 								        <th style="border-top:1px solid black;">PICTURE</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
+								        <th style="border-top:1px solid black;">COLOUR</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
@@ -174,6 +175,9 @@
 								        </td>
 								        <td>
 								           <span t-if="l.name" t-field="l.name"/>
+								        </td>
+								        <td>
+								           <span t-if="l.colour_id" t-field="l.colour_id.name"/>
 								        </td>
 								        <td>
 								           <span t-esc="int(l.product_uom_qty)"/> <span t-if="l.product_uom" t-field="l.product_uom.name"/>

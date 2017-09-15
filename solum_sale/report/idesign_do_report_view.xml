@@ -88,6 +88,7 @@
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
+								        <th style="border-top:1px solid black;">COLOUR</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								    </tr>
 							   </thead>
@@ -102,13 +103,18 @@
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
 								        <td>
+								           <span t-if="l.colour_id" t-field="l.colour_id.name"/>
+								        </td>
+								        <td>
 								           <span t-esc="int(l.product_uom_qty)"/>
 								        </td>
 								    </tr>
 								</tbody>
 							</table>
 							<br/>
-							<span style="margin-top:100px;"><b>*Note all items are to be checked and verified on day of delivery.</b></span>
+							<div style="margin-top:100px; border-bottom: solid; border-bottom-style: double;">
+								<span><b>*Note all items are to be checked and verified on day of delivery.</b></span>
+							</div>
 							<br/>
 							<br/>
 							<br/>
