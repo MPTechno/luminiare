@@ -56,7 +56,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_invoice_idesign">
-		                <div class="page" style="font-family:Calibri (Body); font-size:13px;">
+		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>DATE</b></td>
@@ -100,14 +100,13 @@
 		                    
 		                    
 							<br/><br/>
-							<span style="font-size:25px;"><center><strong>INVOICE</strong></center></span>
+							<span style="font-size:30px;"><center><strong>INVOICE</strong></center></span>
 							<br/>
 							<table class="table table-condensed">
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
 								        <th style="border-top:1px solid black;">DESCRIPTION</th>
-								        <th style="border-top:1px solid black;">COLOUR</th>
 								        <th style="border-top:1px solid black;">QTY</th>
 								        <th style="border-top:1px solid black;">UNIT PRICE</th>
 								        <th style="border-top:1px solid black;">AMOUNT</th>
@@ -124,9 +123,6 @@
 								           <span t-if="l.name" t-field="l.name"/>
 								        </td>
 								        <td>
-								           <span t-if="l.colour_id" t-field="l.colour_id.name"/>
-								        </td>
-								        <td>
 								           <span t-esc="int(l.quantity)"/> <span t-if="l.uom_id" t-field="l.uom_id.name"/>
 								        </td>
 								        <td>
@@ -141,27 +137,27 @@
 							<div class="col-xs-12" style="border-top:1px solid black;">
 								<div class="col-xs-4 pull-right" style="height:109px;">
 									<table class="table table-condensed" style="border-top:none;">
-									    <tr style="border-top:none;">
-									        <td style="border-top:none;"><strong>SUB-TOTAL</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold;">
+									    <tr style="border-top:none; line-height:10px;">
+									        <td style="border-top:none; line-height:10px;"><strong>SUB-TOTAL</strong></td>
+									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:10px;">
 									            <span t-field="o.amount_untaxed"/>
 									        </td>
 									    </tr>
-									    <tr style="border-top:none;">
-									        <td style="border-top:none;"><strong>DISCOUNT</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold;">
+									    <tr style="border-top:none; line-height:10px;">
+									        <td style="border-top:none; line-height:10px;"><strong>DISCOUNT</strong></td>
+									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:10px;">
 									            <span t-field="o.amount_discount"/>
 									        </td>
 									    </tr>
-									    <tr style="border-top:none;">
-									        <td style="border-top:none;"><strong>TAX</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold;">
+									    <tr style="border-top:none; line-height:10px;">
+									        <td style="border-top:none; line-height:10px;"><strong>TAX</strong></td>
+									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:10px;">
 									            <span t-field="o.amount_tax"/>
 									        </td>
 									    </tr>
-									    <tr style="border-top:none;">
-									        <td style="border-top:none;"><strong>GRAND TOTAL</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold;">
+									    <tr style="border-top:none; line-height:10px;">
+									        <td style="border-top:none; line-height:10px;"><strong>GRAND TOTAL</strong></td>
+									        <td class="text-right" style="border-top:solid; border-bottom:solid; border-bottom-style: double; font-weight: bold; line-height:10px;">
 									            <span t-if="o.currency_id" t-field="o.currency_id.symbol"/> 
 									            <span t-esc="'%.2f'% (o.amount_untaxed+o.amount_tax-o.amount_discount)"/>
 									        </td>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         
         <record id="attachment_remarks_cdi" model="remarks.remarks">
             <field name="name">Complimentary Delivery Included</field>
@@ -49,10 +49,11 @@
         
         <record id="strip_remarks_idesign" model="remarks.remarks">
             <field name="name">FULL PAYMENT UPON COMPLETION</field>
+            <field name="type">idesign</field>
         </record>
         
         <record id="white_colour" model="colour.colour">
-            <field name="name">White</field>
+            <field name="name">WHITE</field>
         </record>
         
     </data>

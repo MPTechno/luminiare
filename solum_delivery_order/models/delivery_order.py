@@ -8,11 +8,36 @@ class StockPicking(models.Model):
     
     delivery_type = fields.Selection([
                        ('led_strip','LED Strip Delivery Order'),
-                       ('led_attach','LED Attachments Delivery Order')
+                       ('led_attach','LED Attachments Delivery Order'),
+                       ('idesign','iDesign Delivery Order')
                      ],string="Delivery Type")
     sale_project_id = fields.Many2one('sale.project','Project')
     attention = fields.Char("Attention")
     
+    
+    @api.model
+    def get_line_length(self,obj):
+        sale_order_pool = self.env['sale.order']
+    	sale_order_ids = sale_order_pool.search([('name','=',obj.origin)])
+        limit = 7
+        line = sale_order_ids.order_line
+        line_length = len(line)
+        final_limit = limit - line_length
+        if len(line) == 2:
+            final_limit = final_limit - 1
+        if len(line) == 3:
+            final_limit = final_limit - 2
+        if len(line) == 4:
+            final_limit = final_limit - 3
+        if len(line) == 5:
+            final_limit = final_limit - 4
+        if len(line) == 6:
+            final_limit = final_limit - 5
+        if len(line) == 7:
+            final_limit = final_limit - 6
+        if len(line) >= 8:
+            final_limit = 22
+        return final_limit
     
     def get_formated_date(self,min_date):
         if min_date:

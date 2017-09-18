@@ -21,16 +21,5 @@
             name="solum_sale.idesign_quotation_report_template_id"
             file="solum_sale.idesign_quotation_report_template_id" 
             />
-            
-        <!--IDesign DO Report-->
-     	<report 
-        	id="idesign_delivery_order_menu_id" 
-        	string="IDesign Line DO" 
-        	model="sale.order" 
-            report_type="qweb-pdf"
-            name="solum_sale.idesign_delivery_order_template_id"
-            file="solum_sale.idesign_delivery_order_template_id" 
-            />
-            
 	</data>
 </openerp>

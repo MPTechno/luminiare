@@ -92,7 +92,7 @@ class SaleExtenstion(models.Model):
         payment_term_id = payment_term_id and payment_term_id.id or False
         return payment_term_id
     
-    quote_type = fields.Selection([('led_strip','LED Strip Quotation'),('led_attach','LED Attachments Quotaion')],
+    quote_type = fields.Selection([('led_strip','LED Strip Quotation'),('led_attach','LED Attachments Quotaion'),('idesign','iDesign Quotaion')],
                                    string="Quotaion Type",readonly=True)
     state_when_idle = fields.Char(string="State when set Idle",readonly=True)
     attention = fields.Char("Attention")
@@ -125,6 +125,13 @@ class SaleExtenstion(models.Model):
 				    remarks_ids_list.append(line_obj.id)
 		    if rec['quote_type'] == 'led_attach':
 				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_attach'),('type','=','Both')]):
+				    remarks_line_vals = {
+				        'name': remarks_obj and remarks_obj.id or False,
+				        }
+				    line_obj = self.env['sale.remarks'].create(remarks_line_vals)
+				    remarks_ids_list.append(line_obj.id)
+		    if rec['quote_type'] == 'idesign':
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','idesign')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }
@@ -354,7 +361,7 @@ class RemarksRemarks(models.Model):
     _description = 'Remarks'
     
     name = fields.Char(string='Name',required=True)
-    type = fields.Selection([('led_strip','Strip Remark'),('led_attach','Attachment Remark'),('Both','Both')],string="Remark Type",readonly="True")
+    type = fields.Selection([('led_strip','Strip Remark'),('led_attach','Attachment Remark'),('idesign','iDesign Remark'),('Both','Both')],string="Remark Type",readonly="True")
     
 class Colour(models.Model):
     _name = 'colour.colour'

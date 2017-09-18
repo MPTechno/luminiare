@@ -6,7 +6,7 @@
 			<field name="model">crm.to.quote.wizard</field>
 			<field name="arch" type="xml">
 				<form string="LED Quotation">
-					<separator string = "LED Quotation" colspan="4"/>
+					<separator string = "Quotation" colspan="4"/>
 					<group col="2">
 						<group>
 							<field name="quote_type" widget="radio"/>
@@ -21,6 +21,7 @@
 			           					  'readonly_by_pass': True,
 			           					  'default_partner_id': context.get('partner_id',False),
 			           					  'default_team_id': context.get('team_id',False)}"/>
+   					  	
    					  	<button name="quotations_new_attachment" type="object" 
 			           			string="Generate LED Attachment Quotation" class="oe_highlight"
 			           			attrs="{'invisible': [('quote_type','!=','led_attach')]}"
@@ -29,6 +30,16 @@
 			           					  'readonly_by_pass': True,
 			           					  'default_partner_id': context.get('partner_id',False),
 			           					  'default_team_id': context.get('team_id',False)}"/>
+			        	
+			        	<button name="quotations_new_idesign" type="object" 
+			           			string="Generate iDesign Quotation" class="oe_highlight"
+			           			attrs="{'invisible': [('quote_type','!=','idesign')]}"
+			           			context="{'search_default_partner_id': context.get('partner_id',False),
+			           					  'default_quote_type': quote_type,
+			           					  'readonly_by_pass': True,
+			           					  'default_partner_id': context.get('partner_id',False),
+			           					  'default_team_id': context.get('team_id',False)}"/>
+			        	
 			        	<button special="cancel" string="Cancel" class="oe_highlight"/>
  					</footer>
 				</form>

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <record id="luminiare_referal_fee_account" model="account.account">
-            <field name="code">100000</field>
+        <!--record id="luminiare_referal_fee_account" model="account.account">
+            <field name="code">502006</field>
             <field name="name">Referal Fees</field>
             <field name="user_type_id" ref="account.data_account_type_expenses"/>
-            <!--field name="tag_ids" eval="[(6, 0, ref(account.account_tag_operating)])"/-->
+        </record-->
+        
+        <record model="account.account" id="luminiare_referal_fee_account">
+            <field name="name">Referal Fees</field>
+            <field name="code">502006</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+            <field name="company_id" ref="base.main_company"/>
+            <field name="reconcile" eval="False"/>
+            <field name="deprecated" eval="False"/>
         </record>
     </data>
 </odoo>

@@ -16,7 +16,7 @@
 		</template>
 
 		<template id="external_layout_do_header_idesign">
-			<div class="header" style="font-family:Calibri (Body); font-size:13px;">
+			<div class="header" style="font-family:Calibri (Body); font-size:16px;">
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
 						<img src='/solum_delivery_order/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
@@ -40,7 +40,7 @@
 		</template>
 
 		<template id="external_layout_do_footer_idesign">
-			<div class="footer" style="font-family:Calibri (Body); font-size:13px; font-weight: bold;">
+			<div class="footer" style="font-family:Calibri (Body); font-size:13px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
 					<center>
@@ -56,7 +56,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_do_idesign">
-		                <div class="page" style="font-family:Calibri (Body); font-size:13px;">
+		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Date</b></td>
@@ -80,42 +80,9 @@
 							</table>
 		                    
 							<br/><br/>
-							<span style="font-size:25px;"><center><strong>DELIVERY ORDER</strong></center></span>
+							<span style="font-size:30px;"><center><strong>DELIVERY ORDER</strong></center></span>
 							<br/>
-							<table class="table table-condensed" t-if='o.delivery_type == "led_strip"'>
-								<thead>
-								    <tr>
-								        <th style="border-top:1px solid black;">ITEM</th>
-								        <th style="border-top:1px solid black;">AREA</th>
-								        <th style="border-top:1px solid black;">LOCATION</th>
-								        <th style="border-top:1px solid black;">LENGTH(MM)</th>
-								        <th style="border-top:1px solid black;">QTY</th>
-								    </tr>
-							   </thead>
-							   <tbody class="sale_tbody" style="font-weight: bold;">
-								    <t t-set="i" t-value="0" />
-								    <tr t-foreach="o.get_order_line(o)" t-as="l">
-								        <t t-set="i" t-value="i+1" />
-								        <td>
-								           <span t-esc="i"/>
-								        </td>
-								        <td>
-								           <span t-if="l.product_id" t-field="l.product_id.name"/>
-								        </td>
-								        <td>
-								           <span t-if="l.product_location_id" t-field="l.product_location_id.name"/>
-								        </td>
-								        <td>
-								           <span t-field="l.length"/>
-								        </td>
-								        <td>
-								           <span t-esc="int(l.product_uom_qty)"/>
-								        </td>
-								    </tr>
-								</tbody>
-							</table>
-							
-							<table class="table table-condensed" t-if='o.delivery_type == "led_attach"'>
+							<table class="table table-condensed">
 								<thead>
 								    <tr>
 								        <th style="border-top:1px solid black;">ITEM</th>
@@ -125,7 +92,7 @@
 							   </thead>
 							   <tbody class="sale_tbody" style="font-weight: bold;">
 								    <t t-set="i" t-value="0" />
-								    <tr t-foreach="o.get_order_line(o)" t-as="l">
+								    <tr t-foreach="o.pack_operation_product_ids" t-as="l">
 								        <t t-set="i" t-value="i+1" />
 								        <td>
 								           <span t-esc="i"/>
@@ -134,27 +101,23 @@
 								           <span t-if="l.product_id" t-field="l.product_id.name"/>
 								        </td>
 								        <td>
-								           <span t-esc="int(l.product_uom_qty)"/>
+								           <span t-esc="int(l.product_qty)"/>
 								        </td>
 								    </tr>
 								</tbody>
 							</table>
 							<br/>
-							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
-								<table class="table table-condensed" style="border-top:none; margin-left:-15px;">
-								    <tr style="border-top:none;" t-foreach="o.get_order_remarks(o)" t-as="r">
-								        <td style="border-top:none; font-weight: bold;">
-								            *<span t-field="r.name"/>
-								        </td>
-								    </tr>
-								</table>
+							<div style="margin-top:100px; border-bottom: solid; border-bottom-style: double;">
+								<span><b>*Note all items are to be checked and verified on day of delivery.</b></span>
 							</div>
 							<br/>
 							<br/>
 							<br/>
 							<span><b>Checked by:</b></span>
 							<br/>
-							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<span style="border-top:1px solid black; margin-top:200px; float: left; font-size:18px;">
+								<b>CUSTOMER ACKNOWLEDGEMENT</b>
+							</span>
 							<br/>
 		                </div>
 		            </t>

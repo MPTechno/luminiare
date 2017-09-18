@@ -19,7 +19,8 @@ class InvoiceExtension(models.Model):
     
     inv_type = fields.Selection([
                                    ('led_strip','LED Strip Invoice'),
-                                   ('led_attach','LED Attachments Invoice')
+                                   ('led_attach','LED Attachments Invoice'),
+                                   ('idesign','iDesign Invoice')
                                  ],string="Invoice Type",readonly=True)
     attention = fields.Char("Attention")
     prepared_by = fields.Many2one("res.users",'Prepared By')
@@ -28,6 +29,7 @@ class InvoiceExtension(models.Model):
     remarks_ids = fields.One2many('invoice.remarks','invoice_id','Remarks')
     payment_term_text = fields.Char('Payment Term')
     reference_no = fields.Char('Reference No')
+    po_no = fields.Char('PO No')
     payment_term_id = fields.Many2one('account.payment.term', string='Payment Terms', oldname='payment_term',
         readonly=True, states={'draft': [('readonly', False)]},
         help="If you use payment terms, the due date will be computed automatically at the generation "
@@ -147,6 +149,13 @@ class InvoiceExtension(models.Model):
 				    remarks_ids_list.append(line_obj.id)
 		    if rec['inv_type'] == 'led_attach':
 				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_attach'),('type','=','Both')]):
+				    remarks_line_vals = {
+				        'name': remarks_obj and remarks_obj.id or False,
+				        }
+				    line_obj = self.env['invoice.remarks'].create(remarks_line_vals)
+				    remarks_ids_list.append(line_obj.id)
+		    if rec['inv_type'] == 'idesign':
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','idesign')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }

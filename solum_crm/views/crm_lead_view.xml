@@ -19,6 +19,15 @@
         <field name="domain">[('opportunity_id', '=', active_id)]</field>
         <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
     </record>
+    
+    <record id="sale_action_quotations_new_idesign" model="ir.actions.act_window">
+        <field name="name">Quotation</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">form,tree,graph</field>
+        <field name="view_id" ref="solum_sale.view_idesign_order_form"/>
+        <field name="domain">[('opportunity_id', '=', active_id)]</field>
+        <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
+    </record>
 	
 	<record id="sale_crm.crm_case_form_view_oppor" model="ir.ui.view">
         <field name="name">crm.lead.oppor.inherited.crm</field>
@@ -32,6 +41,7 @@
                               'default_quote_type': 'led_strip',
                               'default_team_id': team_id,
                               'readonly_by_pass': True}"/>
+      		 	
       		 	<button string="New LED Attachment Quotation" name="quotations_new_attachment" 
       		 		type="object" class="oe_highlight"
                     context="{'search_default_partner_id': partner_id,
@@ -39,6 +49,15 @@
                               'default_quote_type': 'led_attach',
                               'default_team_id': team_id,
                               'readonly_by_pass': True}"/>
+              	
+              	<button string="New iDesign Quotation" name="quotations_new_idesign" 
+      		 		type="object" class="oe_highlight"
+                    context="{'search_default_partner_id': partner_id,
+                              'default_partner_id': partner_id,
+                              'default_quote_type': 'idesign',
+                              'default_team_id': team_id,
+                              'readonly_by_pass': True}"/>
+              	
               	<button string="Quote" name="%(solum_crm.action_crm_to_quote_wizard)d" type="action" class="oe_highlight"
                     	context="{'partner_id': partner_id,'team_id': team_id}"/>
             </xpath>

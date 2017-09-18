@@ -38,7 +38,7 @@
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
 		            <t t-call="report.external_layout_do_sol">
-		                <div class="page" style="font-family:Calibri (Body); font-size:18px;">
+		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"><b>Date</b></td>
@@ -141,11 +141,15 @@
 								    </tr>
 								</tbody>
 							</table>
-							<br/>
+							
+							<t t-foreach="o.get_line_length(o)" t-as="l">
+								<br/><span style="color:white;">.</span>
+							</t>
+							
 							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
-								<table class="table table-condensed" style="border-top:none; margin-left:-15px;">
-								    <tr style="border-top:none;" t-foreach="o.get_order_remarks(o)" t-as="r">
-								        <td style="border-top:none; font-weight: bold;">
+								<table class="table table-condensed" style="border-top:none; margin-left:-15px; font-size:15px;">
+								    <tr style="border-top:none; line-height:12px;" t-foreach="o.get_order_remarks(o)" t-as="r">
+								        <td style="border-top:none; font-weight: bold; line-height:12px;">
 								            *<span t-field="r.name"/>
 								        </td>
 								    </tr>
@@ -156,7 +160,9 @@
 							<br/>
 							<span><b>Checked by:</b></span>
 							<br/>
-							<span style="border-top:1px solid black; margin-top:200px; float: left"><b>CUSTOMER ACKNOWLEDGEMENT</b></span>
+							<span style="border-top:1px solid black; margin-top:200px; float: left; font-size:18px;">
+								<b>CUSTOMER ACKNOWLEDGEMENT</b>
+							</span>
 							<br/>
 		                </div>
 		            </t>
