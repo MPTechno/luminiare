@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <!--record model="account.account.template" id="account_account_856">
+            <field name="name">Referral fees</field>
+            <field name="code">502006</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+            <field name="chart_template_id" ref="l10n_sg.sg_chart_template"/>
+            <field name="reconcile" eval="False" />
+        </record>
+
+        <record model="account.account" id="account_account_commission_856">
+            <field name="name">Referral fees</field>
+            <field name="code">502006</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+            <field name="company_id" ref="base.main_company"/>
+            <field name="reconcile" eval="False"/>
+            <field name="deprecated" eval="False"/>
+        </record-->
+    </data>
+</openerp>
