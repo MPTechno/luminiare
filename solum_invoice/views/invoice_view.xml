@@ -509,7 +509,7 @@
                             <tree string="Invoice Lines" editable="bottom">
                                 <field name="sequence" widget="handle"/>
                                 <field name="number"/>
-                                <field name="product_id" string="Model" domain="[('type','=','service')]"/>
+                                <field name="product_id" string="Model"/>
                                 <field name="origin" invisible="1"/>
                                 <field name="name"/>
                                 <field name="company_id" invisible="1"/>
