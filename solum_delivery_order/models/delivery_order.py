@@ -13,6 +13,7 @@ class StockPicking(models.Model):
                      ],string="Delivery Type")
     sale_project_id = fields.Many2one('sale.project','Project')
     attention = fields.Char("Attention")
+    remarks_ids = fields.One2many('picking.remarks','picking_id','Remarks')
     
     
     @api.model
@@ -78,4 +79,40 @@ class StockPicking(models.Model):
         			'delivery_type': sale_order_obj.quote_type,
         		})
         stock_picking_obj = super(StockPicking, self).create(vals)
+        if vals.get('origin'):
+            sale_order_obj = sale_order_pool.search([('name','=',vals.get('origin'))])
+            
+            picking_remarks_obj = self.env['picking.remarks']
+            if sale_order_obj.quote_type == 'led_strip':
+                remarks_ids = self.env['remarks.remarks'].search([('type','=','d_led_strip')])
+                for remarks in remarks_ids:
+	                picking_remarks_vals = {
+	   	                'name': remarks and remarks.id or False,
+	   	                'picking_id': stock_picking_obj and stock_picking_obj.id or False
+	                }
+	                picking_remarks_obj.create(picking_remarks_vals)
+            if sale_order_obj.quote_type == 'led_attach':
+                remarks_ids = self.env['remarks.remarks'].search([('type','=','d_led_attach')])
+                for remarks in remarks_ids:
+	                picking_remarks_vals = {
+	   	                'name': remarks and remarks.id or False,
+	   	                'picking_id': stock_picking_obj and stock_picking_obj.id or False
+	                }
+	                picking_remarks_obj.create(picking_remarks_vals)
+            if sale_order_obj.quote_type == 'idesign':
+                remarks_ids = self.env['remarks.remarks'].search([('type','=','idesign')])
+                for remarks in remarks_ids:
+	                picking_remarks_vals = {
+	   	                'name': remarks and remarks.id or False,
+	   	                'picking_id': stock_picking_obj and stock_picking_obj.id or False
+	                }
+	                picking_remarks_obj.create(picking_remarks_vals)
+            
         return stock_picking_obj
+        
+class PickingRemarks(models.Model):
+    _name = 'picking.remarks'
+    _description = 'Picking Remarks'
+    
+    name = fields.Many2one('remarks.remarks','Remarks')
+    picking_id = fields.Many2one('stock.picking','Picking')

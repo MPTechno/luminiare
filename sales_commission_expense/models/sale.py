@@ -76,6 +76,33 @@ class SaleOrder(models.Model):
                 if group_key not in invoices:
                     inv_data = order._prepare_invoice()
                     invoice = inv_obj.create(inv_data)
+                    
+                    inv_remarks_obj = self.env['invoice.remarks']
+                    if order.quote_type == 'led_strip':
+                        remarks_ids = self.env['remarks.remarks'].search([('type','=','i_led_strip')])
+                        for remarks in remarks_ids:
+        	                invoice_remarks_vals = {
+        	   	                'name': remarks and remarks.id or False,
+        	   	                'invoice_id': invoice and invoice.id or False
+        	                }
+        	                inv_remarks_obj.create(invoice_remarks_vals)
+                    if order.quote_type == 'led_attach':
+                        remarks_ids = self.env['remarks.remarks'].search([('type','=','i_led_attach')])
+                        for remarks in remarks_ids:
+        	                invoice_remarks_vals = {
+        	   	                'name': remarks and remarks.id or False,
+        	   	                'invoice_id': invoice and invoice.id or False
+        	                }
+        	                inv_remarks_obj.create(invoice_remarks_vals)
+                    if order.quote_type == 'idesign':
+                        remarks_ids = self.env['remarks.remarks'].search([('type','=','idesign')])
+                        for remarks in remarks_ids:
+        	                invoice_remarks_vals = {
+        	   	                'name': remarks and remarks.id or False,
+        	   	                'invoice_id': invoice and invoice.id or False
+        	                }
+        	                inv_remarks_obj.create(invoice_remarks_vals)
+        	                
                     references[invoice] = order
                     invoices[group_key] = invoice
                 elif group_key in invoices:

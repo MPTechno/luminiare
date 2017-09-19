@@ -1,57 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        
-        <record id="attachment_remarks_cdi" model="remarks.remarks">
-            <field name="name">Complimentary Delivery Included</field>
-            <field name="type">led_attach</field>
+        <!-- QUOTATION - LED ATTACHMENT -->
+        <record id="q_led_attach_ex" model="remarks.remarks">
+            <field name="name">Ex-stock</field>
+            <field name="type">q_led_attach</field>
         </record>
-        
-        <record id="attachment_remarks_cash_delivery" model="remarks.remarks">
-            <field name="name">Cash On Delivery</field>
-            <field name="type">led_attach</field>
+        <record id="q_led_attach_valid" model="remarks.remarks">
+            <field name="name">Quotation is valid for 30 days</field>
+            <field name="type">q_led_attach</field>
         </record>
-        
-        <record id="attachment_remarks_warranty" model="remarks.remarks">
+        <record id="q_led_attach_pod" model="remarks.remarks">
+            <field name="name">Payment on delivery</field>
+            <field name="type">q_led_attach</field>
+        </record>
+        <record id="q_led_attach_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">q_led_attach</field>
+        </record>
+        <record id="q_led_attach_warranty" model="remarks.remarks">
             <field name="name">All items are entitled to 2 years warranty</field>
-            <field name="type">led_attach</field>
+            <field name="type">q_led_attach</field>
         </record>
-        
-        <record id="attachment_remarks_driver" model="remarks.remarks">
-            <field name="name">All recessed lights come with Meanwell Driver/Hep Driver</field>
-            <field name="type">led_attach</field>
+        <record id="q_led_attach_driver" model="remarks.remarks">
+            <field name="name">All recessed lights come with Meanwell / Hep Driver</field>
+            <field name="type">q_led_attach</field>
         </record>
-        
-        <record id="attachment_remarks_non_refund" model="remarks.remarks">
-            <field name="name">Non-Refundable</field>
-            <field name="type">led_attach</field>
-        </record>
-        
-        <record id="remarks_payment_on_delivery" model="remarks.remarks">
-            <field name="name">Payment on Delivery</field>
-            <field name="type">Both</field>
-        </record>
-        
-        <record id="strip_remarks_goods_sold" model="remarks.remarks">
+        <record id="q_led_attach_refundable" model="remarks.remarks">
             <field name="name">Goods sold are not refundable</field>
-            <field name="type">led_strip</field>
+            <field name="type">q_led_attach</field>
         </record>
         
-        <record id="strip_remarks_cldi" model="remarks.remarks">
-            <field name="name">Complimentary Local Delivery Included</field>
-            <field name="type">led_strip</field>
+        
+        <!-- QUOTATION - LED STRIP -->
+        <record id="q_led_strip_ex" model="remarks.remarks">
+            <field name="name">Ex-stock</field>
+            <field name="type">q_led_strip</field>
+        </record>
+        <record id="q_led_strip_valid" model="remarks.remarks">
+            <field name="name">Quotation is valid for 30 days</field>
+            <field name="type">q_led_strip</field>
+        </record>
+        <record id="q_led_strip_pod" model="remarks.remarks">
+            <field name="name">Payment on delivery</field>
+            <field name="type">q_led_strip</field>
+        </record>
+        <record id="q_led_strip_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">q_led_strip</field>
+        </record>
+        <record id="q_led_strip_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 1 year warranty</field>
+            <field name="type">q_led_strip</field>
+        </record>
+        <record id="q_led_strip_driver" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">q_led_strip</field>
         </record>
         
-        <record id="strip_remarks_warranty" model="remarks.remarks">
+        
+        <!-- INVOICE - LED ATTACHMENT -->
+        <record id="i_led_attach_refundable" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">i_led_attach</field>
+        </record>
+        <record id="i_led_attach_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">i_led_attach</field>
+        </record>
+        <record id="i_led_attach_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 2 years warranty</field>
+            <field name="type">i_led_attach</field>
+        </record>
+        <record id="i_led_attach_driver" model="remarks.remarks">
+            <field name="name">All recessed lights come with Meanwell / Hep Driver</field>
+            <field name="type">i_led_attach</field>
+        </record>
+        
+        <!-- INVOICE - LED STRIP -->
+        <record id="i_led_strip_refundable" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">i_led_strip</field>
+        </record>
+        <record id="i_led_strip_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">i_led_strip</field>
+        </record>
+        <record id="i_led_strip_warranty" model="remarks.remarks">
             <field name="name">All items are entitled to 1 years warranty</field>
-            <field name="type">led_strip</field>
+            <field name="type">i_led_strip</field>
         </record>
         
+        <!-- DO - LED ATTACHMENT -->
+        <record id="d_led_attach_refundable" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">d_led_attach</field>
+        </record>
+        <record id="d_led_attach_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">d_led_attach</field>
+        </record>
+        <record id="d_led_attach_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 2 years warranty</field>
+            <field name="type">d_led_attach</field>
+        </record>
+        <record id="d_led_attach_driver" model="remarks.remarks">
+            <field name="name">All recessed lights come with Meanwell / Hep Driver</field>
+            <field name="type">d_led_attach</field>
+        </record>
+        <record id="d_led_attach_verified" model="remarks.remarks">
+            <field name="name">Note all items are to be checked and verified on day of delivery</field>
+            <field name="type">d_led_attach</field>
+        </record>
+        
+        <!-- DO - LED STRIP -->
+        <record id="d_led_strip_refundable" model="remarks.remarks">
+            <field name="name">Goods sold are not refundable</field>
+            <field name="type">d_led_strip</field>
+        </record>
+        <record id="d_led_strip_loc_delivery" model="remarks.remarks">
+            <field name="name">Complimentary Local Delivery included for purchases above $500</field>
+            <field name="type">d_led_strip</field>
+        </record>
+        <record id="d_led_strip_warranty" model="remarks.remarks">
+            <field name="name">All items are entitled to 1 years warranty</field>
+            <field name="type">d_led_strip</field>
+        </record>
+        <record id="d_led_strip_verified" model="remarks.remarks">
+            <field name="name">Note all items are to be checked and verified on day of delivery</field>
+            <field name="type">d_led_strip</field>
+        </record>
+        
+        
+        
+        <!-- iDesign Remarks -->
         <record id="strip_remarks_idesign" model="remarks.remarks">
             <field name="name">FULL PAYMENT UPON COMPLETION</field>
             <field name="type">idesign</field>
         </record>
         
+        
+        <!-- COLOUR -->
         <record id="white_colour" model="colour.colour">
             <field name="name">WHITE</field>
         </record>

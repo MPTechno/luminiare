@@ -7,6 +7,7 @@
     "category": "stock",
     "depends": ['stock','solum_sale'],
     "data": [
+		'security/ir.model.access.csv',
 		'views/delivery_order_view.xml',
 		'views/report_menu.xml',
 		'report/idesign_do_report_view.xml',

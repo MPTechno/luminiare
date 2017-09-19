@@ -141,14 +141,14 @@ class InvoiceExtension(models.Model):
         remarks_ids_list = []
         if rec.has_key('inv_type') and rec['inv_type']:
 		    if rec['inv_type'] == 'led_strip':
-				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_strip'),('type','=','Both')]):
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','i_led_strip')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }
 				    line_obj = self.env['invoice.remarks'].create(remarks_line_vals)
 				    remarks_ids_list.append(line_obj.id)
 		    if rec['inv_type'] == 'led_attach':
-				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_attach'),('type','=','Both')]):
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','i_led_attach')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }
@@ -258,7 +258,7 @@ class InvoiceLineExtension(models.Model):
     
     @api.model
     def _default_colour(self):
-        colour_id = self.env['colour.colour'].search([('name','=','White')])
+        colour_id = self.env['colour.colour'].search([('name','=','WHITE')])
         colour_id = colour_id and colour_id.id or False
         return colour_id
     

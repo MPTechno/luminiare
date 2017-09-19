@@ -10,6 +10,14 @@
                 <field name="sale_project_id"/>
                 <field name="attention"/>
             </xpath>
+            <xpath expr="//notebook/page/field[@name='pack_operation_pack_ids']" position="after">
+            	<field name="remarks_ids" nolabel="1">
+		        	<tree editable="bottom">
+		        		<field name="name" />
+		        		<field name="picking_id" invisible="1" />
+		        	</tree>
+	        	</field>
+            </xpath>
             <xpath expr="//header/button[@name='do_print_picking']" position="attributes">
 				<attribute name="invisible">1</attribute>
 			</xpath>

@@ -117,14 +117,14 @@ class SaleExtenstion(models.Model):
         remarks_ids_list = []
         if rec.has_key('quote_type') and rec['quote_type']:
 		    if rec['quote_type'] == 'led_strip':
-				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_strip'),('type','=','Both')]):
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','q_led_strip')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }
 				    line_obj = self.env['sale.remarks'].create(remarks_line_vals)
 				    remarks_ids_list.append(line_obj.id)
 		    if rec['quote_type'] == 'led_attach':
-				for remarks_obj in self.env['remarks.remarks'].search(['|',('type','=','led_attach'),('type','=','Both')]):
+				for remarks_obj in self.env['remarks.remarks'].search([('type','=','q_led_attach')]):
 				    remarks_line_vals = {
 				        'name': remarks_obj and remarks_obj.id or False,
 				        }
@@ -211,7 +211,7 @@ class SaleOrderLineExtension(models.Model):
     
     @api.model
     def _default_colour(self):
-        colour_id = self.env['colour.colour'].search([('name','=','White')])
+        colour_id = self.env['colour.colour'].search([('name','=','WHITE')])
         colour_id = colour_id and colour_id.id or False
         return colour_id
     
@@ -361,7 +361,15 @@ class RemarksRemarks(models.Model):
     _description = 'Remarks'
     
     name = fields.Char(string='Name',required=True)
-    type = fields.Selection([('led_strip','Strip Remark'),('led_attach','Attachment Remark'),('idesign','iDesign Remark'),('Both','Both')],string="Remark Type",readonly="True")
+    type = fields.Selection([
+    		('q_led_strip','QUOTATION - LED STRIP'),
+    		('q_led_attach','QUOTATION - LED ATTACHMENT'),
+    		('i_led_strip','INVOICE - LED STRIP'),
+    		('i_led_attach','INVOICE - LED ATTACHMENT'),
+    		('d_led_strip','DO - LED STRIP'),
+    		('d_led_attach','DO - LED ATTACHMENT'),
+    		('idesign','iDesign'),
+    		],string="Remark Type",readonly="True")
     
 class Colour(models.Model):
     _name = 'colour.colour'

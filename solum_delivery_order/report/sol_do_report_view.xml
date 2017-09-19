@@ -148,7 +148,7 @@
 							
 							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
 								<table class="table table-condensed" style="border-top:none; margin-left:-15px; font-size:15px;">
-								    <tr style="border-top:none; line-height:12px;" t-foreach="o.get_order_remarks(o)" t-as="r">
+								    <tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
 								        <td style="border-top:none; font-weight: bold; line-height:12px;">
 								            *<span t-field="r.name"/>
 								        </td>
