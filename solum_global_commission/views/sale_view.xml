@@ -31,5 +31,22 @@
                 </xpath>
             </field>
         </record>
+        
+        
+        <record id="commission_sale_view_form_idesign" model="ir.ui.view">
+            <field name="name">commission.sale.order.form.idesign</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_sale_view_form_idesign"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='discount_part']/group/field[@name='discount_rate']" position="after">
+                    <field name="commission_type"/>
+                    <field name="commission_rate"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                    <field name="amount_commission"/>
+                </xpath>
+            </field>
+        </record>
+        
     </data>
 </odoo>

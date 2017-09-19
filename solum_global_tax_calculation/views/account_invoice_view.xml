@@ -30,6 +30,20 @@
             </field>
         </record>
         
+        <record id="tax_account_invoice_view_form_idesign" model="ir.ui.view">
+            <field name="name">tax.account.invoice.idesign</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="sale_discount_total.discount_account_invoice_view_form_idesign"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='discount_rate']" position="after">
+                    <div name="tax_rate">
+                        <label for="tax_rate" string="Tax Rate :"/>
+                        <field name="tax_rate" class="oe_inline"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        
         
     </data>
 </odoo>
