@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	
+	<!-- Product Template Form View -->
+	<record id="product_template_form_view_solum" model="ir.ui.view">
+        <field name="name">product.template.form.solum</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div/div[@name='options']" position="inside">
+                <div>
+                    <field name="idesign_product"/>
+                    <label for="idesign_product"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+	
+	
 	<!-- Quotation/Sale Order Tree View -->
 	<record id="view_quotation_tree_solum" model="ir.ui.view">
         <field name="name">sale.order.tree.solum</field>
@@ -129,8 +145,8 @@
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
                                         <!--field name="price_unit" readonly="1"/-->
-                                        <field name="is_service" invisible='1'/>
-                                        <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                        <!--field name="is_service" invisible='1'/-->
+                                        <field name="price_unit" readonly="1"/>
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/> %%
@@ -187,8 +203,8 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
                                 <field name="price_unit" readonly="1"/-->
-                                <field name="is_service" invisible='1'/>
-                                <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                <!--field name="is_service" invisible='1'/-->
+                                <field name="price_unit" readonly="1"/>
                                 <field name="net_price" />
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
@@ -465,8 +481,8 @@
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
                                         <!--field name="price_unit" readonly="1"/-->
-                                        <field name="is_service" invisible='1'/>
-                                        <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                        <!--field name="is_service" invisible='1'/-->
+                                        <field name="price_unit" readonly="1"/>
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/> %%
@@ -520,8 +536,8 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
                                 <field name="price_unit" readonly="1"/-->
-                                <field name="is_service" invisible='1'/>
-                                <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                <!--field name="is_service" invisible='1'/-->
+                                <field name="price_unit" readonly="1"/>
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
                                     attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
@@ -772,7 +788,7 @@
                                         <field name="product_id" 
                                             context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
                                             attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}" 
-                                           />
+                                            domain="[('idesign_product','=', True)]"/>
                                        	<field name="image" widget="image"/>
                                         <field name="layout_category_id" groups="sale.group_sale_layout"/>
                                         <field name="invoice_status" invisible="1"/>
@@ -797,8 +813,8 @@
                                             <field name="qty_invoiced" invisible="1"/>
                                         </div>
                                         <!--field name="price_unit" readonly="1"/-->
-                                        <field name="is_service" invisible='1'/>
-                                        <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                        <field name="idesign_product" invisible='1'/>
+                                        <field name="price_unit" attrs="{'readonly': [('idesign_product', '!=', True)]}"/>
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/> %%
@@ -831,7 +847,7 @@
                                 <field name="product_id" string="Model"
                                     attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
                                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
-                                   />
+                                   domain="[('idesign_product','=', True)]"/>
                                	<field name="image" widget="image"/>
                                 <field name="layout_category_id" groups="sale.group_sale_layout" invisible="1"/>
                                 <field name="name"/>
@@ -851,8 +867,8 @@
                                 	groups="analytic.group_analytic_accounting" widget="many2many_tags" invisible="1"/>
                                 <!--field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
                                 <field name="price_unit" readonly="1"/-->
-                                <field name="is_service" invisible='1'/>
-                                <field name="price_unit" attrs="{'readonly': [('is_service', '!=', True)]}"/>
+                                <field name="idesign_product" invisible='1'/>
+                                <field name="price_unit" attrs="{'readonly': [('idesign_product', '!=', True)]}"/>
                                 <field name="tax_id" widget="many2many_tags" 
                                 	domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" invisible="1"
                                     attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>

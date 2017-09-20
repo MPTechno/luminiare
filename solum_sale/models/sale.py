@@ -254,7 +254,7 @@ class SaleOrderLineExtension(models.Model):
     length = fields.Float('Length(MM)')
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
-    is_service = fields.Boolean(string="Is Service")
+    idesign_product = fields.Boolean(string="iDesign Product")
                                  
     
     @api.multi
@@ -283,10 +283,10 @@ class SaleOrderLineExtension(models.Model):
             name += product.description_sale
         vals['name'] = name
 
-        if product.type == 'service':
-            vals['is_service'] = True
+        if product.idesign_product:
+            vals['idesign_product'] = True
         else:
-        	vals['is_service'] = False
+        	vals['idesign_product'] = False
         self._compute_tax_id()
 
         if self.order_id.pricelist_id and self.order_id.partner_id:
@@ -382,3 +382,8 @@ class SaleProject(models.Model):
     _description = 'Project'
     
     name = fields.Char(string='Name',required=True)
+    
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+    
+    idesign_product = fields.Boolean(string='iDesign Product')

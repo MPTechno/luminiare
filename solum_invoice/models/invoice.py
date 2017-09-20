@@ -226,10 +226,10 @@ class InvoiceLineExtension(models.Model):
             else:
                 product = self.product_id
 
-            if self.product_id.type == 'service':
-                self.is_service = True
+            if self.product_id.idesign_product:
+                self.idesign_product = True
             else:
-                self.is_service = False 
+                self.idesign_product = False 
             
             self.name = ''
             account = self.get_invoice_line_account(type, product, fpos, company)
@@ -305,7 +305,7 @@ class InvoiceLineExtension(models.Model):
     number = fields.Integer(compute='get_number', store=True ,string="Item")
     length = fields.Float('Length(MM)')
     colour_id = fields.Many2one('colour.colour','Colour', default=_default_colour)
-    is_service = fields.Boolean(string="Is Service")
+    idesign_product = fields.Boolean(string="iDesign Product")
     
 
 class InvoiceRemarks(models.Model):
