@@ -223,6 +223,27 @@ class SalesOrders(models.Model):
             else:
                 result = {'type': 'ir.actions.act_window_close'}
             return result
+        if self.quote_type == 'idesign':
+            action = imd.xmlid_to_object('solum_invoice.action_idesign_invoices')
+            list_view_id = imd.xmlid_to_res_id('account.invoice_tree')
+            form_view_id = imd.xmlid_to_res_id('solum_invoice.idesign_invoice_form')
+            result = {
+                'name': action.name,
+                'help': action.help,
+                'type': action.type,
+                'views': [[list_view_id, 'tree'], [form_view_id, 'form'], [False, 'graph'], [False, 'kanban'], [False, 'calendar'], [False, 'pivot']],
+                'target': action.target,
+                'context': action.context,
+                'res_model': action.res_model,
+            }
+            if len(invoice_ids) > 1:
+                result['domain'] = "[('id','in',%s)]" % invoice_ids.ids
+            elif len(invoice_ids) == 1:
+                result['views'] = [(form_view_id, 'form')]
+                result['res_id'] = invoice_ids.ids[0]
+            else:
+                result = {'type': 'ir.actions.act_window_close'}
+            return result
 
 class SaleAdvancePaymentInvExtension(models.TransientModel):
     _inherit = 'sale.advance.payment.inv'
