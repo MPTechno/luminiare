@@ -83,7 +83,7 @@
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.approved_by" t-field="o.approved_by.name"/></b>
 									</td>
 								</tr>
-								<tr style="border:none; height:20px;" t-if="o.reference_no">
+								<tr style="border:none; height:20px;">
 									<td style="width:8cm; height:20px;"></td>
 									<td style="width:140cm; height:20px;"></td>
 									<td style="width:14cm; height:20px;"><b>Ref. No</b></td>

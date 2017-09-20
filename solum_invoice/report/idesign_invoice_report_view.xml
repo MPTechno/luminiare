@@ -91,8 +91,12 @@
 										
 								     	</b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>TERMS</b></td>
+									<td style="width:14cm; height:20px;">
+										<b>Ref. No.</b><br/>
+										<b>TERMS</b>
+									</td>
 									<td style="width:40cm; height:20px;">
+										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.reference_no"/></b><br/>
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
 								</tr>
