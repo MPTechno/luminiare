@@ -21,7 +21,7 @@ class AccountInvoice(models.Model):
         if self.commission_type == 'percent':
             self.amount_commission = (((self.amount_untaxed - self.amount_discount)*self.commission_rate)/100)
 
-        self.amount_total = ((self.amount_untaxed - self.amount_discount) + self.amount_tax)
+        self.amount_total = (((self.amount_untaxed - self.amount_discount) - self.amount_commission) + self.amount_tax)
         amount_total_company_signed = self.amount_total
         amount_untaxed_signed = self.amount_untaxed
         if self.currency_id and self.currency_id != self.company_id.currency_id:
