@@ -28,7 +28,16 @@ class SaleOrder(models.Model):
             })
     
     
-    tax_rate = fields.Float('Tax Rate', digits_compute=dp.get_precision('Account'),
+    @api.model
+    @api.depends('quote_type')
+    def _default_tax_rate(self):
+        tax_rate = 0.00
+        if self._context.has_key('default_quote_type') and self._context.get('default_quote_type') == 'idesign':
+            tax_rate = 7.0
+        return tax_rate
+    
+    
+    tax_rate = fields.Float('Tax Rate', digits_compute=dp.get_precision('Account'), default=_default_tax_rate,
                                  readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True, readonly=True, compute='_amount_all',
                                      track_visibility='always')

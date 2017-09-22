@@ -15,7 +15,7 @@ Global Tax Calculation in Sale and Invoice
     'depends': [
 		'sale',
 		'account',
-		'sale_discount_total',
+		'sale_discount_total'
     ],
     'data': [
         'views/sale_view.xml',
