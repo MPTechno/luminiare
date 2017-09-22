@@ -17,6 +17,7 @@
 
 		<template id="external_layout_header_idesign">
 			<div class="header" style="font-family:Calibri (Body); font-size:13px;">
+				<br/><br/>
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
 						<img src='/solum_sale/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
@@ -40,14 +41,12 @@
 		</template>
 
 		<template id="external_layout_footer_idesign">
-			<div class="footer" style="font-family:Calibri (Body); font-size:13px;">
+			<div class="footer" style="font-family:Calibri (Body); font-size:15px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
-					<center>
-						<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
-						<span style="margin-left: 30px;">Tel : (+65) 62828020</span>
-						<span style="margin-left: 30px;">Fax : (+65) 62828332</span>
-					</center>
+					<span style="margin-left: 10px;">Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
+					<span style="margin-left: 40px;">Tel : (+65) 62828020</span>
+					<span style="margin-left: 40px;">Fax : (+65) 62828332</span>
 				</div>
 			</div>
 		</template>
@@ -59,39 +58,39 @@
 		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>DATE</b></td>
-									<td style="width:170cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>DATE</b></td>
+									<td style="width:150cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.date_order)"/></b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>QUOTATION</b></td>
-									<td style="width:30cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>QUOTATION NO</b></td>
+									<td style="width:50cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-field="o.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>ATTN</b></td>
-									<td style="width:170cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>ATTN</b></td>
+									<td style="width:150cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>Currency</b></td>
-									<td style="width:30cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>CURRENCY</b></td>
+									<td style="width:50cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>CUSTOMER</b></td>
-									<td style="width:170cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>CUSTOMER</b></td>
+									<td style="width:150cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/>
 										<br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/> &amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/><span t-if="o.partner_id.city">&amp;nbsp;&amp;nbsp;</span><span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
 										
 								     	</b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>TERMS</b></td>
-									<td style="width:30cm; height:20px;">
+									<td style="width:22cm; height:20px;"><b>TERMS</b></td>
+									<td style="width:50cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
 								</tr>

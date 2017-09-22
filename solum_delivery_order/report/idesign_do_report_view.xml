@@ -17,6 +17,7 @@
 
 		<template id="external_layout_do_header_idesign">
 			<div class="header" style="font-family:Calibri (Body); font-size:16px;">
+				<br/><br/>
 				<div class="col-xs-12 pull-left">
 					<div class="col-xs-9 pull-left">
 						<img src='/solum_delivery_order/static/src/images/idesign.jpeg' style="width:300px;height:80px; margin-left:-40px;"/>
@@ -40,14 +41,12 @@
 		</template>
 
 		<template id="external_layout_do_footer_idesign">
-			<div class="footer" style="font-family:Calibri (Body); font-size:13px;">
+			<div class="footer" style="font-family:Calibri (Body); font-size:15px;">
 				<div class="col-xs-12 pull-left">
 					<br/>
-					<center>
-						<span>Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
-						<span style="margin-left: 40px;">Tel : (+65) 62828020</span>
-						<span style="margin-left: 40px;">Fax : (+65) 62828332</span>
-					</center>
+					<span style="margin-left: 10px;">Blk 122 Eunos Ave.7 Richfield Industrial Centre #07-10 (S) 409575</span>
+					<span style="margin-left: 40px;">Tel : (+65) 62828020</span>
+					<span style="margin-left: 40px;">Fax : (+65) 62828332</span>
 				</div>
 			</div>
 		</template>
