@@ -45,7 +45,7 @@ class SaleExtenstion(models.Model):
         if date_order:
             date = str(date_order).split(' ')
             date1 = datetime.datetime.strptime(date[0], '%Y-%m-%d')
-            date2 = date1.strftime('%m/%d/%Y')
+            date2 = date1.strftime('%d/%m/%Y')
             return date2
         else:
         	return ''

@@ -44,14 +44,14 @@
 		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
                 			<table>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Date</b></td>
+									<td style="width:20cm; height:20px;"><b>Date</b></td>
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.date_order)"/></b>
 									</td>
-									<td style="width:8cm; height:20px;">
+									<td style="width:20cm; height:20px;">
 										<b>
-											<span t-if="o.state not in ['draft','sent']">SaleOrder</span>
-                							<span t-if="o.state in ['draft','sent']">Quotation</span>
+											<span t-if="o.state not in ['draft','sent']">Saleorder no</span>
+                							<span t-if="o.state in ['draft','sent']">Quotation no</span>
 										</b>
 									</td>
 									<td style="width:30cm; height:20px;">
@@ -59,31 +59,31 @@
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Company</b></td>
+									<td style="width:20cm; height:20px;"><b>Company</b></td>
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/></b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>Currency</b></td>
+									<td style="width:20cm; height:20px;"><b>Currency</b></td>
 									<td style="width:30cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Project</b></td>
+									<td style="width:20cm; height:20px;"><b>Project</b></td>
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.sale_project_id" t-field="o.sale_project_id.name"/></b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>Name</b></td>
+									<td style="width:20cm; height:20px;"><b>Prepared by</b></td>
 									<td style="width:30cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name_led_strip" t-field="o.name_led_strip.name"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:8cm; height:20px;"><b>Attention</b></td>
+									<td style="width:20cm; height:20px;"><b>Attention</b></td>
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
-									<td style="width:8cm; height:20px;"><b>Email</b></td>
+									<td style="width:20cm; height:20px;"><b>Email</b></td>
 									<td style="width:30cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.email_led_strip" t-field="o.email_led_strip"/></b>
 									</td>
