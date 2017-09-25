@@ -69,7 +69,7 @@
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/>
 										<br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/> &amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/><span t-if="o.partner_id.city">&amp;nbsp;&amp;nbsp;</span><span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
 										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
 										

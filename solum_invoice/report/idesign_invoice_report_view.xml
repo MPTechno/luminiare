@@ -58,45 +58,44 @@
 		                <div class="page" style="font-family:Calibri (Body); font-size:16px;">
 		                    <table>
 								<tr style="border:none; height:20px;">
-									<td style="width:18cm; height:20px;"><b>DATE</b></td>
-									<td style="width:140cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.date_invoice" t-field="o.date_invoice"/></b>
+									<td style="width:18cm; height:20px;"><b>DATE <span style="float:right;">:</span></b></td>
+									<td style="width:140cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.date_invoice" t-field="o.date_invoice"/></b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>INVOICE NO.</b></td>
-									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.number" t-field="o.number"/></b>
+									<td style="width:14cm; height:20px;"><b>INVOICE NO. <span style="float:right;">:</span></b></td>
+									<td style="width:40cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.number" t-field="o.number"/></b>
 									</td>
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:18cm; height:20px;"><b>ATTN</b></td>
-									<td style="width:140cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.attention" t-field="o.attention"/></b>
+									<td style="width:18cm; height:20px;"><b>ATTN <span style="float:right;">:</span></b></td>
+									<td style="width:140cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
-									<td style="width:14cm; height:20px;"><b>CURRENCY</b></td>
-									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.currency_id" t-field="o.currency_id.name"/></b>
+									<td style="width:14cm; height:20px;"><b>CURRENCY <span style="float:right;">:</span></b></td>
+									<td style="width:40cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.currency_id" t-field="o.currency_id.name"/></b>
 									</td>
 									
 								</tr>
 								<tr style="border:none; height:20px;">
-									<td style="width:18cm; height:20px;"><b>CUSTOMER</b></td>
-									<td style="width:140cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id" t-field="o.partner_id.name"/>
+									<td style="width:18cm; height:20px;"><b>CUSTOMER <span style="float:right;">:</span></b></td>
+									<td style="width:140cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.partner_id" t-field="o.partner_id.name"/>
 										<br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.city" t-field="o.partner_id.city"/><span t-if="o.partner_id.city">&amp;nbsp;&amp;nbsp;</span><span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
-										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
-										
+										<span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
+										<span t-if="o.partner_id.city" t-field="o.partner_id.city"/><span t-if="o.partner_id.city">&amp;nbsp;&amp;nbsp;</span><span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br/>
+										<span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
+										<span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
 								     	</b>
 									</td>
 									<td style="width:14cm; height:20px;">
-										<b>PO No.</b><br/>
-										<b>TERMS</b>
+										<b>PO No. <span style="float:right;">:</span></b><br/>
+										<b>TERMS <span style="float:right;">:</span></b>
 									</td>
-									<td style="width:40cm; height:20px;">
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.po_no" t-field="o.po_no"/></b><br/>
-										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
+									<td style="width:40cm; height:20px; padding-left:20px;">
+										<b><span t-if="o.po_no" t-field="o.po_no"/></b><br/>
+										<b><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
 								</tr>
 							</table>
