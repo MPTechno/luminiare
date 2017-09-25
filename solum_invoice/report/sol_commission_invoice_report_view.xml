@@ -183,11 +183,11 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_commission_line_length(o.invoice_line_ids)" t-as="l">
+							<!--t t-foreach="o.get_commission_line_length(o.invoice_line_ids)" t-as="l">
 								<br/><span style="color:white;">.</span>
-							</t>
+							</t-->
 							
-							<div class="col-xs-12">
+							<div class="col-xs-12" style="float:none; page-break-before:always;">
 								<div class="col-xs-8">
 									<table class="table table-condensed" style="border-top:none; margin-left:-35px; font-size:15px;">
 									    <tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">

@@ -142,11 +142,11 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_line_length(o)" t-as="l">
+							<!--t t-foreach="o.get_line_length(o)" t-as="l">
 								<br/><span style="color:white;">.</span>
-							</t>
+							</t-->
 							
-							<div class="col-xs-12 pull-left" style="border-bottom:2px solid black;">
+							<div class="col-xs-12" style="border-bottom:2px solid black; float:none; page-break-before:always;">
 								<table class="table table-condensed" style="border-top:none; margin-left:-15px; font-size:15px;">
 								    <tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
 								        <td style="border-top:none; font-weight: bold; line-height:12px;">
