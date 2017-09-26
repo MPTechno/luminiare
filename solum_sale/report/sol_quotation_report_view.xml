@@ -191,7 +191,7 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_line_length(o.order_line)" t-as="l">
+							<t t-foreach="o.get_line_length(o.order_line,o.quote_type)" t-as="l">
 								<br/><span style="color:white;">.</span>
 							</t>
 							

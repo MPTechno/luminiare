@@ -142,7 +142,7 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_line_length(o)" t-as="l">
+							<t t-foreach="o.get_line_length(o,delivery_type)" t-as="l">
 								<br/><span style="color:white;">.</span>
 							</t>
 							

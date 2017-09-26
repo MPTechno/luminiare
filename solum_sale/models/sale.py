@@ -19,8 +19,30 @@ class SaleExtenstion(models.Model):
         return words
     
     @api.model
-    def get_line_length(self,line):
-        limit = 7
+    def get_line_length(self,line,quote_type):
+        
+        length = len(line)
+        result = 0
+        if quote_type == 'led_strip':
+            if length < 5:
+                if length == 1:
+                    result = 6
+                if length == 2:
+                    result = 3
+                if length == 3:
+                    result = 1
+        if quote_type == 'led_attach':
+            if length < 5:
+                if length == 1:
+                    result = 7
+                if length == 2:
+                    result = 4
+                if length == 3:
+                    result = 2
+        return result
+		 
+        
+        '''limit = 7
         line_length = len(line)
         final_limit = limit - line_length
         if len(line) == 1:
@@ -38,7 +60,7 @@ class SaleExtenstion(models.Model):
         if len(line) == 7:
             final_limit = 3
         if len(line) == 8:
-            final_limit = 3
+            final_limit = 3'''
         return final_limit
     
     def get_formated_date(self,date_order):

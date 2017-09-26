@@ -89,47 +89,86 @@ class InvoiceExtension(models.Model):
     
     
     @api.model
-    def get_line_length(self,line):
-        limit = 7
-        line_length = len(line)
-        final_limit = limit - line_length
-        if len(line) == 2:
-            final_limit = final_limit - 1
-        if len(line) == 3:
-            final_limit = final_limit - 2
-        if len(line) == 4:
-            final_limit = final_limit - 3
-        if len(line) == 5:
-            final_limit = final_limit - 4
-        if len(line) == 6:
-            final_limit = final_limit - 5
-        if len(line) == 7:
-            final_limit = final_limit - 6
-        if len(line) >= 8:
-            final_limit = 19
-        return final_limit
-    
+    def get_line_length(self,line,inv_type):
+        length = len(line)
+        result = 0
+        if inv_type == 'led_strip':
+            if length < 10:
+                if length == 1:
+                    result = 14
+                if length == 2:
+                    result = 12
+                if length == 3:
+                    result = 10
+                if length == 4:
+                    result = 8
+                if length == 5:
+                    result = 6
+                if length == 6:
+                    result = 4
+                if length == 7:
+                    result = 2
+                if length == 8:
+                    result = 1
+                if length == 9:
+                    result = 6
+        if inv_type == 'led_attach':
+            if length < 7:
+                if length == 1:
+                    result = 10
+                if length == 2:
+                    result = 7
+                if length == 3:
+                    result = 5
+                if length == 4:
+                    result = 4
+                if length == 5:
+                    result = 0
+                if length == 6:
+                    result = 4
+        return result
+
     @api.model
-    def get_commission_line_length(self,line):
-        limit = 7
-        line_length = len(line)
-        final_limit = limit - line_length - 2
-        if len(line) == 2:
-            final_limit = final_limit - 1
-        if len(line) == 3:
-            final_limit = final_limit - 2
-        if len(line) == 4:
-            final_limit = final_limit - 3
-        if len(line) == 5:
-            final_limit = final_limit - 4
-        if len(line) == 6:
-            final_limit = final_limit - 5
-        if len(line) == 7:
-            final_limit = final_limit - 6
-        if len(line) >= 8:
-            final_limit = 19
-        return final_limit
-    
+    def get_commission_line_length(self,line,inv_type):
+        
+        length = len(line)
+        result = 0
+        if inv_type == 'led_strip':
+            if length < 10:
+                if length == 1:
+                    result = 14
+                if length == 2:
+                    result = 12
+                if length == 3:
+                    result = 10
+                if length == 4:
+                    result = 8
+                if length == 5:
+                    result = 6
+                if length == 6:
+                    result = 4
+                if length == 7:
+                    result = 2
+                if length == 8:
+                    result = 1
+                if length == 9:
+                    result = 6
+        if inv_type == 'led_attach':
+            if length < 7:
+                if length == 1:
+                    result = 10
+                if length == 2:
+                    result = 7
+                if length == 3:
+                    result = 5
+                if length == 4:
+                    result = 3
+                if length == 5:
+                    result = 0
+                if length == 6:
+                    result = 5
+        return result
+        
     @api.onchange('payment_term_id')
     def _payment_term_id(self):
         for invoice in self:

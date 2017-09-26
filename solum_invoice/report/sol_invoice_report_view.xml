@@ -183,7 +183,7 @@
 								</tbody>
 							</table>
 							
-							<t t-foreach="o.get_line_length(o.invoice_line_ids)" t-as="l">
+							<t t-foreach="o.get_line_length(o.invoice_line_ids,o.inv_type)" t-as="l">
 								<br/><span style="color:white;">.</span>
 							</t>
 							

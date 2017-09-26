@@ -17,12 +17,35 @@ class StockPicking(models.Model):
     
     
     @api.model
-    def get_line_length(self,obj):
+    def get_line_length(self,obj,delivery_type):
         sale_order_pool = self.env['sale.order']
     	sale_order_ids = sale_order_pool.search([('name','=',obj.origin)])
         limit = 7
         line = sale_order_ids.order_line
-        line_length = len(line)
+        length = len(line)
+        print "\n\nlength=========",length
+        result = 0
+        if length < 9:
+            if length == 1:
+                result = 10
+            if length == 2:
+                result = 8
+            if length == 3:
+                result = 6
+            if length == 4:
+                result = 4
+            if length == 5:
+                result = 2
+            if length == 6:
+                result = 0
+            if length == 7:
+                result = 0
+            if length == 8:
+                result = 6
+        print "\n\nresult=========",result
+        return result
+        
+        '''line_length = len(line)
         final_limit = limit - line_length
         if len(line) == 2:
             final_limit = final_limit - 1
@@ -38,7 +61,7 @@ class StockPicking(models.Model):
             final_limit = final_limit - 6
         if len(line) >= 8:
             final_limit = 22
-        return final_limit
+        return final_limit'''
     
     def get_formated_date(self,min_date):
         if min_date:
