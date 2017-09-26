@@ -142,27 +142,29 @@
 								</tbody>
 							</table>
 							
-							<!--t t-foreach="o.get_line_length(o)" t-as="l">
+							<t t-foreach="o.get_line_length(o)" t-as="l">
 								<br/><span style="color:white;">.</span>
-							</t-->
+							</t>
 							
-							<div class="col-xs-12" style="border-bottom:2px solid black; float:none; page-break-before:always;">
-								<table class="table table-condensed" style="border-top:none; margin-left:-15px; font-size:15px;">
-								    <tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
-								        <td style="border-top:none; font-weight: bold; line-height:12px;">
-								            *<span t-field="r.name"/>
-								        </td>
-								    </tr>
-								</table>
+							<div style="display: inline-block;">
+								<div class="col-xs-12" style="border-bottom:2px solid black; float:none; page-break-before:always;">
+									<table class="table table-condensed" style="border-top:none; margin-left:-15px; font-size:15px;">
+										<tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
+										    <td style="border-top:none; font-weight: bold; line-height:12px;">
+										        *<span t-field="r.name"/>
+										    </td>
+										</tr>
+									</table>
+								</div>
+								<br/>
+								<br/>
+								<br/>
+								<span><b>Checked by:</b></span>
+								<br/>
+								<span style="border-top:1px solid black; margin-top:200px; float: left; font-size:18px;">
+									<b>CUSTOMER ACKNOWLEDGEMENT</b>
+								</span>
 							</div>
-							<br/>
-							<br/>
-							<br/>
-							<span><b>Checked by:</b></span>
-							<br/>
-							<span style="border-top:1px solid black; margin-top:200px; float: left; font-size:18px;">
-								<b>CUSTOMER ACKNOWLEDGEMENT</b>
-							</span>
 							<br/>
 		                </div>
 		            </t>

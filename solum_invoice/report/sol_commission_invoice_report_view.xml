@@ -183,60 +183,62 @@
 								</tbody>
 							</table>
 							
-							<!--t t-foreach="o.get_commission_line_length(o.invoice_line_ids)" t-as="l">
+							<t t-foreach="o.get_commission_line_length(o.invoice_line_ids)" t-as="l">
 								<br/><span style="color:white;">.</span>
-							</t-->
+							</t>
 							
-							<div class="col-xs-12" style="float:none; page-break-before:always;">
-								<div class="col-xs-8">
-									<table class="table table-condensed" style="border-top:none; margin-left:-35px; font-size:15px;">
-									    <tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
-									        <td style="border-top:none; font-weight: bold; line-height:12px;">
-									            *<span t-if="r.name" t-field="r.name.name"/>
-									        </td>
-									    </tr>
-									</table>
+							<div style="display: inline-block;">
+								<div class="col-xs-12">
+									<div class="col-xs-8">
+										<table class="table table-condensed" style="border-top:none; margin-left:-35px; font-size:15px;">
+											<tr style="border-top:none; line-height:12px;" t-foreach="o.remarks_ids" t-as="r">
+											    <td style="border-top:none; font-weight: bold; line-height:12px;">
+											        *<span t-if="r.name" t-field="r.name.name"/>
+											    </td>
+											</tr>
+										</table>
+									</div>
 								</div>
-							</div>
-							<div class="col-xs-12" style="border-bottom:solid; border-top:solid; border-top-style: double;">
-								<div class="col-xs-4 pull-right" style="height:110px;">
-									<table class="table table-condensed" style="border-top:none; border-bottom:none;">
-									    <tr style="border-top:none; line-height:12px;">
-									        <td style="border-top:none; line-height:12px;"><strong>SUB-TOTAL</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
-									            <span t-field="o.amount_untaxed"/>
-									        </td>
-									    </tr>
-									    <tr style="border-top:none; line-height:12px;">
-									        <td style="border-top:none; line-height:12px;"><strong>DISCOUNT</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
-									            <span t-field="o.amount_discount"/>
-									        </td>
-									    </tr>
-									    <tr style="border-top:none; line-height:12px;">
-									        <td style="border-top:none; line-height:12px;"><strong>TAX</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
-									            <span t-field="o.amount_tax"/>
-									        </td>
-									    </tr>
-									    <tr style="border-top:none; line-height:12px;">
-									        <td style="border-top:none; line-height:12px;"><strong>COMMISSION</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
-									            <span t-field="o.amount_commission"/>
-									        </td>
-									    </tr>
-									    <tr style="border-top:none; line-height:12px;">
-									        <td style="border-top:none; line-height:12px;"><strong>GRAND TOTAL</strong></td>
-									        <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
-									            <span t-field="o.amount_total"/>
-									        </td>
-									    </tr>
-									</table>
+								<div class="col-xs-12" style="border-bottom:solid; border-top:solid; border-top-style: double;">
+									<div class="col-xs-4 pull-right" style="height:110px;">
+										<table class="table table-condensed" style="border-top:none; border-bottom:none;">
+											<tr style="border-top:none; line-height:12px;">
+											    <td style="border-top:none; line-height:12px;"><strong>SUB-TOTAL</strong></td>
+											    <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
+											        <span t-field="o.amount_untaxed"/>
+											    </td>
+											</tr>
+											<tr style="border-top:none; line-height:12px;">
+											    <td style="border-top:none; line-height:12px;"><strong>DISCOUNT</strong></td>
+											    <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
+											        <span t-field="o.amount_discount"/>
+											    </td>
+											</tr>
+											<tr style="border-top:none; line-height:12px;">
+											    <td style="border-top:none; line-height:12px;"><strong>TAX</strong></td>
+											    <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
+											        <span t-field="o.amount_tax"/>
+											    </td>
+											</tr>
+											<tr style="border-top:none; line-height:12px;">
+											    <td style="border-top:none; line-height:12px;"><strong>COMMISSION</strong></td>
+											    <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
+											        <span t-field="o.amount_commission"/>
+											    </td>
+											</tr>
+											<tr style="border-top:none; line-height:12px;">
+											    <td style="border-top:none; line-height:12px;"><strong>GRAND TOTAL</strong></td>
+											    <td class="text-right" style="border-top:none; font-weight: bold; line-height:12px;">
+											        <span t-field="o.amount_total"/>
+											    </td>
+											</tr>
+										</table>
+									</div>
 								</div>
+								<span style="border-top:2px solid black; margin-top:130px; float:left; font-size:18px;">
+									<b>CUSTOMER ACKNOWLEDGEMENT</b>
+								</span>
 							</div>
-							<span style="border-top:2px solid black; margin-top:130px; float:left; font-size:18px;">
-								<b>CUSTOMER ACKNOWLEDGEMENT</b>
-							</span>
 							<br/>
 		                </div>
 		            </t>
