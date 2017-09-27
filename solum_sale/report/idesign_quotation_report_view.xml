@@ -62,7 +62,7 @@
 									<td style="width:150cm; height:20px; padding-left:20px;">
 										<b><sapn t-esc="o.get_formated_date(o.date_order)"/></b>
 									</td>
-									<td style="width:25cm; height:20px;">
+									<td style="width:27cm; height:20px;">
 										<b t-if="o.state not in ['draft','sent']">
 											SALEORDER NO <span style="float:right;">:</span>
 										</b>
@@ -79,7 +79,7 @@
 									<td style="width:150cm; height:20px; padding-left:20px;">
 										<b><span t-if="o.attention" t-field="o.attention"/></b>
 									</td>
-									<td style="width:25cm; height:20px;"><b>CURRENCY <span style="float:right;">:</span></b></td>
+									<td style="width:27cm; height:20px;"><b>CURRENCY <span style="float:right;">:</span></b></td>
 									<td style="width:50cm; height:20px; padding-left:20px;">
 										<b><span t-if="o.pricelist_id" t-field="o.pricelist_id.currency_id.name"/></b>
 									</td>
@@ -97,7 +97,7 @@
 										
 								     	</b>
 									</td>
-									<td style="width:25cm; height:20px;"><b>TERMS <span style="float:right;">:</span></b></td>
+									<td style="width:27cm; height:20px;"><b>TERMS <span style="float:right;">:</span></b></td>
 									<td style="width:50cm; height:20px; padding-left:20px;">
 										<b><span t-if="o.payment_term_id" t-field="o.payment_term_id.name"/></b>
 									</td>
