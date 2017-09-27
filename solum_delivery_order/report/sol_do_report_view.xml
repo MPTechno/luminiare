@@ -45,7 +45,7 @@
 									<td style="width:170cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<sapn t-esc="o.get_formated_date(o.min_date)"/></b>
 									</td>
-									<td style="width:16cm; height:20px;"><b>Delivery No.</b></td>
+									<td style="width:16cm; height:20px;"><b>Delivery No </b></td>
 									<td style="width:30cm; height:20px;">
 										<b>:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span t-if="o.name" t-field="o.name"/></b>
 									</td>

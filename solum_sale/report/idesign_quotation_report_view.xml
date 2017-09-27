@@ -62,7 +62,14 @@
 									<td style="width:150cm; height:20px; padding-left:20px;">
 										<b><sapn t-esc="o.get_formated_date(o.date_order)"/></b>
 									</td>
-									<td style="width:25cm; height:20px;"><b>QUOTATION NO <span style="float:right;">:</span></b></td>
+									<td style="width:25cm; height:20px;">
+										<b t-if="o.state not in ['draft','sent']">
+											SALEORDER NO <span style="float:right;">:</span>
+										</b>
+										<b t-if="o.state in ['draft','sent']">
+                							QUOTATION NO <span style="float:right;">:</span>
+										</b>
+									</td>
 									<td style="width:50cm; height:20px; padding-left:20px;">
 										<b><span t-field="o.name"/></b>
 									</td>
